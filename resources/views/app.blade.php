@@ -14,14 +14,15 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <!-- ✅ Link ke file CSS kamu -->
-    <<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 </head>
 
 <body>
     <div class="">
         {{-- Sidebar --}}
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
+        <x-navbar />
 
         {{-- Content --}}
         <div class="">
