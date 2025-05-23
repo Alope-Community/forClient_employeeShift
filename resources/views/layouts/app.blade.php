@@ -17,7 +17,8 @@
 <body>
     <div class="">
         {{-- Sidebar --}}
-        <x-navbar />
+        {{-- <x-navbar /> --}}
+        <x-sidebar />
 
         {{-- Content --}}
         <div class="">
