@@ -21,7 +21,6 @@
 
         {{-- Content --}}
         <div class="">
-            <p>ini dari layout</p>
             @yield('content')
         </div>
     </div>

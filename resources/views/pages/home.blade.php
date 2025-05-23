@@ -3,4 +3,5 @@
 @section('content')
 
     @include('sections.hero.index')
-    @include('sections.home.index')
+
+@endsection    

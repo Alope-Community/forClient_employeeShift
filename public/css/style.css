@@ -160,15 +160,10 @@ a.sidebar-link:hover {
     right: 1rem;
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Shadow biru */
-    border: 1px solid #0d6efd;
-    color: #0d6efd;
-    background-color: transparent;
+    border: 1px solid #00ACE8;
+    color: white;
+    background-color: #054586;
     transition: 0.3s;
     z-index: 1;
 }
 
-.custom-login-btn:hover {
-    background-color: #0d6efd;
-    color: white;
-}
