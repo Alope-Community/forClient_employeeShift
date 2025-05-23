@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="wrapper">
     <aside id="sidebar">
         <div class="d-flex" style="padding-top: 20px;">
@@ -47,12 +44,11 @@
             </a>
         </div>
     </aside>
-   @endsection
 
-<script>
-    const hamBurger = document.querySelector(" .toggle-btn");
+    <script>
+        const hamBurger = document.querySelector(" .toggle-btn");
 
-    hamBurger.addEventListener("click", function() {
-        document.querySelector("#sidebar").classList.toggle("expand");
-    });
-</script>
+        hamBurger.addEventListener("click", function() {
+            document.querySelector("#sidebar").classList.toggle("expand");
+        });
+    </script>
