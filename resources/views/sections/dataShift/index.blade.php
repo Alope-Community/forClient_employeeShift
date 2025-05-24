@@ -8,7 +8,7 @@
 
                 <div class="table-responsive">
                     <table class="table table-bordered align-middle">
-                        <thead class="table-secondary text-center">
+                        <thead class="table-dark text-center">
                             <tr>
                                 <th>No</th>
                                 <th>Nama Shift</th>
