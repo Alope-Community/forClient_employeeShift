@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-    <div class="container">
-        <h1>Login Employee</h1>
+    <div class="">
+        <h1 class="mb-5 fs-2">Login Karyawan</h1>
         <form action="{{ route('employee.login') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -13,7 +13,11 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="d-flex justify-content-center align-items-center mt-3">
+                <button class="btn login-btn px-4 w-50" type="submit">
+                    Login
+                </button>
+            </div>
         </form>
     </div>
 @endsection
