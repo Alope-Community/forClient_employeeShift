@@ -3,6 +3,6 @@
 @section('content')
 
     {{-- @include('sections.hero.index') --}}
-    @include('sections.dataJadwalShift.index')
+    @include('sections.profile.index')
 
 @endsection    
