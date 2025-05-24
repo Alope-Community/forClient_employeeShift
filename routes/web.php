@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('welcome');
 });
 
 Route::middleware('guest:employee')->prefix('auth')->group(function () {
