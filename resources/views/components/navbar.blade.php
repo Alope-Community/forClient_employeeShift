@@ -3,7 +3,7 @@
     <a class="navbar-brand d-flex align-items-center" href="#">
       <img src="{{asset('/assets/logo_color.png')}}" alt="Bukit Asam" height="40">
     </a>
-    <a href="#" class="btn custom-login-btn px-4">
+    <a href="{{ route('employee.login.view') }}" class="btn custom-login-btn px-4">
       Login
     </a>
   </div>
