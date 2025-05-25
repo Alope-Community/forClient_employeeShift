@@ -13,4 +13,23 @@ class DashboardController extends Controller
 
         return view('pages.dashboard', compact('user'));
     }
+
+    public function employeeDashboard()
+    {
+        $user = Auth::guard('employee')->user();
+
+        return view('pages.dashboard', compact('user'));
+    }
+    public function shiftLeaderDashboard()
+    {
+        $user = Auth::guard('shift_leader')->user();
+
+        return view('pages.dashboard', compact('user'));
+    }
+    public function adminDashboard()
+    {
+        $user = Auth::guard('admin')->user();
+
+        return view('pages.dashboard', compact('user'));
+    }
 }
