@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shift;
 use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
 use App\Notifications\shiftReportNotification;
@@ -13,10 +14,30 @@ class LeaveApplicationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = ShiftReport::with(['employee', 'fromShift', 'toShift'])->latest()->get();
+        $reports = ShiftReport::where('employee_id', $request->user()->id)
+            ->whereHas('shiftChange', function ($query) {
+                $query->where('status', 'pending');
+            })
+            ->with([
+                'employee',
+                'fromShift',
+                'toShift',
+                'shiftChange' => function ($query) {
+                    $query->where('status', 'pending');
+                }
+            ])
+            ->latest()
+            ->get();
+
         return view('pages.leave-application.index', compact('reports'));
+    }
+
+    public function create()
+    {
+        $shifts = Shift::all();
+        return view('pages.leave-application.create', compact('shifts'));
     }
 
     /**
@@ -34,7 +55,7 @@ class LeaveApplicationController extends Controller
         ]);
 
         $shiftReport = ShiftReport::create([
-            'employee_id' => $request->user()->employee_id,
+            'employee_id' => $request->user()->id,
             'from_shift_id' => $request->from_shift_id,
             'to_shift_id' => $request->to_shift_id,
             'title' => $request->title,
@@ -43,6 +64,15 @@ class LeaveApplicationController extends Controller
             'address' => $request->address,
             'image' => $request->image
         ]);
+
+        $shiftReport->shiftChange()->updateOrCreate(
+            [], // Karena hasOne, tidak perlu kondisi spesifik
+            [
+                'status' => 'pending',
+                'approved_by' => null,
+                'approved_at' => null,
+            ]
+        );
 
         if ($shiftReport->from_shift_id === $shiftReport->to_shift_id) {
             return back()->withErrors(['error' => 'Shift yang dipilih tidak boleh sama.']);
@@ -70,9 +100,10 @@ class LeaveApplicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(string $id)
+    {
         $shiftReport = ShiftReport::findOrFail($id);
-        return view('pages.leave-application.view', compact('shiftReport'));
+        return view('pages.leave-application.show', compact('shiftReport'));
     }
 
     /**
@@ -110,6 +141,15 @@ class LeaveApplicationController extends Controller
 
         return back()->with('success', 'Pengajuan perubahan shift berhasil diperbarui.');
     }
+
+    public function edit($id)
+    {
+        $report = ShiftReport::findOrFail($id);
+        $shifts = Shift::all();
+
+        return view('pages.leave-application.edit', compact('report', 'shifts'));
+    }
+
 
     /**
      * Remove the specified resource from storage.
