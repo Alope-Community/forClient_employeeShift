@@ -26,7 +26,7 @@
             @endauth
             @auth('shift_leader')
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('data.user') }}" class="sidebar-link">
                         <i class="lni lni-users"></i>
                         <span>Data Karyawan</span>
                     </a>

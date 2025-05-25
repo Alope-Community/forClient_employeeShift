@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaveApplicationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,5 +28,6 @@ Route::middleware('auth:employee')->prefix('employee')->group(function() {
 
 Route::middleware('auth:shift_leader')->prefix('leader')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'shiftLeaderDashboard'])->name('leader.dashboard');
+    Route::get('/user', [UserController::class, 'index'])->name('data.user');
     Route::post('/logout', [AuthController::class, 'shiftLeaderLogout'])->name('shift-leader.logout');
 });
