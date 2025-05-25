@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         if (Auth::guard('employee')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('employee.dashboard'));
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.']);
@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         if (Auth::guard('shift_leader')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('leader.dashboard'));
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.']);
