@@ -14,7 +14,7 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'User Not Defined');
             }
 
-            return view('pages.data-user.index', [
+            return view('pages.data-laporan-shift.index', [
                 'user' => $user
             ]);
         } catch (\Exception $e) {

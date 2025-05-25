@@ -5,6 +5,11 @@
     <div class="row">
         <div class="col">
             <h3 class="fw-bold">Data Shift <i class="lni lni-timer"></i></h3>
+            <div class="mb-3">
+                <a href="#" class="btn btn-primary">
+                    <i class="lni lni-plus"></i> Tambah Shift
+                </a>
+            </div>
 
             <div class="table-responsive">
                 <table id="shiftTable" class="table table-bordered align-middle">
