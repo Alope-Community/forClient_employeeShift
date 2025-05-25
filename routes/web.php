@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LeaveApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::middleware('guest:shift_leader')->prefix('auth')->group(function () {
 Route::middleware('auth:employee')->prefix('employee')->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
     Route::post('/logout', [AuthController::class, 'employeeLogout'])->name('employee.logout');
+    Route::resource('/leave-application', LeaveApplicationController::class)->names('leave-application');
 });
 
 Route::middleware('auth:shift_leader')->prefix('leader')->group(function() {
