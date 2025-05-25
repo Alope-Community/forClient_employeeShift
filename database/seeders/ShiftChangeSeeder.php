@@ -28,7 +28,7 @@ class ShiftChangeSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'shift_report_id' => 1,
+                'shift_report_id' => 3,
                 'approved_by' => 2,
                 'status' => 'pending',
                 'approved_at' => null,

@@ -34,7 +34,19 @@ class ShiftReportSeeder extends Seeder
                 'image' => 'shift_reports/report2.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'employee_id' => 1,
+                'from_shift_id' => 1,
+                'to_shift_id' => 3,
+                'title' => 'Shift Pagi ke Malam',
+                'description' => 'Tidak ada masalah, semua berjalan sesuai rencana.',
+                'time' => Carbon::now()->subDays(3)->setTime(20, 0),
+                'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
+                'image' => 'shift_reports/report3.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
