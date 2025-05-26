@@ -81,7 +81,8 @@ class ShiftChangeController extends Controller
             $shiftChange->approved_by = Auth::id();
             $shiftChange->save();
 
-            $notification = auth('shift_leader')->user()->unreadNotifications
+            $notification = auth($this->prefix)->user()
+                ->unreadNotifications
                 ->where('data.report_id', $shiftChange->shift_report_id)
                 ->first();
 

@@ -1,42 +1,69 @@
 @extends('layouts.app')
 
-
 @section('content')
-<!-- Modal Edit -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Edit Jadwal Shift</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="namaKaryawan" class="form-label">Nama Karyawan</label>
-            <input type="text" class="form-control" id="namaKaryawan" placeholder="Masukkan nama karyawan">
-          </div>
-          <div class="mb-3">
-            <label for="shift" class="form-label">Shift</label>
-            <select class="form-select" id="shift">
-              <option value="">Pilih Shift</option>
-              <option value="shiftPagi">Shift Pagi (07:00 - 15:00)</option>
-              <option value="shiftSiang">Shift Siang (15:00 - 23:00)</option>
-              <option value="shiftMalam">Shift Malam (23:00 - 07:00)</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="tanggalWaktu" class="form-label">Tanggal & Waktu</label>
-            <input type="datetime-local" class="form-control" id="tanggalWaktu">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Simpan</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+    <div class="main p-3 ms-3 mt-3">
+        @php
+            $prefix = auth('admin')->check() ? 'admin' : (auth('shift_leader')->check() ? 'shift-leader' : null);
+        @endphp
+        <div class="row">
+            <div class="col-md-8">
+                <h3 class="fw-bold mb-4">Edit Jadwal Shift <i class="lni lni-pencil"></i></h3>
 
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{ route($prefix . '.schedule.update', $schedule->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="mb-3">
+                                <label for="nama_karyawan" class="form-label">Nama Karyawan</label>
+                                <select class="form-select" id="nama_karyawan" name="employee_id" required>
+                                    <option disabled>Pilih karyawan</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}"
+                                            {{ $employee->id == $schedule->employee_id ? 'selected' : '' }}>
+                                            {{ $employee->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="shift" class="form-label">Shift</label>
+                                <select class="form-select" id="shift" name="shift_id" required>
+                                    <option disabled>Pilih shift</option>
+                                    @foreach ($shifts as $shift)
+                                        <option value="{{ $shift->id }}"
+                                            {{ $shift->id == $schedule->shift_id ? 'selected' : '' }}>
+                                            {{ $shift->name }} ({{ $shift->group }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="waktu" class="form-label">Tanggal & Waktu</label>
+                                <input type="datetime-local"
+                                       class="form-control"
+                                       id="waktu"
+                                       name="date"
+                                       value="{{ \Carbon\Carbon::parse($schedule->shift_time)->format('Y-m-d\TH:i') }}"
+                                       required>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary me-2">
+                                    <i class="lni lni-arrow-left"></i> Batal
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="lni lni-save"></i> Simpan Perubahan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection

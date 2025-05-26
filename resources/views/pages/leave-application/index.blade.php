@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main p-3 ms-3 mt-3">
-        <h1 class="mb-4">Daftar Pengajuan Cuti</h1>
+        <h1 class="mb-4">Daftar Pergantian Shift</h1>
 
         @if (session('success'))
             <div class="alert alert-success">

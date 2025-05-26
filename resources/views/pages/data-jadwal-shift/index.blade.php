@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        $prefix = Auth::guard('admin')->check() ? 'admin' : 'shift-leader';
+        $prefix = auth('admin')->check() ? 'admin' : 'shift-leader';
     @endphp
 
     <div class="main p-3 ms-3 mt-3">
@@ -47,12 +47,13 @@
                                         class="btn btn-sm btn-secondary">Edit</a>
 
                                     <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
-                                        data-id="{{ $schedule->id }}"
+                                        data-route="{{ route($prefix . '.schedule.destroy', $schedule->id) }}"
                                         data-employee="{{ $schedule->employee->name ?? 'Karyawan tidak ditemukan' }}"
                                         data-date="{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal" title="Hapus">
                                         <i class="lni lni-trash"></i>
                                     </button>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -78,7 +79,11 @@
                                 id="shiftDate"></strong>?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                            data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            Hapus
+                        </button>
+
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </div>
@@ -89,27 +94,18 @@
 
 @push('scripts')
     <script>
-        const prefix = "{{ $prefix }}"; // Inject dari PHP
-
         $(document).ready(function() {
             $('#shiftTable').DataTable();
 
             $('.delete-btn').click(function() {
-                const shiftId = $(this).data('id');
+                const url = $(this).data('route');
                 const employeeName = $(this).data('employee');
                 const shiftDate = $(this).data('date');
 
+                $('#deleteShiftForm').attr('action', url);
                 $('#shiftEmployeeName').text(employeeName);
                 $('#shiftDate').text(shiftDate);
-
-                const url = buildRoute(prefix + '.schedule.destroy', shiftId);
-                $('#deleteShiftForm').attr('action', url);
             });
-
-            function buildRoute(name, id) {
-                const baseUrl = "{{ url('/') }}";
-                return baseUrl + '/' + name.replace(/\./g, '/') + '/' + id;
-            }
         });
     </script>
 @endpush

@@ -65,6 +65,15 @@ class ScheduleController extends Controller
         return view("pages.data-jadwal-shift.show", compact('schedule'));
     }
 
+    public function edit(string $id)
+    {
+        $schedule = Schedule::with(['employee', 'shift'])->findOrFail($id);
+        $shifts = Shift::all();
+        $employees = Employee::all();
+
+        return view("pages.data-jadwal-shift.edit", compact('schedule', 'shifts', 'employees'));
+    }
+
     public function update(Request $request, string $id)
     {
         $request->validate([
