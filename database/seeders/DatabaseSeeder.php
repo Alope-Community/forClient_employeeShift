@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ScheduleSeeder::class,
             ShiftReportSeeder::class,
             ShiftChangeSeeder::class,
+            UserAdminSeeder::class,
         ]);
     }
 }

@@ -30,10 +30,10 @@ body {
 }
 
 .main {
-    min-height: 100vh;
+    /* min-height: 100vh;
     width: 100%;
     overflow: hidden;
-    transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; */
 }
 
 #sidebar {
@@ -186,6 +186,14 @@ a.sidebar-link:hover {
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border: 1px solid #fff;
+}
+
+.logout-button:hover {
+    background-color: #dc3545 !important;
+}
+
+.logout-button:hover i {
+    color: white !important;
 }
 
 .object-cover {

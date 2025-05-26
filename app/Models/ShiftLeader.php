@@ -17,6 +17,7 @@ class ShiftLeader extends Authenticatable
         'gender',
         'address',
         'phone_number',
+        'password',
     ];
 
     protected $hidden = [

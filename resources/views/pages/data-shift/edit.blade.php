@@ -1,42 +1,53 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Shift')
 
 @section('content')
+    <div class="main p-3 ms-3 mt-3">
+        <h3 class="fw-bold mb-4"><i class="lni lni-pencil"></i> Edit Shift</h3>
 
-<!-- Modal Edit -->
-<div class="modal fade" id="editShiftModal" tabindex="-1" aria-labelledby="editShiftModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form method="POST" action="#">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editShiftModalLabel">Edit Shift</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="namaShift" class="form-label">Nama Shift</label>
-            <input type="text" class="form-control" id="namaShift" name="namaShift" value="">
-          </div>
-          <div class="mb-3">
-            <label for="grupShift" class="form-label">Grup Shift</label>
-            <input type="text" class="form-control" id="grupShift" name="grupShift" value="">
-          </div>
-          <div class="mb-3">
-            <label for="jamMasuk" class="form-label">Jam Masuk</label>
-            <input type="time" class="form-control" id="jamMasuk" name="jamMasuk" value="">
-          </div>
-          <div class="mb-3">
-            <label for="jamKeluar" class="form-label">Jam Keluar</label>
-            <input type="time" class="form-control" id="jamKeluar" name="jamKeluar" value="">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Simpan</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+        @php
+            $prefix = auth('admin')->check() ? 'admin' : (auth('shift_leader')->check() ? 'shift-leader' : null);
+        @endphp
 
+        @if ($prefix)
+            <form action="{{ route($prefix . '.shift.update', $shift->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label for="namaShift" class="form-label">Nama Shift</label>
+                    <input type="text" class="form-control" id="namaShift" name="name"
+                        value="{{ old('name', $shift->name) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="grupShift" class="form-label">Grup Shift</label>
+                    <input type="text" class="form-control" id="grupShift" name="group"
+                        value="{{ old('group', $shift->group) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="jamMasuk" class="form-label">Jam Masuk</label>
+                    <input type="time" class="form-control" id="jamMasuk" name="start_time"
+                        value="{{ old('start_time', \Carbon\Carbon::parse($shift->start_time)->format('H:i')) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="jamKeluar" class="form-label">Jam Keluar</label>
+                    <input type="time" class="form-control" id="jamKeluar" name="end_time"
+                        value="{{ old('end_time', \Carbon\Carbon::parse($shift->end_time)->format('H:i')) }}" required>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <a href="{{ route($prefix . '.shift.index') }}" class="btn btn-secondary">Batal</a>
+                </div>
+            </form>
+        @else
+            <div class="alert alert-danger">
+                Anda tidak memiliki izin untuk mengedit shift ini.
+            </div>
+        @endif
+    </div>
 @endsection

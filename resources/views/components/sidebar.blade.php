@@ -1,8 +1,8 @@
 <div class="wrapper">
-    <aside id="sidebar">
+    <aside id="sidebar" class="expand">
         <div class="d-flex" style="padding-top: 20px;">
             <button class="toggle-btn" type="button">
-                <i class="lni lni-grid-alt"></i>
+                <i class="lni lni-menu"></i>
             </button>
             <div class="sidebar-logo">
                 <a href="#"><img src="/assets/logo_white.png" alt="" style="width: 150px; "></a>
@@ -12,7 +12,13 @@
         <ul class="sidebar-nav">
             @auth('employee')
                 <li class="sidebar-item">
-                    <a href="{{ route('leave-application.index') }}" class="sidebar-link">
+                    <a href="{{ route('employee.dashboard') }}" class="sidebar-link">
+                        <i class="lni lni-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('employee.leave-application.index') }}" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Data Pengajuan Cuti</span>
                     </a>
@@ -26,27 +32,21 @@
             @endauth
             @auth('shift_leader')
                 <li class="sidebar-item">
-                    <a href="{{ route('data.user') }}" class="sidebar-link">
-                        <i class="lni lni-users"></i>
-                        <span>Data Karyawan</span>
+                    <a href="{{ route('leader.dashboard') }}" class="sidebar-link">
+                        <i class="lni lni-dashboard"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('shift-leader.shift.index') }}" class="sidebar-link">
                         <i class="lni lni-clipboard"></i>
                         <span>Data Shift</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('shift-leader.schedule.index') }}" class="sidebar-link">
                         <i class="lni lni-clipboard"></i>
                         <span>Data Jadwal Shift</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-clipboard"></i>
-                        <span>Data Riwayat Shift</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -56,23 +56,38 @@
                     </a>
                 </li>
             @endauth
-
-            {{-- <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="lni lni-protection"></i>
-                    <span>Auth</span>
-                </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Login</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Register</a>
-                    </li>
-                </ul>
-            </li> --}}
-
+            @auth('admin')
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.dashboard') }}" class="sidebar-link">
+                        <i class="lni lni-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('data.user.index') }}" class="sidebar-link">
+                        <i class="lni lni-users"></i>
+                        <span>Data Pengguna</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.shift.index') }}" class="sidebar-link">
+                        <i class="lni lni-clipboard"></i>
+                        <span>Data Shift</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.schedule.index') }}" class="sidebar-link">
+                        <i class="lni lni-calendar"></i>
+                        <span>Data Jadwal Shift</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.leave-application.index') }}" class="sidebar-link">
+                        <i class="lni lni-clipboard"></i>
+                        <span>Data Pengajuan Cuti</span>
+                    </a>
+                </li>
+            @endauth
         </ul>
 
         <div class="sidebar-footer">
@@ -82,14 +97,51 @@
                     <span>Profile</span>
                 </a>
             </li>
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-exit"></i>
-                <span>Logout</span>
-            </a>
+            @auth('employee')
+                <form action="{{ route('employee.logout') }}" method="POST"
+                    class="d-flex align-items-center mx-2 py-2 sidebar-link text-white logout-form"
+                    style="border: none; background: none;">
+                    @csrf
+                    <button type="submit"
+                        class="btn btn-link text-start w-100 d-flex align-items-center gap-2 logout-button"
+                        style="color: inherit; text-decoration: none;">
+                        <i class="lni lni-exit fs-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            @endauth
+            @auth('shift_leader')
+                <form action="{{ route('shift-leader.logout') }}" method="POST"
+                    class="d-flex align-items-center mx-2 py-2 sidebar-link text-white logout-form"
+                    style="border: none; background: none;">
+                    @csrf
+                    <button type="submit"
+                        class="btn btn-link text-start w-100 d-flex align-items-center gap-2 logout-button"
+                        style="color: inherit; text-decoration: none;">
+                        <i class="lni lni-exit fs-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            @endauth
+            @auth('admin')
+                <form action="{{ route('admin.logout') }}" method="POST"
+                    class="d-flex align-items-center mx-2 py-2 sidebar-link text-white logout-form"
+                    style="border: none; background: none;">
+                    @csrf
+                    <button type="submit"
+                        class="btn btn-link text-start w-100 d-flex align-items-center gap-2 logout-button"
+                        style="color: inherit; text-decoration: none;">
+                        <i class="lni lni-exit fs-5"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            @endauth
         </div>
 
     </aside>
+</div>
 
+@push('scripts')
     <script>
         const hamBurger = document.querySelector(" .toggle-btn");
 
@@ -97,3 +149,4 @@
             document.querySelector("#sidebar").classList.toggle("expand");
         });
     </script>
+@endpush

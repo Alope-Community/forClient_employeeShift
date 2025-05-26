@@ -31,10 +31,16 @@ class AppServiceProvider extends ServiceProvider
                 $prefix = 'shift_leader';
             }
 
+            if ($prefix === '/admin' || $prefix === '/auth/admin') {
+                $prefix = 'admin';
+            }
+
             if ($prefix === 'employee') {
                 return route('employee.login.view');
             } else if ($prefix === 'shift_leader') {
                 return route('shift-leader.login.view');
+            } else if ($prefix === 'admin') {
+                return route('admin.login.view');
             }
             
             return route('employee.login.view');

@@ -36,7 +36,17 @@
             </form> --}}
         </section>
     @endauth
-
+    
+    @auth('admin')
+        <section class="main p-3 ms-3 mt-3">
+            <h1>Dashboard Admin</h1>
+            <p>Selamat datang, {{ auth('admin')->user()->name }}</p>
+            <form action="{{ route('admin.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </section>
+    @endauth
 
     @guest
         <p>Silakan login dulu</p>

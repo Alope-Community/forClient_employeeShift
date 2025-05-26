@@ -1,0 +1,98 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Schedule;
+use App\Models\Shift;
+use App\Models\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ScheduleController extends Controller
+{
+    protected $prefix;
+
+    public function __construct()
+    {
+        // Tentukan prefix guard saat controller diinisialisasi
+        if (Auth::guard('admin')->check()) {
+            $this->prefix = 'admin';
+        } elseif (Auth::guard('shift_leader')->check()) {
+            $this->prefix = 'shift-leader';
+        } else {
+            abort(403, 'Unauthorized');
+        }
+    }
+
+    public function index()
+    {
+        $schedules = Schedule::with(['employee', 'shift'])
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return view("pages.data-jadwal-shift.index", compact('schedules'));
+    }
+
+    public function create()
+    {
+        $shifts = Shift::all();
+        $employees = Employee::all();
+
+        return view("pages.data-jadwal-shift.create", compact('shifts', 'employees'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'shift_id' => 'required|exists:shifts,id',
+            'date' => 'required|date',
+        ]);
+
+        try {
+            Schedule::create($request->only('employee_id', 'shift_id', 'date'));
+
+            return redirect()->route("{$this->prefix}.schedule.index")->with('success', 'Schedule created successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => 'An error occurred while creating the schedule: ' . $th->getMessage()]);
+        }
+    }
+
+    public function show(string $id)
+    {
+        $schedule = Schedule::with(['employee', 'shift'])->findOrFail($id);
+
+        return view("pages.data-jadwal-shift.show", compact('schedule'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'shift_id' => 'required|exists:shifts,id',
+            'date' => 'required|date',
+        ]);
+
+        $schedule = Schedule::findOrFail($id);
+
+        try {
+            $schedule->update($request->only('employee_id', 'shift_id', 'date'));
+
+            return redirect()->route("{$this->prefix}.schedule.index")->with('success', 'Schedule updated successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => 'An error occurred while updating the schedule: ' . $th->getMessage()]);
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        $schedule = Schedule::findOrFail($id);
+
+        try {
+            $schedule->delete();
+            return redirect()->route("{$this->prefix}.schedule.index")->with('success', 'Schedule deleted successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => 'An error occurred while deleting the schedule: ' . $th->getMessage()]);
+        }
+    }
+}

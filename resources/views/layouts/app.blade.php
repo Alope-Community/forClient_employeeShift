@@ -18,10 +18,10 @@
 </head>
 
 <body>
-    <div class="">
+    <div class="d-flex min-vh-100 w-100">
         <x-sidebar />
 
-        <div class="">
+        <div class="flex-grow-1 w-100">
             @yield('content')
         </div>
     </div>

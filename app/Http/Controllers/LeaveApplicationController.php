@@ -16,20 +16,31 @@ class LeaveApplicationController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = ShiftReport::where('employee_id', $request->user()->id)
-            ->whereHas('shiftChange', function ($query) {
-                $query->where('status', 'pending');
-            })
+        $user = $request->user();
+        $isAdmin = auth()->guard('admin')->check();
+
+        $reportsQuery = ShiftReport::query()
             ->with([
                 'employee',
                 'fromShift',
                 'toShift',
-                'shiftChange' => function ($query) {
+                'shiftChange'
+            ]);
+
+        // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
+        if (!$isAdmin) {
+            $reportsQuery->where('employee_id', $user->id)
+                ->whereHas('shiftChange', function ($query) {
                     $query->where('status', 'pending');
-                }
-            ])
-            ->latest()
-            ->get();
+                })
+                ->with([
+                    'shiftChange' => function ($query) {
+                        $query->where('status', 'pending');
+                    }
+                ]);
+        }
+
+        $reports = $reportsQuery->latest()->get();
 
         return view('pages.leave-application.index', compact('reports'));
     }

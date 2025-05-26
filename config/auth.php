@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'shift_leaders',
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
     ],
 
     /*
@@ -83,6 +88,11 @@ return [
         'shift_leaders' => [
             'driver' => 'eloquent',
             'model' => App\Models\ShiftLeader::class,
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -127,6 +137,13 @@ return [
 
         'shift_leaders' => [
             'provider' => 'shift_leaders',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
