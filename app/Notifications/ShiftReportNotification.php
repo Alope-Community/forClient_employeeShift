@@ -10,6 +10,7 @@ class ShiftReportNotification extends Notification
 {
     use Queueable;
 
+    protected $reportId;
     protected $employeeName;
     protected $cutiTanggal;
     protected $alasan;
@@ -17,8 +18,9 @@ class ShiftReportNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($employeeName, $cutiTanggal, $alasan)
+    public function __construct($reportId, $employeeName, $cutiTanggal, $alasan)
     {
+        $this->reportId = $reportId;
         $this->employeeName = $employeeName;
         $this->cutiTanggal = $cutiTanggal;
         $this->alasan = $alasan;
@@ -42,7 +44,8 @@ class ShiftReportNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title' => 'Pengajuan Cuti',
+            'report_id' => $this->reportId,
+            'title' => 'Pengajuan Pergantian Shift',
             'message' => "Karyawan {$this->employeeName} mengajukan cuti pada tanggal {$this->cutiTanggal}. Alasan: {$this->alasan}",
             'employee_name' => $this->employeeName,
             'tanggal' => $this->cutiTanggal,

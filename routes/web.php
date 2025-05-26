@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ShiftChangeController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::middleware('auth:shift_leader')->prefix('leader')->group(function () {
     Route::resource('/shift', ShiftController::class)->names('shift-leader.shift');
     Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule');
 
+    Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'show', 'edit', 'update']);
+
     Route::post('/logout', [AuthController::class, 'shiftLeaderLogout'])->name('shift-leader.logout');
 });
 
@@ -57,6 +60,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::resource('/shift', ShiftController::class)->names('admin.shift');
     Route::resource('/schedule', ScheduleController::class)->names('admin.schedule');
     Route::resource('/leave-application', LeaveApplicationController::class)->names('admin.leave-application')->only(['index', 'show', 'update', 'edit', 'destroy']);
+    Route::resource('/shift-change', ShiftChangeController::class)->names('admin.shift-change')->only(['index', 'show', 'edit', 'update']);
 
     Route::post('/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
 });

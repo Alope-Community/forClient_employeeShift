@@ -50,9 +50,9 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('shift-leader.shift-change.index') }}" class="sidebar-link">
                         <i class="lni lni-clipboard"></i>
-                        <span>Data Pergantian Shift</span>
+                        <span>Data Verifikasi Pergantian Shift</span>
                     </a>
                 </li>
             @endauth
@@ -84,7 +84,13 @@
                 <li class="sidebar-item">
                     <a href="{{ route('admin.leave-application.index') }}" class="sidebar-link">
                         <i class="lni lni-clipboard"></i>
-                        <span>Data Pengajuan Cuti</span>
+                        <span>Data Laporan Pergantian Shift</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.shift-change.index') }}" class="sidebar-link">
+                        <i class="lni lni-clipboard"></i>
+                        <span>Data Verifikasi Pergantian Shift</span>
                     </a>
                 </li>
             @endauth

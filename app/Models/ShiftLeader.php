@@ -31,4 +31,9 @@ class ShiftLeader extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function shiftChanges()
+    {
+        return $this->hasMany(ShiftChange::class, 'approved_by');
+    }
 }

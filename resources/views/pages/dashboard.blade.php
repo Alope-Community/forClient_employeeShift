@@ -3,13 +3,8 @@
 @section('content')
     @auth('employee')
         <section class="main p-3 ms-3 mt-3">
-            {{-- include we didieu khusus employee --}}
             <h1>Dashboard Employee</h1>
             <p>Selamat datang, {{ auth('employee')->user()->name }}</p>
-            <form action="{{ route('employee.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
         </section>
     @endauth
 
@@ -17,34 +12,30 @@
         <section class="main p-3 ms-3 mt-3">
             <h1>Dashboard Shift Leader</h1>
             <p>Selamat datang, {{ auth('shift_leader')->user()->name }}</p>
-            
+
             <h3>Notifikasi</h3>
-            @forelse(auth()->user()->notifications as $notification)
+            @forelse(auth()->user()->unreadNotifications as $notification)
                 <div class="alert alert-info mb-2">
-                    <strong>{{ $notification->data['title'] }}</strong><br>
-                    {{ $notification->data['message'] }}<br>
-                    <small>{{ $notification->created_at->diffForHumans() }}</small>
+                    <div class="">
+                        <strong>{{ $notification->data['title'] }}</strong><br>
+                        {{ $notification->data['message'] }}<br>
+                        <small>{{ $notification->created_at->diffForHumans() }}</small>
+                    </div>
+                    {{-- verifikasi sekarang button mengarah ke --}}
+                    <a href="{{ route('shift-leader.shift-change.edit', $notification->data['report_id']) }}"
+                        class="btn btn-primary mt-2">Verifikasi Sekarang</a>
                 </div>
             @empty
                 <p>Tidak ada notifikasi.</p>
             @endforelse
 
-
-            {{-- <form action="{{ route('shift-leader.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form> --}}
         </section>
     @endauth
-    
+
     @auth('admin')
         <section class="main p-3 ms-3 mt-3">
             <h1>Dashboard Admin</h1>
             <p>Selamat datang, {{ auth('admin')->user()->name }}</p>
-            <form action="{{ route('admin.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
         </section>
     @endauth
 

@@ -89,23 +89,23 @@ class LeaveApplicationController extends Controller
             return back()->withErrors(['error' => 'Shift yang dipilih tidak boleh sama.']);
         }
 
+        if (!$shiftReport) {
+            return back()->withErrors(['error' => 'Gagal mengajukan perubahan shift.']);
+        }
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images/shift_reports', 'public');
             $shiftReport->image = $imagePath;
             $shiftReport->save();
         }
 
-        if (!$shiftReport) {
-            return back()->withErrors(['error' => 'Gagal mengajukan perubahan shift.']);
-        }
-
         $shiftLeaders = ShiftLeader::all();
 
         foreach ($shiftLeaders as $shiftLeader) {
-            $shiftLeader->notify(new ShiftReportNotification(auth()->user()->name, $shiftReport->time, $shiftReport->description));
+            $shiftLeader->notify(new ShiftReportNotification($shiftReport->id, auth()->user()->name, $shiftReport->time, $shiftReport->description));
         }
 
-        return back()->with('success', 'Pengajuan perubahan shift berhasil diajukan. Mohon tunggu konfirmasi dari atasan.');
+        return redirect()->route('employee.leave-application.index')->with('success', 'Pengajuan perubahan shift berhasil diajukan. Mohon tunggu konfirmasi dari atasan.');
     }
 
     /**

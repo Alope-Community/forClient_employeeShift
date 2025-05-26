@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('leave-application.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('employee.leave-application.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -59,12 +59,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="image" class="form-label">Upload Bukti (jika ada)</label>
+                <label for="image" class="form-label">Upload Bukti</label>
                 <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Kirim Pengajuan</button>
-            <a href="{{ route('leave-application.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('employee.leave-application.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 @endsection

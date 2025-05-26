@@ -2,15 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\ShiftLeader;
+use App\Models\ShiftReport;
+use App\Notifications\ShiftReportNotification;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class ShiftReportSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('shift_reports')->insert([
+        $reportsData = [
             [
                 'employee_id' => 1,
                 'from_shift_id' => 1,
@@ -20,8 +22,6 @@ class ShiftReportSeeder extends Seeder
                 'time' => Carbon::now()->subDays(1)->setTime(15, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
                 'image' => 'shift_reports/report1.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'employee_id' => 2,
@@ -32,8 +32,6 @@ class ShiftReportSeeder extends Seeder
                 'time' => Carbon::now()->subDays(2)->setTime(23, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
                 'image' => 'shift_reports/report2.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'employee_id' => 1,
@@ -44,9 +42,33 @@ class ShiftReportSeeder extends Seeder
                 'time' => Carbon::now()->subDays(3)->setTime(20, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
                 'image' => 'shift_reports/report3.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
-        ]);
+        ];
+
+        $shiftLeaders = ShiftLeader::all();
+
+        foreach ($reportsData as $data) {
+            $timestamp = now();
+
+            $shiftReport = ShiftReport::create(array_merge($data, [
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]));
+
+            $shiftReport->shiftChange()->create([
+                'status' => 'pending',
+                'approved_by' => null,
+                'approved_at' => null,
+            ]);
+
+            foreach ($shiftLeaders as $shiftLeader) {
+                $shiftLeader->notify(new ShiftReportNotification(
+                    $shiftReport->id,
+                    'Seeder System',
+                    $shiftReport->time,
+                    $shiftReport->description
+                ));
+            }
+        }
     }
 }
