@@ -20,13 +20,13 @@
                 <li class="sidebar-item">
                     <a href="{{ route('employee.leave-application.index') }}" class="sidebar-link">
                         <i class="lni lni-user"></i>
-                        <span>Data Pengajuan Cuti</span>
+                        <span>Data Pengajuan Pergantian Shift</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-user"></i>
-                        <span>Data Riwayat Cuti</span>
+                        <span>Data Riwayat Pergantian Shift</span>
                     </a>
                 </li>
             @endauth

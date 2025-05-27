@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Pengajuan Cuti')
+@section('title', 'Daftar Pengajuan Pergantian Shift')
 
 @section('content')
     <div class="main p-3 ms-3 mt-3">
@@ -13,7 +13,7 @@
         @endif
 
         @auth('employee')
-            <a href="{{ route('employee.leave-application.create') }}" class="btn btn-primary mb-3">+ Ajukan Cuti</a>
+            <a href="{{ route('employee.leave-application.create') }}" class="btn btn-primary mb-3">+ Ajukan Pergantian Shift</a>
         @endauth
 
         <div class="table-responsive">
@@ -24,7 +24,7 @@
                         <th>Nama Karyawan</th>
                         <th>Dari Shift</th>
                         <th>Kepada Shift</th>
-                        <th>Tanggal Cuti</th>
+                        <th>Tanggal Mulai</th>
                         <th>Judul</th>
                         <th>Alasan</th>
                         <th>Status</th>

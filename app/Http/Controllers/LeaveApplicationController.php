@@ -7,10 +7,27 @@ use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
 use App\Notifications\shiftReportNotification;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class LeaveApplicationController extends Controller
 {
+    protected $prefix;
+
+    public function __construct()
+    {
+        if (Auth::guard('admin')->check()) {
+            $this->prefix = 'admin';
+        } elseif (Auth::guard('shift_leader')->check()) {
+            $this->prefix = 'shift-leader';
+        } elseif (Auth::guard('employee')->check()) {
+            $this->prefix = 'employee';
+        } else {
+            abort(403, 'Unauthorized');
+        }
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -167,7 +184,11 @@ class LeaveApplicationController extends Controller
      */
     public function destroy(string $id)
     {
-        $shiftReport = shiftReport::findOrFail($id);
+        $shiftReport = ShiftReport::findOrFail($id);
+
+        DatabaseNotification::where('type', ShiftReportNotification::class)
+            ->where('data->report_id', $shiftReport->id)
+            ->delete();
 
         if ($shiftReport->image) {
             Storage::disk('public')->delete($shiftReport->image);
