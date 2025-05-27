@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaveApplicationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ShiftChangeController;
 use App\Http\Controllers\ShiftController;
@@ -30,8 +31,14 @@ Route::middleware(['guest:admin', 'redirect.if.logged.in'])->prefix('auth')->gro
 
 Route::middleware('auth:employee')->prefix('employee')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
-    Route::post('/logout', [AuthController::class, 'employeeLogout'])->name('employee.logout');
+
     Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('employee.profile.update');
+
+    Route::post('/logout', [AuthController::class, 'employeeLogout'])->name('employee.logout');
 });
 
 Route::middleware('auth:shift_leader')->prefix('leader')->group(function () {
@@ -41,6 +48,10 @@ Route::middleware('auth:shift_leader')->prefix('leader')->group(function () {
     Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule');
 
     Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'show', 'edit', 'update']);
+    
+    Route::get('/profile', [ProfileController::class, 'index'])->name('shift-leader.profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('shift-leader.profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('shift-leader.profile.update');
 
     Route::post('/logout', [AuthController::class, 'shiftLeaderLogout'])->name('shift-leader.logout');
 });
@@ -61,6 +72,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::resource('/schedule', ScheduleController::class)->names('admin.schedule');
     Route::resource('/leave-application', LeaveApplicationController::class)->names('admin.leave-application')->only(['index', 'show', 'update', 'edit', 'destroy']);
     Route::resource('/shift-change', ShiftChangeController::class)->names('admin.shift-change')->only(['index', 'show', 'edit', 'update']);
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 
     Route::post('/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
 });

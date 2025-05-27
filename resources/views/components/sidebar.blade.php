@@ -97,12 +97,30 @@
         </ul>
 
         <div class="sidebar-footer">
+            @auth('employee')
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="{{ route('employee.profile.index') }}" class="sidebar-link">
                     <i class="lni lni-user"></i>
                     <span>Profile</span>
                 </a>
             </li>
+            @endauth
+            @auth('shift_leader')
+                <li class="sidebar-item">
+                    <a href="{{ route('shift-leader.profile.index') }}" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            @endauth
+            @auth('admin')
+                <li class="sidebar-item">
+                    <a href="{{ route('admin.profile.index') }}" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            @endauth
             @auth('employee')
                 <form action="{{ route('employee.logout') }}" method="POST"
                     class="d-flex align-items-center mx-2 py-2 sidebar-link text-white logout-form"
