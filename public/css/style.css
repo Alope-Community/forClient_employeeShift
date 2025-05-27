@@ -73,6 +73,25 @@ body {
     font-weight: 600;
 }
 
+/* Highlight untuk menu aktif */
+.sidebar-item.active > a.sidebar-link {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-left: 3px solid #3b7ddd;
+    color: #fff;
+    font-weight: 600;
+}
+
+.sidebar-item.active > a.sidebar-link i {
+    color: #ffffff;
+}
+
+/* Hover effect tetap ada */
+a.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+    border-left: 3px solid #3b7ddd;
+    color: #fff;
+}
+
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;
@@ -116,7 +135,7 @@ a.sidebar-link:hover {
     display: none;
 }
 
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
     display: block;
     max-height: 15em;
     width: 100%;
@@ -158,10 +177,6 @@ a.sidebar-link:hover {
 }
 
 .custom-login-btn {
-    position: absolute;
-    bottom: 1rem;
-    /* <--- Naikkan tombol */
-    right: 1rem;
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border: 1px solid #00ACE8;
@@ -169,23 +184,31 @@ a.sidebar-link:hover {
     background-color: #054586;
     transition: 0.3s;
     z-index: 1;
+    padding-block: 0.6rem;
 }
 
 .login-btn {
-    padding-block: 0.60rem;
+    padding-block: 0.6rem;
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    border: 1px solid #00ACE8;
+    border: 1px solid #00ace8;
 }
 
 .login-btn:hover {
-    padding-block: 0.60rem;
+    padding-block: 0.6rem;
     background-color: #054586;
     color: white;
     transition: 0.3s;
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     border: 1px solid #fff;
+}
+
+.dropdown {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 .logout-button:hover {
