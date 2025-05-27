@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ShiftChangeController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\ShiftHistoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::middleware('auth:employee')->prefix('employee')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('employee.profile.update');
+
+    Route::resource('/shift-history', ShiftHistoryController::class)->names('employee.shift-history')->only(['index', 'show']);
 
     Route::post('/logout', [AuthController::class, 'employeeLogout'])->name('employee.logout');
 });

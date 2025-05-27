@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item {{ request()->routeIs('employee.leave-history') ? 'active' : '' }}">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('employee.shift-history.index') }}" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>Data Riwayat Pergantian Shift</span>
                     </a>
