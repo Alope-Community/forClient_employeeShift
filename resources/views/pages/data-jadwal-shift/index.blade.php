@@ -40,21 +40,23 @@
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}</td>
                                 <td class="d-flex justify-content-center gap-2">
-                                    <a href="{{ route($prefix . '.schedule.show', $schedule->id) }}"
-                                        class="btn btn-sm btn-info">Detail</a>
+    <a href="{{ route($prefix . '.schedule.show', $schedule->id) }}"
+        class="btn btn-sm btn-info">Detail</a>
 
-                                    <a href="{{ route($prefix . '.schedule.edit', $schedule->id) }}"
-                                        class="btn btn-sm btn-secondary">Edit</a>
+    <a href="{{ route($prefix . '.schedule.edit', $schedule->id) }}"
+        class="btn btn-sm btn-outline-primary me-1">
+        <i class="lni lni-pencil"></i> 
+    </a>
 
-                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
-                                        data-route="{{ route($prefix . '.schedule.destroy', $schedule->id) }}"
-                                        data-employee="{{ $schedule->employee->name ?? 'Karyawan tidak ditemukan' }}"
-                                        data-date="{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal" title="Hapus">
-                                        <i class="lni lni-trash"></i>
-                                    </button>
+    <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
+        data-route="{{ route($prefix . '.schedule.destroy', $schedule->id) }}"
+        data-employee="{{ $schedule->employee->name ?? 'Karyawan tidak ditemukan' }}"
+        data-date="{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}"
+        data-bs-toggle="modal" data-bs-target="#deleteModal" title="Hapus">
+        <i class="lni lni-trash"></i>
+    </button>
+</td>
 
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

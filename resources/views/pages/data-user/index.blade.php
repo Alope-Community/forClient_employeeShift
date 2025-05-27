@@ -38,22 +38,15 @@
                                     class="btn btn-sm btn-info">Detail</a>
 
                                 <a href="{{ route('user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
-                                    class="btn btn-sm btn-secondary">Edit</a>
+                                    class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                    <i class="lni lni-pencil"></i>
+                                </a>
 
                                 <button class="btn btn-sm btn-outline-danger delete-btn" data-id="{{ $item['model']->id }}"
                                     data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}" title="Hapus"
                                     data-bs-toggle="modal" data-bs-target="#deleteUserModal">
                                     <i class="lni lni-trash"></i>
                                 </button>
-
-                                {{-- <form
-                                    action="{{ route('user.destroy', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
-                                    method="POST" class="d-inline"
-                                    onsubmit="return confirm('Yakin ingin menghapus pengguna ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </form> --}}
                             </td>
                         </tr>
                     @endforeach
@@ -62,24 +55,23 @@
         </div>
     </div>
 
-    <!-- Modal Hapus User -->
+    <!-- Modal Hapus -->
     <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form id="deleteUserForm" method="POST">
+        <div class="modal-dialog">
+            <form method="POST" id="deleteUserForm">
                 @csrf
                 @method('DELETE')
-                <div class="modal-content rounded-4">
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title" id="deleteUserModalLabel"><i class="lni lni-trash-can"></i> Hapus User</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteUserModalLabel">Hapus Pengguna</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body text-center">
-                        <p>Yakin ingin menghapus user <strong id="deleteUserName"></strong>?</p>
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin ingin menghapus user <strong id="deleteUserName"></strong>?</p>
                     </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-danger px-4">Hapus</button>
-                        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Batal</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </div>
             </form>
