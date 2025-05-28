@@ -7,18 +7,26 @@ use Illuminate\Support\Facades\Auth;
 
 class ShiftChangeController extends Controller
 {
-    protected $prefix;
-
-    public function __construct()
+    protected function detectPrefix()
     {
-        // Tentukan prefix guard saat controller diinisialisasi
-        if (Auth::guard('admin')->check()) {
-            $this->prefix = 'admin';
-        } elseif (Auth::guard('shift_leader')->check()) {
-            $this->prefix = 'shift-leader';
-        } else {
-            abort(403, 'Unauthorized');
+        foreach (['admin', 'shift_leader', 'employee'] as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return $guard === 'shift_leader' ? 'shift-leader' : $guard;
+            }
         }
+
+        abort(403, 'Unauthorized');
+    }
+
+    protected function detectGuard()
+    {
+        foreach (['admin', 'shift_leader', 'employee'] as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return $guard;
+            }
+        }
+
+        abort(403, 'Unauthorized');
     }
 
     /**
@@ -79,9 +87,10 @@ class ShiftChangeController extends Controller
             $shiftChange = \App\Models\ShiftChange::findOrFail($id);
             $shiftChange->status = $request->input('status');
             $shiftChange->approved_by = Auth::id();
+            $shiftChange->approved_at = now();
             $shiftChange->save();
 
-            $notification = auth($this->prefix)->user()
+            $notification = auth($this->detectGuard())->user()
                 ->unreadNotifications
                 ->where('data.report_id', $shiftChange->shift_report_id)
                 ->first();
@@ -90,7 +99,7 @@ class ShiftChangeController extends Controller
                 $notification->markAsRead();
             }
 
-            return redirect()->route("{$this->prefix}.shift-change.index")->with('success', 'Shift change updated successfully.');
+            return redirect()->route("{$this->detectPrefix()}.shift-change.index")->with('success', 'Shift change updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Failed to update shift change: ' . $e->getMessage()]);
         }

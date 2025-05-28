@@ -12,17 +12,17 @@ class ShiftReportNotification extends Notification
 
     protected $reportId;
     protected $employeeName;
-    protected $cutiTanggal;
+    protected $shiftTanggal;
     protected $alasan;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($reportId, $employeeName, $cutiTanggal, $alasan)
+    public function __construct($reportId, $employeeName, $shiftTanggal, $alasan)
     {
         $this->reportId = $reportId;
         $this->employeeName = $employeeName;
-        $this->cutiTanggal = $cutiTanggal;
+        $this->shiftTanggal = $shiftTanggal;
         $this->alasan = $alasan;
     }
 
@@ -46,9 +46,9 @@ class ShiftReportNotification extends Notification
         return [
             'report_id' => $this->reportId,
             'title' => 'Pengajuan Pergantian Shift',
-            'message' => "Karyawan {$this->employeeName} mengajukan cuti pada tanggal {$this->cutiTanggal}. Alasan: {$this->alasan}",
+            'message' => "Karyawan {$this->employeeName} mengajukan pergantian shift pada tanggal {$this->shiftTanggal}. Alasan: {$this->alasan}",
             'employee_name' => $this->employeeName,
-            'tanggal' => $this->cutiTanggal,
+            'tanggal' => $this->shiftTanggal,
             'alasan' => $this->alasan,
         ];
     }

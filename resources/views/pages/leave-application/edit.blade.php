@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Pengajuan Cuti')
+@section('title', 'Edit Pengajuan Pergantian Shift')
 
 @section('content')
     <div class="main p-3 ms-3 mt-3">
-        <h1 class="mb-4">Edit Pengajuan Cuti</h1>
+        <h1 class="mb-4">Edit Pengajuan Pergantian Shift</h1>
 
         @php
-            $prefix = auth('admin')->check() ? 'admin' : (auth('shift_leader')->check() ? 'shift-leader' : null);
+            $prefix = auth('admin')->check()
+                ? 'admin'
+                : (auth('shift_leader')->check()
+                    ? 'shift-leader'
+                    : (auth('employee')->check()
+                        ? 'employee'
+                        : null));
         @endphp
 
         @if ($errors->any())
@@ -21,7 +27,8 @@
             </div>
         @endif
 
-        <form action="{{ route($prefix . '.leave-application.update', $report->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route($prefix . '.leave-application.update', $report->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
