@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shift;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ShiftController extends Controller
 {
@@ -33,9 +34,11 @@ class ShiftController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'group' => 'required|string|max:255',
+                'group' => 'required|string|max:255|unique:shifts,group',
                 'start_time' => 'required|date_format:H:i',
                 'end_time' => 'required|date_format:H:i',
+            ], [
+                'group.unique' => 'Group shift sudah ada, silakan gunakan nama group yang berbeda.',
             ]);
 
             $start = \Carbon\Carbon::createFromFormat('H:i', $request->start_time);
@@ -43,6 +46,10 @@ class ShiftController extends Controller
 
             if ($end <= $start) {
                 return back()->withErrors(['end_time' => 'Jam keluar harus setelah jam masuk.'])->withInput();
+            }
+
+            if ($start->diffInHours($end) != 8) {
+                return back()->withErrors(['end_time' => 'Shift hanya diperbolehkan 8 jam.'])->withInput();
             }
 
             Shift::create([
@@ -53,14 +60,14 @@ class ShiftController extends Controller
             ]);
 
             $isAdmin = auth()->guard('admin')->check();
-            
+
             if ($isAdmin) {
                 return redirect()->route('admin.shift.index')->with('success', 'Shift created successfully.');
             }
 
             return redirect()->route('shift-leader.shift.index')->with('success', 'Shift created successfully.');
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'An error occurred while creating the shift: ' . $th->getMessage()]);
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }
     }
 
