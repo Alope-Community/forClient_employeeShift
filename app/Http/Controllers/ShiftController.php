@@ -102,6 +102,8 @@ class ShiftController extends Controller
                 'group' => 'required|string|max:255',
                 'start_time' => 'required|date_format:H:i',
                 'end_time' => 'required|date_format:H:i',
+            ], [
+                'group.unique' => 'Group shift sudah ada, silakan gunakan nama group yang berbeda.',
             ]);
 
             $start = \Carbon\Carbon::createFromFormat('H:i', $request->start_time);
@@ -109,6 +111,10 @@ class ShiftController extends Controller
 
             if ($end <= $start) {
                 return back()->withErrors(['end_time' => 'Jam keluar harus setelah jam masuk.'])->withInput();
+            }
+
+            if ($start->diffInHours($end) != 8) {
+                return back()->withErrors(['end_time' => 'Shift hanya diperbolehkan 8 jam.'])->withInput();
             }
 
             $shift = Shift::findOrFail($id);
