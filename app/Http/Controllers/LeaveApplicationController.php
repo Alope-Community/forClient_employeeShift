@@ -27,7 +27,7 @@ class LeaveApplicationController extends Controller
             abort(403, 'Unauthorized');
         }
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -42,6 +42,13 @@ class LeaveApplicationController extends Controller
                 'fromShift',
                 'toShift',
                 'shiftChange'
+            ])->whereHas('shiftChange', function ($query) {
+                $query->where('status', 'pending');
+            })
+            ->with([
+                'shiftChange' => function ($query) {
+                    $query->where('status', 'pending');
+                }
             ]);
 
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
