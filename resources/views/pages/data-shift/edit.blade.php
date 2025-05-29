@@ -10,6 +10,16 @@
             $prefix = auth('admin')->check() ? 'admin' : (auth('shift_leader')->check() ? 'shift-leader' : null);
         @endphp
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if ($prefix)
             <form action="{{ route($prefix . '.shift.update', $shift->id) }}" method="POST">
                 @csrf

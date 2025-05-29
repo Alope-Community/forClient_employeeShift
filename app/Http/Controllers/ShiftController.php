@@ -44,12 +44,17 @@ class ShiftController extends Controller
             $start = \Carbon\Carbon::createFromFormat('H:i', $request->start_time);
             $end = \Carbon\Carbon::createFromFormat('H:i', $request->end_time);
 
-            if ($end <= $start) {
-                return back()->withErrors(['end_time' => 'Jam keluar harus setelah jam masuk.'])->withInput();
+            // tambah hari untuk shift malam
+            if ($end->lessThanOrEqualTo($start)) {
+                $end->addDay();
             }
 
-            if ($start->diffInHours($end) != 8) {
-                return back()->withErrors(['end_time' => 'Shift hanya diperbolehkan 8 jam.'])->withInput();
+            // Hitung durasi dalam jam
+            $durationInHours = $start->diffInHours($end);
+
+            // Validasi durasi harus 8 jam
+            if ($durationInHours != 8) {
+                return redirect()->back()->withErrors(['error' => 'Durasi shift harus tepat 8 jam.']);
             }
 
             Shift::create([
@@ -99,7 +104,7 @@ class ShiftController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'group' => 'required|string|max:255',
+                'group' => 'required|string|max:255|unique:shifts,group,' . $id,
                 'start_time' => 'required|date_format:H:i',
                 'end_time' => 'required|date_format:H:i',
             ], [
@@ -109,12 +114,17 @@ class ShiftController extends Controller
             $start = \Carbon\Carbon::createFromFormat('H:i', $request->start_time);
             $end = \Carbon\Carbon::createFromFormat('H:i', $request->end_time);
 
-            if ($end <= $start) {
-                return back()->withErrors(['end_time' => 'Jam keluar harus setelah jam masuk.'])->withInput();
+            // tambah hari untuk shift malam
+            if ($end->lessThanOrEqualTo($start)) {
+                $end->addDay();
             }
 
-            if ($start->diffInHours($end) != 8) {
-                return back()->withErrors(['end_time' => 'Shift hanya diperbolehkan 8 jam.'])->withInput();
+            // Hitung durasi dalam jam
+            $durationInHours = $start->diffInHours($end);
+
+            // Validasi durasi harus 8 jam
+            if ($durationInHours != 8) {
+                return redirect()->back()->withErrors(['error' => 'Durasi shift harus tepat 8 jam.']);
             }
 
             $shift = Shift::findOrFail($id);
@@ -133,7 +143,7 @@ class ShiftController extends Controller
             }
             return redirect()->route('shift-leader.shift.index')->with('success', 'Shift updated successfully.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'An error occurred while updating the shift: ' . $th->getMessage());
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }
     }
 
