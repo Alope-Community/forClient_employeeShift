@@ -9,9 +9,14 @@
                 <div>
                     <h5 class="card-title mb-1">Shift Saat Ini</h5>
                     <p class="card-text text-muted mb-0">
-                        {{ $schedule->shift->name }}
-                        ({{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} -
-                        {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }})
+                        @if ($schedule != null)
+                            {{ $schedule->shift->name }}
+                            ({{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} -
+                            {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }})
+                        @else
+                            Tidak ada jadwal hari ini.
+                        @endif
+
                     </p>
                 </div>
             </div>
