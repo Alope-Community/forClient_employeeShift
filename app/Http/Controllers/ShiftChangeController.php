@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,6 +90,15 @@ class ShiftChangeController extends Controller
             $shiftChange->approved_by = Auth::id();
             $shiftChange->approved_at = now();
             $shiftChange->save();
+
+            // TODO: create schedule if approved
+            if ($shiftChange->status == 'approved') {
+                Schedule::create([
+                    'employee_id' => $shiftChange->shiftReport->employee_id,
+                    'shift_id' => $shiftChange->shiftReport->toShift->id,
+                    'date' => $shiftChange->shiftReport->time,
+                ]);
+            }
 
             $notification = auth($this->detectGuard())->user()
                 ->unreadNotifications
