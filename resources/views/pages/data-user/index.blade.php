@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="main p-4">
+    <div class="main p-3 ms-5 mt-3">
         <h3 class="fw-bold mb-3"><i class="lni lni-users"></i> Manajemen Pengguna</h3>
         <a href="{{ route('user.create') }}" class="btn btn-primary mb-4">
             <i class="lni lni-plus"></i> Tambah Pengguna
         </a>
 
-        <div class="table-responsive rounded-4 shadow-sm">
-            <table id="userTable" class="table table-hover table-bordered align-middle mb-0">
+        <div class="table-responsive-md rounded-4 shadow-sm">
+            <table id="userTable" class="table table-sm table-hover table-bordered align-middle mb-0">
                 <thead class="table-dark text-center">
                     <tr>
                         <th style="width: 5%">No</th>
@@ -33,18 +33,19 @@
                                     <span class="badge bg-success text-white">Employee</span>
                                 @endif
                             </td>
-                            <td class="d-flex justify-content-center gap-2">
+                            <td class="d-flex flex-wrap justify-content-center gap-2">
                                 <a href="{{ route('user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
                                     class="btn btn-sm btn-info">Detail</a>
 
                                 <a href="{{ route('user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
-                                    class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                    class="btn btn-sm btn-outline-primary" title="Edit">
                                     <i class="lni lni-pencil"></i>
                                 </a>
 
-                                <button class="btn btn-sm btn-outline-danger delete-btn" data-id="{{ $item['model']->id }}"
-                                    data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}" title="Hapus"
-                                    data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                                <button class="btn btn-sm btn-outline-danger delete-btn"
+                                    data-id="{{ $item['model']->id }}"
+                                    data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}"
+                                    data-bs-toggle="modal" data-bs-target="#deleteUserModal" title="Hapus">
                                     <i class="lni lni-trash"></i>
                                 </button>
                             </td>
@@ -87,18 +88,14 @@
                 autoWidth: false
             });
 
-            // Modal hapus user
             $('#deleteUserModal').on('show.bs.modal', function(event) {
                 const button = $(event.relatedTarget);
                 const userId = button.data('id');
                 const userRole = button.data('role');
-                const userName = button.closest('tr').find('td:nth-child(2)')
-                    .text(); // Ambil nama user dari kolom 2
+                const userName = button.closest('tr').find('td:nth-child(2)').text();
 
-                // Update teks konfirmasi
-                $(this).find('#deleteUserName').text(userName);
+                $('#deleteUserName').text(userName);
 
-                // Update form action dengan route yang benar
                 const url = "{{ route('user.destroy', [':id', ':role']) }}"
                     .replace(':id', userId)
                     .replace(':role', userRole);

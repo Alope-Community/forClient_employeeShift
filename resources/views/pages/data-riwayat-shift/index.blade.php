@@ -3,7 +3,7 @@
 @section('title', 'Daftar Pengajuan Pergantian Shift')
 
 @section('content')
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <h1 class="mb-4">Riwayat Pergantian Shift</h1>
 
         <div class="table-responsive">

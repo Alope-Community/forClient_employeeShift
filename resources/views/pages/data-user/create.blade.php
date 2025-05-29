@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <h1 class="mb-4">Tambah Data User</h1>
 
         @if ($errors->any())

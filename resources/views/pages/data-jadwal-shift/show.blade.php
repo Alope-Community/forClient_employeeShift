@@ -5,7 +5,7 @@
         $prefix = Auth::guard('admin')->check() ? 'admin' : 'shift-leader';
     @endphp
 
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col-md-8">
                 <h3 class="fw-bold mb-4">Detail Jadwal Shift <i class="lni lni-calendar"></i></h3>

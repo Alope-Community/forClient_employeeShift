@@ -3,7 +3,7 @@
 @section('title', 'Edit Shift')
 
 @section('content')
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <h3 class="fw-bold mb-4"><i class="lni lni-pencil"></i> Edit Shift</h3>
 
         @php
