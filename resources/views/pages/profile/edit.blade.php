@@ -9,7 +9,7 @@
                 : 'employee');
     @endphp
 
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col-md-8">
                 <div class="card rounded shadow-sm">

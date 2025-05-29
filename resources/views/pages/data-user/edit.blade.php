@@ -3,7 +3,7 @@
 @section('title', 'Edit Data User')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="main p-3 ms-5 mt-3">
         <h1>Edit Data User</h1>
 
         @if ($errors->any())

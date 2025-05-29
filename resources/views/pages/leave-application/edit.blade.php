@@ -3,7 +3,7 @@
 @section('title', 'Edit Pengajuan Pergantian Shift')
 
 @section('content')
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <h1 class="mb-4">Edit Pengajuan Pergantian Shift</h1>
 
         @php
@@ -86,7 +86,7 @@
                 <input class="form-control" type="file" id="image" name="image" accept="image/*">
             </div>
 
-            <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
             <a href="{{ route($prefix . '.leave-application.index') }}" class="btn btn-secondary">Batal</a>
         </form>
     </div>

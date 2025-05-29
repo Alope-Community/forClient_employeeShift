@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col">
                 <h3 class="fw-bold"><i class="lni lni-timer"></i> Data Shift</h3>

@@ -8,7 +8,7 @@
                 ? 'shift-leader'
                 : 'employee');
     @endphp
-    <div class="main p-3 ms-3 mt-3">
+    <div class="main p-3 ms-5 mt-3">
         <div class="row justify-content-center">
 
             <!-- Kotak Kiri (Profil Singkat) -->
