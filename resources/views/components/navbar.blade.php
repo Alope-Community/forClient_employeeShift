@@ -18,6 +18,11 @@
             Login sebagai Admin
           </a>
         </li>
+        <li>
+          <a class="dropdown-item" href="{{ route('leader.dashboard') }}">
+            Login sebagai Leadership
+          </a>
+        </li>
       </ul>
     </div>
   </div>

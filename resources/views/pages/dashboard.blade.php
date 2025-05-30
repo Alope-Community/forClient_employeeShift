@@ -12,11 +12,10 @@
     @endauth
 
     @auth('shift_leader')
-        <section class="main p-3 mt-3">
+        <section class="main p-3 ms-5 mt-3">
             <div class="container">
                 <h1>Dashboard Shift Leader</h1>
                 <p>Selamat datang, {{ auth('shift_leader')->user()->name }}</p>
-                <!-- Admin Card -->
 
                 <h3>Notifikasi</h3>
                 @forelse(auth()->user()->unreadNotifications as $notification)
