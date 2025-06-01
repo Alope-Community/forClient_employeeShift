@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="">
-        <h1 class="mb-5 fs-2">Login Shift Leader</h1>
+        <h1 class="mb-5 fs-2">{{ __('Login Shift Leader') }}</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">

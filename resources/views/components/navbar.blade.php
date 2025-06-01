@@ -10,12 +10,12 @@
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
         <li>
           <a class="dropdown-item" href="{{ route('employee.login.view') }}">
-            Login sebagai Karyawan
+            {{ __('Login sebagai Karyawan') }}
           </a>
         </li>
         <li>
           <a class="dropdown-item" href="{{ route('admin.login.view') }}">
-            Login sebagai Admin
+            {{ __('Login sebagai Admin') }}
           </a>
         </li>
       </ul>
