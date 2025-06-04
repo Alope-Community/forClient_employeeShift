@@ -28,7 +28,23 @@
                         <i class="lni lni-user"></i>
                         <span>{{ __('Data Riwayat Pergantian Shift')}}</span>
                     </a>
-                </li>
+                    <li class="sidebar-item dropdown">
+                        <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="lni lni-world me-2"></i>
+                            <span>{{ __('Pilih Bahasa') }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a>
+                            </li>
+                        </ul>
+                    </li>
             @endauth
 
             @auth('shift_leader')
@@ -55,6 +71,23 @@
                         <i class="lni lni-clipboard"></i>
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
+                </li>
+                <li class="sidebar-item dropdown">
+                    <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="lni lni-world me-2"></i>
+                        <span>{{ __('Pilih Bahasa') }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('lang.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">🇺🇸 English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('lang.switch', 'zh') }}">🇨🇳 中文</a>
+                        </li>
+                    </ul>
                 </li>
             @endauth
 
@@ -94,6 +127,23 @@
                         <i class="lni lni-clipboard"></i>
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
+                </li>
+                <li class="sidebar-item dropdown">
+                    <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="lni lni-world me-2"></i>
+                        <span>{{ __('Pilih Bahasa') }}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a>
+                        </li>
+                    </ul>
                 </li>
             @endauth
         </ul>
