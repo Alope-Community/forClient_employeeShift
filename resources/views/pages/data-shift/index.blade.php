@@ -4,7 +4,7 @@
     <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col">
-                <h3 class="fw-bold"><i class="lni lni-timer"></i> Data Shift</h3>
+                <h3 class="fw-bold"><i class="lni lni-timer"></i> {{ __('Data Shift')}}</h3>
 
                 @php
                     $prefix = auth('admin')->check()
@@ -17,7 +17,7 @@
                 <div class="mb-3">
                     @if ($prefix)
                         <a href="{{ route($prefix . '.shift.create') }}" class="btn btn-primary">
-                            <i class="lni lni-plus"></i> Tambah Shift
+                            <i class="lni lni-plus"></i> {{ __('Tambah Shift')}}
                         </a>
                     @endif
                 </div>
@@ -26,12 +26,12 @@
                     <table id="shiftTable" class="table table-bordered align-middle">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th>No</th>
-                                <th>Nama Shift</th>
-                                <th>Grup Shift</th>
-                                <th>Jam Masuk</th>
-                                <th>Jam Keluar</th>
-                                <th>Aksi</th>
+                                <th>{{ __('No')}}</th>
+                                <th>{{ __('Nama Shift')}}</th>
+                                <th>{{ __('Grup Shift')}}</th>
+                                <th>{{ __('Jam Masuk')}}</th>
+                                <th>{{ __('Jam Keluar')}}</th>
+                                <th>{{ __('Aksi')}}</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -72,15 +72,15 @@
                 @method('DELETE')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteShiftModalLabel">Hapus Shift</h5>
+                        <h5 class="modal-title" id="deleteShiftModalLabel">{{ __('Hapus Shift')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah Anda yakin ingin menghapus data shift ini?</p>
+                        <p>{{ __('Apakah Anda yakin ingin menghapus data shift ini?')}}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">{{ __('Hapus')}}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Batal')}}</button>
                     </div>
                 </div>
             </form>

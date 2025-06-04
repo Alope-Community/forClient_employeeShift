@@ -4,31 +4,31 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Detail Pengajuan Pergantian Shift</h1>
+        <h1 class="mb-4">{{ __('Detail Pengajuan Pergantian Shift')}}</h1>
 
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ $shiftReport->title }}</h5>
                 <h6 class="card-subtitle mb-3 text-muted">
-                    Diajukan oleh: {{ $shiftReport->employee->name }} pada
+                    {{ __('Diajukan oleh:')}} {{ $shiftReport->employee->name }} {{ __('pada')}}
                     {{ \Carbon\Carbon::parse($shiftReport->time)->translatedFormat('d M Y, H:i') }}
                 </h6>
 
                 <dl class="row">
-                    <dt class="col-sm-3">Dari Shift</dt>
+                    <dt class="col-sm-3">{{ __('Dari Shift')}}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->fromShift->name }}</dd>
 
-                    <dt class="col-sm-3">Ke Shift</dt>
+                    <dt class="col-sm-3">{{ __('Ke Shift')}}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->toShift->name }}</dd>
 
-                    <dt class="col-sm-3">Alamat</dt>
+                    <dt class="col-sm-3">{{ __('Alamat')}}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->address }}</dd>
 
-                    <dt class="col-sm-3">Alasan</dt>
+                    <dt class="col-sm-3">{{ __('Alasan')}}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->description }}</dd>
 
                     @if ($shiftReport->image)
-                        <dt class="col-sm-3">Bukti Pendukung</dt>
+                        <dt class="col-sm-3">{{ __('Bukti Pendukung')}}</dt>
                         <dd class="col-sm-9">
                             <img src="{{ asset('storage/' . $shiftReport->image) }}" alt="Bukti"
                                 class="img-fluid rounded" style="max-height: 300px;">
@@ -36,7 +36,7 @@
                     @endif
 
                     @if ($shiftReport->shiftChange)
-                        <dt class="col-sm-3">Status</dt>
+                        <dt class="col-sm-3">{{ __('Status')}}</dt>
                         <dd class="col-sm-9">
                             <span
                                 class="badge 
@@ -47,10 +47,10 @@
                             </span>
                         </dd>
 
-                        <dt class="col-sm-3">Disetujui Oleh</dt>
+                        <dt class="col-sm-3">{{ __('Disetujui Oleh')}}</dt>
                         <dd class="col-sm-9">{{ $shiftReport->shiftChange->approver->name ?? '-' }}</dd>
 
-                        <dt class="col-sm-3">Tanggal Persetujuan</dt>
+                        <dt class="col-sm-3">{{ __('Tanggal Persetujuan')}}</dt>
                         <dd class="col-sm-9">
                             {{ $shiftReport->shiftChange->approved_at ? \Carbon\Carbon::parse($shiftReport->shiftChange->approved_at)->translatedFormat('d M Y, H:i') : '-' }}
                         </dd>
@@ -58,10 +58,10 @@
                 </dl>
 
                 @auth('employee')
-                    <a href="{{ route('employee.leave-application.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                    <a href="{{ route('employee.leave-application.index') }}" class="btn btn-secondary mt-3">{{ __('Kembali')}}</a>
                 @endauth
                 @auth
-                    <a href="{{ route('admin.leave-application.index') }}" class="btn btn-secondary mt-3">Kembali ke Daftar</a>
+                    <a href="{{ route('admin.leave-application.index') }}" class="btn btn-secondary mt-3">{{ __('Kembali ke Daftar')}}</a>
                 @endauth
             </div>
         </div>

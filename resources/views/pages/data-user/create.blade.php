@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Tambah Data User</h1>
+        <h1 class="mb-4">{{ __('Tambah Data User')}}</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,17 +18,17 @@
             @csrf
 
             <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
+                <label for="name" class="form-label">{{ __('Nama')}}</label>
                 <input type="text" name="name" id="name" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label">{{ __('Email')}}</label>
                 <input type="email" name="email" id="email" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
+                <label for="role" class="form-label">{{ __('Role')}}</label>
                 <select name="role" id="role" class="form-select" required>
                     <option value="">-- Pilih Role --</option>
                     <option value="admin">Admin</option>
@@ -39,12 +39,12 @@
 
             <div id="additionalFields">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="username" class="form-label">{{ __('Username')}}</label>
                     <input type="text" name="username" id="username" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label for="gender" class="form-label">Jenis Kelamin</label>
+                    <label for="gender" class="form-label">{{ __('Jenis Kelamin')}}</label>
                     <select name="gender" id="gender" class="form-select">
                         <option value="">-- Pilih Gender --</option>
                         <option value="Pria">Laki-laki</option>
@@ -53,28 +53,28 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="address" class="form-label">Alamat</label>
+                    <label for="address" class="form-label">{{ __('Alamat')}}</label>
                     <textarea name="address" id="address" class="form-control"></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="phone_number" class="form-label">Nomor Telepon</label>
+                    <label for="phone_number" class="form-label">{{ __('Nomor Telepon')}}</label>
                     <input type="text" name="phone_number" id="phone_number" class="form-control">
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Kata Sandi</label>
+                <label for="password" class="form-label">{{ __('Kata Sandi')}}</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
+                <label for="password_confirmation" class="form-label">{{ __('Konfirmasi Kata Sandi')}}</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
                     required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="submit" class="btn btn-primary">{{ __('Simpan')}}</button>
         </form>
     </div>
 @endsection

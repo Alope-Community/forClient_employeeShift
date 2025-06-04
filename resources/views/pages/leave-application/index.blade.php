@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Daftar Pergantian Shift</h1>
+        <h1 class="mb-4">{{ __('Daftar Pergantian Shift')}}</h1>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -15,7 +15,7 @@
         @auth('employee')
             <a href="{{ route('employee.leave-application.create') }}"
                class="btn btn-primary mb-3 d-block d-md-inline-block">
-               + Ajukan Pergantian Shift
+               {{ __('+ Ajukan Pergantian Shift')}}
             </a>
         @endauth
 
@@ -24,15 +24,15 @@
             <table id="reportTable" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Dari Shift</th>
-                        <th>Kepada Shift</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Judul</th>
-                        <th>Alasan</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>{{ __('No')}}</th>
+                        <th>{{ __('Nama Karyawan')}}</th>
+                        <th>{{ __('Dari Shift')}}</th>
+                        <th>{{ __('Kepada Shift')}}</th>
+                        <th>{{ __('Tanggal Mulai')}}</th>
+                        <th>{{ __('Judul')}}</th>
+                        <th>{{ __('Alasan')}}</th>
+                        <th>{{ __('Status')}}</th>
+                        <th>{{ __('Aksi')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,18 +47,18 @@
                             <td>{{ $report->description }}</td>
                             <td>
                                 @if ($report->shiftChange->status === 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    <span class="badge bg-warning text-dark">{{ __('Pending')}}</span>
                                 @elseif ($report->shiftChange->status === 'approved')
-                                    <span class="badge bg-success text-white">Disetujui</span>
+                                    <span class="badge bg-success text-white">{{ __('Disetuju')}}i</span>
                                 @else
-                                    <span class="badge bg-danger text-white">Ditolak</span>
+                                    <span class="badge bg-danger text-white">{{ __('Ditolak')}}</span>
                                 @endif
                             </td>
                             <td class="align-middle">
                                 <div class="d-flex flex-wrap gap-1">
                                     @auth('employee')
                                         <a href="{{ route('employee.leave-application.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">Detail</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                         <a href="{{ route('employee.leave-application.edit', $report->id) }}"
                                             class="btn btn-edit btn-sm btn-outline-primary me-1" title="Edit">
@@ -78,7 +78,7 @@
 
                                     @auth('admin')
                                         <a href="{{ route('admin.leave-application.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">Detail</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                         <a href="{{ route('admin.leave-application.edit', $report->id) }}"
                                             class="btn btn-sm btn-outline-primary me-1" title="Edit">
@@ -107,15 +107,15 @@
             <table id="reportTableDesktop" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Dari Shift</th>
-                        <th>Kepada Shift</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Judul</th>
-                        <th>Alasan</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>{{ __('No')}}</th>
+                        <th>{{ __('Nama Karyawan')}}</th>
+                        <th>{{ __('Dari Shift')}}</th>
+                        <th>{{ __('Kepada Shift')}}</th>
+                        <th>{{ __('Tanggal Mulai')}}</th>
+                        <th>{{ __('Judul')}}</th>
+                        <th>{{ __('Alasan')}}</th>
+                        <th>{{ __('Status')}}</th>
+                        <th>{{ __('Aksi')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,21 +130,21 @@
                             <td>{{ $report->description }}</td>
                             <td>
                                 @if ($report->shiftChange->status === 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    <span class="badge bg-warning text-dark">{{ __('Pending')}}</span>
                                 @elseif ($report->shiftChange->status === 'approved')
-                                    <span class="badge bg-success text-white">Disetujui</span>
+                                    <span class="badge bg-success text-white">{{ __('Disetuju')}}i</span>
                                 @else
-                                    <span class="badge bg-danger text-white">Ditolak</span>
+                                    <span class="badge bg-danger text-white">{{ __('Ditolak')}}</span>
                                 @endif
                             </td>
                             <td class="align-middle">
                                 <div class="d-flex flex-wrap gap-1">
                                     @auth('employee')
                                         <a href="{{ route('employee.leave-application.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">Detail</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                         <a href="{{ route('employee.leave-application.edit', $report->id) }}"
-                                            class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                            class="btn btn-edit btn-sm btn-outline-primary me-1" title="Edit">
                                             <i class="lni lni-pencil"></i>
                                         </a>
                                         <button type="button"
@@ -161,7 +161,7 @@
 
                                     @auth('admin')
                                         <a href="{{ route('admin.leave-application.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">Detail</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                         <a href="{{ route('admin.leave-application.edit', $report->id) }}"
                                             class="btn btn-sm btn-outline-primary me-1" title="Edit">
@@ -194,15 +194,15 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">{{ __('Konfirmasi Hapus')}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus pengajuan cuti dari <strong id="employeeName"></strong>?</p>
+                    <p>{{ __('Apakah Anda yakin ingin menghapus pengajuan cuti dari')}} <strong id="employeeName"></strong>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Batal')}}</button>
+                    <button type="submit" class="btn btn-danger">{{ __('Hapus')}}</button>
                 </div>
             </form>
             </div>

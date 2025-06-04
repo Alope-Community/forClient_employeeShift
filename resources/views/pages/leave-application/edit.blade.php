@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Edit Pengajuan Pergantian Shift</h1>
+        <h1 class="mb-4">{{ __('Edit Pengajuan Pergantian Shift')}}</h1>
 
         @php
             $prefix = auth('admin')->check()
@@ -18,7 +18,7 @@
 
         @if ($errors->any())
             <div class="alert alert-danger">
-                <strong>Terjadi kesalahan!</strong>
+                <strong>{{ __('Terjadi kesalahan!')}}</strong>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -33,7 +33,7 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="from_shift_id" class="form-label">Dari Shift</label>
+                <label for="from_shift_id" class="form-label">{{ __('Dari Shift')}}</label>
                 <select class="form-select" id="from_shift_id" name="from_shift_id" required>
                     <option value="">-- Pilih Shift --</option>
                     @foreach ($shifts as $shift)
@@ -45,7 +45,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="to_shift_id" class="form-label">Kepada Shift</label>
+                <label for="to_shift_id" class="form-label">{{ __('Kepada Shift')}}</label>
                 <select class="form-select" id="to_shift_id" name="to_shift_id" required>
                     <option value="">-- Pilih Shift --</option>
                     @foreach ($shifts as $shift)
@@ -57,37 +57,37 @@
             </div>
 
             <div class="mb-3">
-                <label for="title" class="form-label">Judul</label>
+                <label for="title" class="form-label">{{ __('Judul')}}</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $report->title }}"
                     required>
             </div>
 
             <div class="mb-3">
-                <label for="description" class="form-label">Alasan</label>
+                <label for="description" class="form-label">{{ __('Alasan')}}</label>
                 <textarea class="form-control" id="description" name="description" rows="4" required>{{ $report->description }}</textarea>
             </div>
 
             <div class="mb-3">
-                <label for="address" class="form-label">Alamat</label>
+                <label for="address" class="form-label">{{ __('Alamat')}}</label>
                 <textarea class="form-control" id="address" name="address" rows="2" required>{{ $report->address }}</textarea>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Gambar Saat Ini</label><br>
+                <label class="form-label">{{ __('Gambar Saat Ini')}}</label><br>
                 @if ($report->image)
                     <img src="{{ asset('storage/' . $report->image) }}" alt="Image" width="200">
                 @else
-                    <p>Tidak ada gambar.</p>
+                    <p>{{ __('Tidak ada gambar.')}}</p>
                 @endif
             </div>
 
             <div class="mb-3">
-                <label for="image" class="form-label">Ubah Gambar</label>
+                <label for="image" class="form-label">{{ __('Ubah Gambar')}}</label>
                 <input class="form-control" type="file" id="image" name="image" accept="image/*">
             </div>
 
-            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-            <a href="{{ route($prefix . '.leave-application.index') }}" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary">{{ __('Simpan Perubahan')}}</button>
+            <a href="{{ route($prefix . '.leave-application.index') }}" class="btn btn-secondary">{{ __('Batal')}}</a>
         </form>
     </div>
 @endsection

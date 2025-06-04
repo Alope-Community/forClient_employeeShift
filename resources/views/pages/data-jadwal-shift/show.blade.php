@@ -8,15 +8,15 @@
     <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col-md-8">
-                <h3 class="fw-bold mb-4">Detail Jadwal Shift <i class="lni lni-calendar"></i></h3>
+                <h3 class="fw-bold mb-4">{{ __('Detail Jadwal Shift')}} <i class="lni lni-calendar"></i></h3>
 
                 <div class="card">
                     <div class="card-body">
                         <dl class="row">
-                            <dt class="col-sm-4">Nama Karyawan</dt>
+                            <dt class="col-sm-4">{{ __('Nama Karyawan')}}</dt>
                             <dd class="col-sm-8">{{ $schedule->employee->name ?? '-' }}</dd>
 
-                            <dt class="col-sm-4">Shift</dt>
+                            <dt class="col-sm-4">{{ __('Shift')}}</dt>
                             <dd class="col-sm-8">
                                 @if ($schedule->shift)
                                     {{ $schedule->shift->name }}
@@ -27,14 +27,14 @@
                                 @endif
                             </dd>
 
-                            <dt class="col-sm-4">Tanggal & Waktu</dt>
+                            <dt class="col-sm-4">{{ __('Tanggal & Waktu')}}</dt>
                             <dd class="col-sm-8">
                                 {{ \Carbon\Carbon::parse($schedule->date)->format('d M Y H:i') }}
                             </dd>
                         </dl>
 
                         <a href="{{ route($prefix . '.schedule.index') }}" class="btn btn-secondary mt-3">
-                            <i class="lni lni-arrow-left"></i> Kembali
+                            <i class="lni lni-arrow-left"></i> {{ __('Kembali')}}
                         </a>
                     </div>
                 </div>

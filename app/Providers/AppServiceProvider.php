@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        App::setLocale(Session::get('locale', config('app.locale')));
+
         Authenticate::redirectUsing(function ($request) {
             $prefix = $request->route() ? $request->route()->getPrefix() : null;
 
