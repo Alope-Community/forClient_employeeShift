@@ -15,10 +15,17 @@
             <div class="col-md-4 mb-4">
                 <div class="card rounded shadow-sm text-center">
                     <div class="card-body">
-                        <div class="rounded-circle bg-primary bg-opacity-25 d-flex align-items-center justify-content-center mx-auto mb-3"
-                            style="width: 100px; height: 100px; font-size: 40px; background-color: #0d6efd; color: white">
-                            {{ strtoupper(substr($user->name, 0, 1)) }}
-                        </div>
+                        <div class="d-flex justify-content-center mb-3">
+                                @if ($user->photo != null)
+                                    <img src="{{ Storage::url($user->photo) }}" alt="Foto Profil" class="rounded-circle"
+                                        style="width: 100px; height: 100px; object-fit: cover;">
+                                @else
+                                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                                        style="width: 100px; height: 100px; font-size: 40px; color: white;">
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
                         <h5 class="card-title fw-bold">{{ $user->name }}</h5>
                         <p class="text-muted mb-1">{{ $user->email }}</p>
                         <p class="text-muted">Nomor Telepon: {{ $user->phone_number }}</p>

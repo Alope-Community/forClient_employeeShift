@@ -66,6 +66,7 @@ class ProfileController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|max:255|unique:' . $table . ',email,' . $user->id,
                 'password' => 'nullable|string|min:8|confirmed',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ];
 
             // Hanya validasi ini jika bukan admin
@@ -81,6 +82,11 @@ class ProfileController extends Controller
                 $validated['password'] = bcrypt($validated['password']);
             } else {
                 unset($validated['password']); // Jangan ubah password jika kosong
+            }
+
+            if ($request->hasFile('photo')) {
+                $imagePath = $request->file('photo')->store('images/profile', 'public');
+                $validated['photo'] = $imagePath;
             }
 
             $user->update($validated);

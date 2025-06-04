@@ -32,9 +32,26 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route($prefix . '.profile.update') }}">
+                        <form method="POST" action="{{ route($prefix . '.profile.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+
+                            <div class="d-flex justify-content-center mb-3">
+                                @if ($user->photo != null)
+                                    <img src="{{ Storage::url($user->photo) }}" alt="Foto Profil" class="rounded-circle"
+                                        style="width: 100px; height: 100px; object-fit: cover;">
+                                @else
+                                    <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center"
+                                        style="width: 100px; height: 100px; font-size: 40px; color: white;">
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="photo" class="form-label">Foto Profil</label>
+                                <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
+                            </div>
 
                             <div class="mb-3">
                                 <label for="name" class="form-label fw-bold">Nama</label>
