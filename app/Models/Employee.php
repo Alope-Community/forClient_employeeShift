@@ -39,11 +39,6 @@ class Employee extends Authenticatable
         return $this->hasMany(Schedule::class);
     }
 
-    public function latestSchedule()
-    {
-        return $this->hasOne(Schedule::class)->latestOfMany();
-    }
-
     public function shiftReports()
     {
         return $this->hasMany(ShiftReport::class);
