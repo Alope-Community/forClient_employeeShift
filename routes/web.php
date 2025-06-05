@@ -48,7 +48,7 @@ Route::middleware('auth:shift_leader')->prefix('leader')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'shiftLeaderDashboard'])->name('leader.dashboard');
 
     Route::resource('/shift', ShiftController::class)->names('shift-leader.shift');
-    Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule');
+    Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule')->only(['index', 'show']);
 
     Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'show', 'edit', 'update']);
     
@@ -72,7 +72,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::delete('/user/{id}/{role}', [UserController::class, 'destroy'])->name('user.destroy');
 
     Route::resource('/shift', ShiftController::class)->names('admin.shift');
-    Route::resource('/schedule', ScheduleController::class)->names('admin.schedule');
+    Route::resource('/schedule', ScheduleController::class)->names('admin.schedule')->only(['index', 'show']);
     Route::resource('/leave-application', LeaveApplicationController::class)->names('admin.leave-application')->only(['index', 'show', 'update', 'edit', 'destroy']);
     Route::resource('/shift-change', ShiftChangeController::class)->names('admin.shift-change')->only(['index', 'show', 'edit', 'update']);
 

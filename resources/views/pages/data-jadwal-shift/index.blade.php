@@ -8,43 +8,39 @@
     <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col">
-                <h3 class="fw-bold mb-4">Jadwal Shift Karyawan <i class="lni lni-calendar"></i></h3>
+                <h3 class="fw-bold mb-4">Riwayat Jadwal Shift Karyawan <i class="lni lni-calendar"></i></h3>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <a href="{{ route($prefix . '.schedule.create') }}" class="btn btn-primary">
                         <i class="lni lni-plus me-1"></i> Tambah Jadwal Shift
                     </a>
-                </div>
+                </div> --}}
 
                 <div class="table-responsive-md rounded-4 shadow-sm">
-                    <table id="shiftTable" class="table table-sm table-bordered table-striped text-center align-middle mb-0">
+                    <table id="shiftTable"
+                        class="table table-sm table-bordered table-striped text-center align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
                                 <th>No</th>
-                                <th>Nama Karyawan</th>
-                                <th>Shift</th>
-                                <th>Tanggal & Waktu</th>
+                                <th>Nama Shift</th>
+                                <th>Waktu</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($schedules as $index => $schedule)
+                            @foreach ($shifts as $index => $shift)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $schedule->employee->name ?? '-' }}</td>
+                                    <td>{{ $shift->name ?? '-' }}</td>
                                     <td>
-                                        {{ $schedule->shift->name ?? '-' }}
-                                        @if ($schedule->shift)
-                                            ({{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} -
-                                            {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }})
-                                        @endif
+                                        ({{ \Carbon\Carbon::parse($shift->start_time)->format('H:i') }} -
+                                        {{ \Carbon\Carbon::parse($shift->end_time)->format('H:i') }})
                                     </td>
-                                    <td>{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}</td>
                                     <td class="d-flex flex-wrap justify-content-center gap-2">
-                                        <a href="{{ route($prefix . '.schedule.show', $schedule->id) }}"
+                                        <a href="{{ route($prefix . '.schedule.show', $shift->id) }}"
                                             class="btn btn-sm btn-info">Detail</a>
 
-                                        <a href="{{ route($prefix . '.schedule.edit', $schedule->id) }}"
+                                        {{-- <a href="{{ route($prefix . '.schedule.edit', $schedule->id) }}"
                                             class="btn btn-sm btn-outline-primary">
                                             <i class="lni lni-pencil"></i>
                                         </a>
@@ -55,7 +51,7 @@
                                             data-date="{{ \Carbon\Carbon::parse($schedule->date)->format('Y-m-d H:i') }}"
                                             data-bs-toggle="modal" data-bs-target="#deleteModal" title="Hapus">
                                             <i class="lni lni-trash"></i>
-                                        </button>
+                                        </button> --}}
                                     </td>
                                 </tr>
                             @endforeach

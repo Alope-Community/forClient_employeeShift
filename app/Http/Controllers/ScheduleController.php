@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,11 +27,22 @@ class ScheduleController extends Controller
 
     public function index()
     {
-        $schedules = Schedule::with(['employee', 'shift'])
+        $shifts = Shift::all();
+
+        return view("pages.data-jadwal-shift.index", compact('shifts'));
+    }
+
+    public function show(string $id)
+    {
+        $shift = Shift::findOrFail($id);
+
+        // Ambil semua jadwal dengan shift_id tertentu, dan ikutkan data employee-nya
+        $schedules = Schedule::with('employee')
+            ->where('shift_id', $id)
             ->orderBy('date', 'desc')
             ->get();
 
-        return view("pages.data-jadwal-shift.index", compact('schedules'));
+        return view("pages.data-jadwal-shift.show", compact('shift', 'schedules'));
     }
 
     public function create()
@@ -56,13 +68,6 @@ class ScheduleController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => 'An error occurred while creating the schedule: ' . $th->getMessage()]);
         }
-    }
-
-    public function show(string $id)
-    {
-        $schedule = Schedule::with(['employee', 'shift'])->findOrFail($id);
-
-        return view("pages.data-jadwal-shift.show", compact('schedule'));
     }
 
     public function edit(string $id)
