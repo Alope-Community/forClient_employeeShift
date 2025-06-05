@@ -8,11 +8,11 @@
     <div class="main p-3 ms-5 mt-3">
         <div class="row">
             <div class="col">
-                <h3 class="fw-bold mb-4">Riwayat Jadwal Shift Karyawan <i class="lni lni-calendar"></i></h3>
+                <h3 class="fw-bold mb-4">{{ __('Riwayat Jadwal Shift Karyawan') }} <i class="lni lni-calendar"></i></h3>
 
                 {{-- <div class="mb-3">
                     <a href="{{ route($prefix . '.schedule.create') }}" class="btn btn-primary">
-                        <i class="lni lni-plus me-1"></i> Tambah Jadwal Shift
+                        <i class="lni lni-plus me-1"></i> {{ __('Tambah Jadwal Shift')}}
                     </a>
                 </div> --}}
 
@@ -21,10 +21,10 @@
                         class="table table-sm table-bordered table-striped text-center align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th>No</th>
-                                <th>Nama Shift</th>
-                                <th>Waktu</th>
-                                <th>Aksi</th>
+                                <th>{{ __('No') }}</th>
+                                <th>{{ __('Nama Shift') }}</th>
+                                <th>{{ __('Waktu') }}</th>
+                                <th>{{ __('Aksi') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +38,7 @@
                                     </td>
                                     <td class="d-flex flex-wrap justify-content-center gap-2">
                                         <a href="{{ route($prefix . '.schedule.show', $shift->id) }}"
-                                            class="btn btn-sm btn-info">Detail</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                         {{-- <a href="{{ route($prefix . '.schedule.edit', $schedule->id) }}"
                                             class="btn btn-sm btn-outline-primary">
@@ -71,19 +71,19 @@
                 @method('DELETE')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Hapus Jadwal Shift</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">{{ __('Hapus Jadwal Shift')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Yakin ingin menghapus jadwal shift untuk <strong id="shiftEmployeeName"></strong> pada <strong
+                        <p>{{ __('Yakin ingin menghapus jadwal shift untuk')}} <strong id="shiftEmployeeName"></strong> {{ __('pada')}} <strong
                                 id="shiftDate"></strong>?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-sm btn-outline-danger">
-                            Hapus
+                            {{ __('Hapus')}}
                         </button>
 
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Batal')}}</button>
                     </div>
                 </div>
             </form>

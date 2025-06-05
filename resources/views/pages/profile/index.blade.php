@@ -28,7 +28,7 @@
                             </div>
                         <h5 class="card-title fw-bold">{{ $user->name }}</h5>
                         <p class="text-muted mb-1">{{ $user->email }}</p>
-                        <p class="text-muted">Nomor Telepon: {{ $user->phone_number }}</p>
+                        <p class="text-muted">{{ __('Nomor Telepon:')}} {{ $user->phone_number }}</p>
                     </div>
                 </div>
             </div>
@@ -37,38 +37,37 @@
             <div class="col-md-8">
                 <div class="card rounded shadow-sm">
                     <div class="card-body">
-                        <h4 class="card-title fw-bold mb-4">Informasi Profil</h4>
+                        <h4 class="card-title fw-bold mb-4">{{ __('Informasi Profile')}}</h4>
 
                         <div class="mb-3">
-                            <label class="form-label">Nama</label>
+                            <label class="form-label">{{ __('Nama')}}</label>
                             <input type="text" class="form-control" value="{{ $user->name }}" readonly>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
+                            <label class="form-label">{{ __('Email')}}</label>
                             <input type="email" class="form-control" value="{{ $user->email }}" readonly>
                         </div>
 
                         @if ($prefix !== 'admin')
                             <div class="mb-3">
-                                <label class="form-label">Jenis Kelamin</label>
+                                <label class="form-label">{{ __('Jenis Kelamin')}}</label>
                                 <input type="text" class="form-control" value="{{ $user->gender }}" readonly>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Nomor Telepon</label>
+                                <label class="form-label">{{ __('Nomor Telepon')}}</label>
                                 <input type="text" class="form-control" value="{{ $user->phone_number }}" readonly>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Jenis Kelamin</label>
+                                <label class="form-label">{{ __('Jenis Kelamin')}}</label>
                                 <input type="text" class="form-control" value="{{ $user->gender }}" readonly>
                             </div>
                         @endif
 
                         <div class="text-end">
-                            <a href="{{ route($prefix . '.profile.edit') }}" class="btn btn-primary rounded px-4">Edit
-                                Profil</a>
+                            <a href="{{ route($prefix . '.profile.edit') }}" class="btn btn-primary rounded px-4">{{ __('Edit Profile')}}</a>
                         </div>
 
                     </div>

@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h3 class="fw-bold mb-3"><i class="lni lni-users"></i> Manajemen Pengguna</h3>
+        <h3 class="fw-bold mb-3"><i class="lni lni-users"></i> {{ __('Manajemen Pengguna')}}</h3>
         <a href="{{ route('user.create') }}" class="btn btn-primary mb-4">
-            <i class="lni lni-plus"></i> Tambah Pengguna
+            <i class="lni lni-plus"></i>{{ __('Tambah Pengguna')}}
         </a>
 
         <div class="table-responsive-md rounded-4 shadow-sm">
             <table id="userTable" class="table table-sm table-hover table-bordered align-middle mb-0">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th style="width: 5%">No</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th style="width: 15%">Aksi</th>
+                        <th style="width: 5%">{{ __('No')}}</th>
+                        <th>{{ __('Nama')}}</th>
+                        <th>{{ __('Email')}}</th>
+                        <th>{{ __('Role')}}</th>
+                        <th style="width: 15%">{{ __('Aksi')}}</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -26,16 +26,16 @@
                             <td>{{ $item['model']->email }}</td>
                             <td>
                                 @if ($item['role'] === 'Admin')
-                                    <span class="badge bg-info text-dark">Admin</span>
+                                    <span class="badge bg-info text-dark">{{ __('Admin')}}</span>
                                 @elseif ($item['role'] === 'Shift Leader')
-                                    <span class="badge bg-warning text-dark">Shift Leader</span>
+                                    <span class="badge bg-warning text-dark">{{ __('Shift Leader')}}</span>
                                 @else
-                                    <span class="badge bg-success text-white">Employee</span>
+                                    <span class="badge bg-success text-white">{{ __('Employee')}}</span>
                                 @endif
                             </td>
                             <td class="d-flex flex-wrap justify-content-center gap-2">
                                 <a href="{{ route('user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
-                                    class="btn btn-sm btn-info">Detail</a>
+                                    class="btn btn-sm btn-info">{{ __('Detail')}}</a>
 
                                 <a href="{{ route('user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
                                     class="btn btn-sm btn-outline-primary" title="Edit">
@@ -64,15 +64,15 @@
                 @method('DELETE')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteUserModalLabel">Hapus Pengguna</h5>
+                        <h5 class="modal-title" id="deleteUserModalLabel">{{ __('Hapus Pengguna')}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah Anda yakin ingin menghapus user <strong id="deleteUserName"></strong>?</p>
+                        <p>{{ __('Apakah Anda yakin ingin menghapus user')}} <strong id="deleteUserName"></strong>?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">{{ __('Hapus')}}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Batal')}}</button>
                     </div>
                 </div>
             </form>

@@ -7,7 +7,7 @@
         @endphp
         <div class="row">
             <div class="col-md-8">
-                <h3 class="fw-bold mb-4">Tambah Jadwal Shift <i class="lni lni-plus"></i></h3>
+                <h3 class="fw-bold mb-4">{{ __('Tambah Jadwal Shift')}} <i class="lni lni-plus"></i></h3>
 
                 <div class="card">
                     <div class="card-body">
@@ -15,7 +15,7 @@
                             @csrf
 
                             <div class="mb-3">
-                                <label for="nama_karyawan" class="form-label">Nama Karyawan</label>
+                                <label for="nama_karyawan" class="form-label">{{ __('Nama Karyawan')}}</label>
                                 <select class="form-select" id="nama_karyawan" name="employee_id" required>
                                     <option selected disabled>Pilih karyawan</option>
                                     @foreach ($employees as $employee)
@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="shift" class="form-label">Shift</label>
+                                <label for="shift" class="form-label">{{ __('Shift')}}</label>
                                 <select class="form-select" id="shift" name="shift_id" required>
                                     <option selected disabled>Pilih shift</option>
                                     @foreach ($shifts as $shift)
@@ -36,16 +36,16 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="waktu" class="form-label">Tanggal & Waktu</label>
+                                <label for="waktu" class="form-label">{{ __('Tanggal & Waktu')}}</label>
                                 <input type="datetime-local" class="form-control" id="waktu" name="date" required>
                             </div>
 
                             <div class="d-flex justify-content-end">
                                 <a href="{{ url()->previous() }}" class="btn btn-secondary me-2">
-                                    <i class="lni lni-arrow-left"></i> Batal
+                                    <i class="lni lni-arrow-left"></i> {{ __('Batal')}}
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="lni lni-save"></i> Simpan
+                                    <i class="lni lni-save"></i> {{ __('Simpan')}}
                                 </button>
                             </div>
                         </form>

@@ -4,21 +4,21 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Riwayat Pergantian Shift</h1>
+        <h1 class="mb-4">{{ __('Riwayat Pergantian Shift')}}</h1>
 
         <div class="table-responsive">
             <table id="reportTable" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>No</th>
-                        <th>Nama Karyawan</th>
-                        <th>Dari Shift</th>
-                        <th>Kepada Shift</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Judul</th>
-                        <th>Alasan</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
+                        <th>{{ __('No')}}</th>
+                        <th>{{ __('Nama Karyawan')}}</th>
+                        <th>{{ __('Dari Shift')}}</th>
+                        <th>{{ __('Kepada Shift')}}</th>
+                        <th>{{ __('Tanggal Mulai')}}</th>
+                        <th>{{ __('Judul')}}</th>
+                        <th>{{ __('Alasan')}}</th>
+                        <th>{{ __('Status')}}</th>
+                        <th>{{ __('Aksi')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,14 +33,14 @@
                             <td>{{ $report->description }}</td>
                             <td>
                                 @if ($report->shiftChange->status === 'approved')
-                                    <span class="badge bg-success text-white">Disetujui</span>
+                                    <span class="badge bg-success text-white">{{ __('Disetujui')}}</span>
                                 @else
-                                    <span class="badge bg-danger text-white">Ditolak</span>
+                                    <span class="badge bg-danger text-white">{{ __('Ditolak')}}</span>
                                 @endif
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('employee.shift-history.show', $report->id) }}"
-                                    class="btn btn-sm btn-info">Detail</a>
+                                    class="btn btn-sm btn-info">{{ __('Detail')}}</a>
                             </td>
 
                         </tr>

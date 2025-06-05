@@ -4,43 +4,43 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">Detail User</h1>
+        <h1 class="mb-4">{{ __('Detail User')}}</h1>
 
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ $user->name }}</h5>
                 <h6 class="card-subtitle mb-3 text-muted">
-                    Terdaftar sejak: {{ $user->created_at->format('d F Y, H:i') }}
+                    {{ __('Terdaftar sejak:')}} {{ $user->created_at->format('d F Y, H:i') }}
                 </h6>
 
                 <dl class="row">
-                    <dt class="col-sm-3">Nama</dt>
+                    <dt class="col-sm-3">{{ __('Nama')}}</dt>
                     <dd class="col-sm-9">{{ $user->name }}</dd>
 
-                    <dt class="col-sm-3">Email</dt>
+                    <dt class="col-sm-3">{{ __('Email')}}</dt>
                     <dd class="col-sm-9">{{ $user->email }}</dd>
 
-                    <dt class="col-sm-3">Role</dt>
+                    <dt class="col-sm-3">{{ __('Role')}}</dt>
                     <dd class="col-sm-9">
                         <span class="badge bg-primary text-capitalize">{{ str_replace('_', ' ', $role) }}</span>
                     </dd>
 
                     @if (in_array($role, ['shift_leader', 'employee']))
-                        <dt class="col-sm-3">Username</dt>
+                        <dt class="col-sm-3">{{ __('Username')}}</dt>
                         <dd class="col-sm-9">{{ $user->username }}</dd>
 
-                        <dt class="col-sm-3">Jenis Kelamin</dt>
+                        <dt class="col-sm-3">{{ __('Jenis Kelamin')}}</dt>
                         <dd class="col-sm-9">{{ $user->gender }}</dd>
 
-                        <dt class="col-sm-3">Alamat</dt>
+                        <dt class="col-sm-3">{{ __('Alamat')}}</dt>
                         <dd class="col-sm-9">{{ $user->address }}</dd>
 
-                        <dt class="col-sm-3">No. Telepon</dt>
+                        <dt class="col-sm-3">{{ __('No. Telepon')}}</dt>
                         <dd class="col-sm-9">{{ $user->phone_number }}</dd>
                     @endif
                 </dl>
 
-                <a href="{{ route('data.user.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                <a href="{{ route('data.user.index') }}" class="btn btn-secondary mt-3">{{ __('Kembali')}}</a>
             </div>
         </div>
     </div>

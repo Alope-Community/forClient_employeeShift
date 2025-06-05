@@ -11,6 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(\App\Http\Middleware\SetLocale::class);
+
         $middleware->alias([
             'redirect.if.logged.in' => \App\Http\Middleware\RedirectIfLoggedInWithDifferentRole::class,
         ]);
