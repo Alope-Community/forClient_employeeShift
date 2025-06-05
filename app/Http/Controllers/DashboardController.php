@@ -28,6 +28,7 @@ class DashboardController extends Controller
 
         $schedule = Schedule::where('employee_id', $id)
             ->whereDate('date', now())
+            ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
             ->first();
 
         return view('pages.dashboard', compact('user', 'schedule'));

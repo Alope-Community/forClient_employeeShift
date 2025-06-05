@@ -14,6 +14,7 @@ class ShiftReportSeeder extends Seeder
     {
         $reportsData = [
             [
+                'from_employee_id' => 1,
                 'employee_id' => 1,
                 'from_shift_id' => 1,
                 'to_shift_id' => 2,
@@ -24,6 +25,7 @@ class ShiftReportSeeder extends Seeder
                 'image' => 'shift_reports/report1.jpg',
             ],
             [
+                'from_employee_id' => 2,
                 'employee_id' => 2,
                 'from_shift_id' => 2,
                 'to_shift_id' => 3,
@@ -32,16 +34,6 @@ class ShiftReportSeeder extends Seeder
                 'time' => Carbon::now()->subDays(2)->setTime(23, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
                 'image' => 'shift_reports/report2.jpg',
-            ],
-            [
-                'employee_id' => 1,
-                'from_shift_id' => 1,
-                'to_shift_id' => 3,
-                'title' => 'Shift Pagi ke Malam',
-                'description' => 'Tidak ada masalah, semua berjalan sesuai rencana.',
-                'time' => Carbon::now()->subDays(3)->setTime(20, 0),
-                'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
-                'image' => 'shift_reports/report3.jpg',
             ],
         ];
 

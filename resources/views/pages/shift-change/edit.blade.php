@@ -24,15 +24,21 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="namaKaryawan" class="form-label">Nama Karyawan</label>
+                        <label for="namaKaryawan" class="form-label">Nama Karyawan Asal</label>
                         <input readonly ="text" class="form-control" id="namaKaryawan"
-                            value="{{ $shiftChange->shiftReport->employee->name }}" readonly>
+                            value="{{ $shiftChange->shiftReport->fromEmployee->name }}" readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="dariShift" class="form-label">Dari Shift</label>
                         <input readonly type="text" class="form-control" id="dariShift"
                             value="{{ $shiftChange->shiftReport->fromShift->name }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="namaKaryawan" class="form-label">Nama Karyawan</label>
+                        <input readonly ="text" class="form-control" id="namaKaryawan"
+                            value="{{ $shiftChange->shiftReport->employee->name }}" readonly>
                     </div>
 
                     <div class="mb-3">

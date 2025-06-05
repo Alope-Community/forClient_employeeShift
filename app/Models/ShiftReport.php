@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShiftReport extends Model
 {
     protected $fillable = [
+        'from_employee_id',
         'employee_id',
         'from_shift_id',
         'to_shift_id',
@@ -20,6 +21,11 @@ class ShiftReport extends Model
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function fromEmployee()
+    {
+        return $this->belongsTo(Employee::class, 'from_employee_id');
     }
 
     public function fromShift()

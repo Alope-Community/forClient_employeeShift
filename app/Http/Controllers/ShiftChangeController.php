@@ -93,11 +93,33 @@ class ShiftChangeController extends Controller
 
             // TODO: create schedule if approved
             if ($shiftChange->status == 'approved') {
+                $report = $shiftChange->shiftReport;
+
+                // Tambahkan jadwal untuk pengaju
                 Schedule::create([
-                    'employee_id' => $shiftChange->shiftReport->employee_id,
-                    'shift_id' => $shiftChange->shiftReport->toShift->id,
-                    'date' => $shiftChange->shiftReport->time,
+                    'employee_id' => $report->employee_id,
+                    // 'shift_id' => $report->toShift->id,
+                    'shift_id' => $report->fromShift->id,
+                    'date' => $report->time,
                 ]);
+
+                // Ubah jadwal karyawan asal di tanggal itu menjadi shift asal pengaju
+                $existingSchedule = Schedule::where('employee_id', $report->from_employee_id)
+                    ->whereDate('date', $report->time)
+                    ->first();
+
+                if ($existingSchedule) {
+                    $existingSchedule->update([
+                        'shift_id' => $report->toShift->id,
+                    ]);
+                } else {
+                    // Jika tidak ada, buat baru
+                    Schedule::create([
+                        'employee_id' => $report->from_employee_id,
+                        'shift_id' => $report->toShift->id,
+                        'date' => $report->time,
+                    ]);
+                }
             }
 
             $notification = auth($this->detectGuard())->user()

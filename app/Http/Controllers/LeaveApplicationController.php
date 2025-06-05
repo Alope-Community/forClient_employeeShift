@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
@@ -71,9 +73,24 @@ class LeaveApplicationController extends Controller
 
     public function create()
     {
+        // $employees = Employee::with(['schedules' => function ($query) {
+        //     $query->orderBy('date', 'desc')->with('shift');
+        // }])->where('id', '!=', auth()->user()->id)->get();
+
+        $employees = Employee::where('id', '!=', auth()->user()->id)
+            ->whereHas('schedules', function ($query) {
+                $query->whereDate('date', now());
+            })
+            ->with(['schedules' => function ($query) {
+                $query->whereDate('date', now())->with('shift');
+            }])
+            ->get();
+
         $shifts = Shift::all();
-        return view('pages.leave-application.create', compact('shifts'));
+
+        return view('pages.leave-application.create', compact('employees', 'shifts'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -81,6 +98,7 @@ class LeaveApplicationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'from_employee_id' => 'required|exists:employees,id',
             'from_shift_id' => 'required|exists:shifts,id',
             'to_shift_id' => 'required|exists:shifts,id',
             'title' => 'required|string|max:255',
@@ -90,6 +108,7 @@ class LeaveApplicationController extends Controller
         ]);
 
         $shiftReport = ShiftReport::create([
+            'from_employee_id' => $request->from_employee_id,
             'employee_id' => $request->user()->id,
             'from_shift_id' => $request->from_shift_id,
             'to_shift_id' => $request->to_shift_id,

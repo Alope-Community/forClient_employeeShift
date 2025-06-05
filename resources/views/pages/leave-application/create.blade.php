@@ -17,29 +17,38 @@
         <form action="{{ route('employee.leave-application.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
+            <!-- Select Input -->
             <div class="mb-3">
-                <label for="from_shift_id" class="form-label">Shift Asal</label>
-                <select name="from_shift_id" id="from_shift_id" class="form-select" required>
-                    <option value="">-- Pilih Shift Asal --</option>
-                    @foreach ($shifts as $shift)
-                        <option value="{{ $shift->id }}" {{ old('from_shift_id') == $shift->id ? 'selected' : '' }}>
-                            {{ $shift->name }}
+                <label for="from_employee_id" class="form-label fw-bold">Karyawan Asal</label>
+                <select class="form-select" id="from_employee_id" name="from_employee_id" required>
+                    <option value="">-- Pilih --</option>
+                    @foreach ($employees as $employee)
+                        @php
+                            $todaySchedule = $employee->schedules->first();
+                        @endphp
+                        <option value="{{ $employee->id }}" data-schedule-id="{{ $todaySchedule->shift->id ?? '' }}"
+                            data-schedule-name="{{ $todaySchedule->shift->name ?? '-' }}">
+                            {{ $employee->name }}
                         </option>
                     @endforeach
                 </select>
             </div>
 
+            <!-- Readonly Input Shift -->
             <div class="mb-3">
-                <label for="to_shift_id" class="form-label">Shift Tujuan</label>
-                <select name="to_shift_id" id="to_shift_id" class="form-select" required>
-                    <option value="">-- Pilih Shift Tujuan --</option>
-                    @foreach ($shifts as $shift)
-                        <option value="{{ $shift->id }}" {{ old('to_shift_id') == $shift->id ? 'selected' : '' }}>
-                            {{ $shift->name }}
-                        </option>
-                    @endforeach
-                </select>
+                <label for="from_shift_name" class="form-label fw-bold">Shift Karyawan Asal</label>
+                <input type="text" id="from_shift_name" class="form-control" readonly>
+                <input type="hidden" name="from_shift_id" id="from_shift_id">
             </div>
+
+            <select name="to_shift_id" id="to_shift_id" class="form-select" required>
+                <option value="">-- Pilih Shift Tujuan --</option>
+                @foreach ($shifts as $shift)
+                    <option value="{{ $shift->id }}">
+                        {{ $shift->name }}
+                    </option>
+                @endforeach
+            </select>
 
             <div class="mb-3">
                 <label for="title" class="form-label">Judul</label>
@@ -67,4 +76,22 @@
             <a href="{{ route('employee.leave-application.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#from_employee_id').select2();
+
+                $('#from_employee_id').on('change', function() {
+                    let selected = $(this).find('option:selected');
+                    let scheduleName = selected.data('schedule-name');
+                    let scheduleId = selected.data('schedule-id');
+
+                    $('#from_shift_name').val(scheduleName || '-');
+                    $('#from_shift_id').val(scheduleId || '');
+                });
+            });
+        </script>
+    @endpush
+
 @endsection
