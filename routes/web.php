@@ -8,6 +8,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ShiftChangeController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\ShiftHistoryController;
+use App\Http\Controllers\ShiftReportProblemController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SetLocale;
@@ -42,6 +43,8 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/leave-application/{id}/download', [LeaveApplicationController::class, 'download'])
             ->name('employee.leave-application.download');
 
+        Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
+
         Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
         Route::put('/profile', [ProfileController::class, 'update'])->name('employee.profile.update');
@@ -57,7 +60,10 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::resource('/shift', ShiftController::class)->names('shift-leader.shift');
         Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule')->only(['index', 'show']);
 
-        Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'show', 'edit', 'update']);
+        Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'edit', 'update']);
+
+        Route::resource('/shift-problem', ShiftReportProblemController::class)->names('shift-leader.report-problem')->only(['edit']);
+        Route::put('/shift-problem/{id}', [ShiftReportProblemController::class, 'updateOnLeader'])->name('shift-leader.report-problem.update-leader');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('shift-leader.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('shift-leader.profile.edit');

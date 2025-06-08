@@ -45,7 +45,7 @@ class LeaveApplicationController extends Controller
                 'fromShift',
                 'toShift',
                 'shiftChange'
-            ])->whereHas('shiftChange', function ($query) {
+            ])->where('type', 'change')->whereHas('shiftChange', function ($query) {
                 $query->where('status', 'pending');
             })
             ->with([
@@ -57,6 +57,7 @@ class LeaveApplicationController extends Controller
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
         if (!$isAdmin) {
             $reportsQuery->where('employee_id', $user->id)
+                ->where('type', 'change')
                 ->whereHas('shiftChange', function ($query) {
                     $query->where('status', 'pending');
                 })
@@ -78,6 +79,7 @@ class LeaveApplicationController extends Controller
         //     $query->orderBy('date', 'desc')->with('shift');
         // }])->where('id', '!=', auth()->user()->id)->get();
 
+        // ambil hanya karyawan dengan jadwal aktif sekarang
         $employees = Employee::where('id', '!=', auth()->user()->id)
             ->whereHas('schedules', function ($query) {
                 $query->whereDate('date', now());
@@ -175,7 +177,7 @@ class LeaveApplicationController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $shiftReport = shiftReport::findOrFail($id);
+        $shiftReport = ShiftReport::findOrFail($id);
         $shiftReport->from_shift_id = $request->from_shift_id;
         $shiftReport->to_shift_id = $request->to_shift_id;
         $shiftReport->title = $request->title;
@@ -200,9 +202,19 @@ class LeaveApplicationController extends Controller
     public function edit($id)
     {
         $report = ShiftReport::findOrFail($id);
+
+        $employees = Employee::where('id', '!=', auth()->user()->id)
+            ->whereHas('schedules', function ($query) {
+                $query->whereDate('date', now());
+            })
+            ->with(['schedules' => function ($query) {
+                $query->whereDate('date', now())->with('shift');
+            }])
+            ->get();
+
         $shifts = Shift::all();
 
-        return view('pages.leave-application.edit', compact('report', 'shifts'));
+        return view('pages.leave-application.edit', compact('report', 'shifts', 'employees'));
     }
 
 

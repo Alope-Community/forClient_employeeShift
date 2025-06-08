@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('shift_reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('from_employee_id')->references('id')->on('employees')->cascadeOnDelete();
-            $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('from_shift_id')->references('id')->on('shifts')->cascadeOnDelete();
-            $table->foreignId('to_shift_id')->references('id')->on('shifts')->cascadeOnDelete();
+            $table->foreignId('employee_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('from_shift_id')->nullable()->references('id')->on('shifts')->cascadeOnDelete();
+            $table->foreignId('to_shift_id')->nullable()->references('id')->on('shifts')->cascadeOnDelete();
+            $table->enum('type', ['change', 'problem'])->default('change');
             $table->string('title');
             $table->text('description');
             $table->dateTime('time');

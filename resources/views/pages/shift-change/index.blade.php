@@ -7,7 +7,7 @@
         @endphp
         <div class="row">
             <div class="col">
-                <h3 class="fw-bold mb-4">{{ __('Verifikasi Pergantian Shift')}} <i class="lni lni-agenda"></i></h3>
+                <h3 class="fw-bold mb-4">{{ __('Verifikasi Pergantian Shift') }} <i class="lni lni-agenda"></i></h3>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -20,20 +20,21 @@
                 @endif
 
                 <div class="table-responsive-md rounded-4 shadow-sm">
-                    <table id="laporanTable" class="table table-sm table-bordered table-striped text-center align-middle mb-0">
+                    <table id="laporanTable"
+                        class="table table-sm table-bordered table-striped text-center align-middle mb-0">
                         <thead class="table-dark">
                             <tr>
-                                <th>{{ __('No')}}</th>
-                                <th>{{ __('Nama Karyawan')}}</th>
-                                <th>{{ __('Dari Shift')}}</th>
-                                <th>{{ __('Ke Shift')}}</th>
-                                <th>{{ __('Judul')}}</th>
-                                <th>{{ __('Deskripsi')}}</th>
-                                <th>{{ __('Waktu')}}</th>
-                                <th>{{ __('Alamat')}}</th>
-                                <th>{{ __('Gambar')}}</th>
-                                <th>{{ __('Status')}}</th>
-                                <th>{{ __('Aksi')}}</th>
+                                <th>{{ __('No') }}</th>
+                                <th>{{ __('Nama Karyawan') }}</th>
+                                <th>{{ __('Dari Shift') }}</th>
+                                <th>{{ __('Ke Shift') }}</th>
+                                <th>{{ __('Judul') }}</th>
+                                <th>{{ __('Deskripsi') }}</th>
+                                <th>{{ __('Waktu') }}</th>
+                                <th>{{ __('Alamat') }}</th>
+                                <th>{{ __('Gambar') }}</th>
+                                <th>{{ __('Status') }}</th>
+                                <th>{{ __('Aksi') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,23 +57,29 @@
                                             <img src="{{ asset('storage/' . $change->shiftReport->image) }}" alt="gambar"
                                                 class="img-fluid rounded" style="width: 80px; height: auto;">
                                         @else
-                                            <span class="text-muted">{{ __('Tidak ada')}}</span>
+                                            <span class="text-muted">{{ __('Tidak ada') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($change->status === 'approved')
-                                            <span class="badge bg-success">{{ __('Disetujui')}}</span>
+                                            <span class="badge bg-success">{{ __('Disetujui') }}</span>
                                         @elseif($change->status === 'rejected')
-                                            <span class="badge bg-danger">{{ __('Ditolak')}}</span>
+                                            <span class="badge bg-danger">{{ __('Ditolak') }}</span>
                                         @else
-                                            <span class="badge bg-warning text-dark">{{ __('Pending')}}</span>
+                                            <span class="badge bg-warning text-dark">{{ __('Pending') }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route($prefix . '.shift-change.edit', $change->id) }}"
-                                            class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                            <i class="lni lni-pencil"></i>
-                                        </a>
+                                        {{-- <a href="{{ route($prefix . '.shift-change.show', $change->id) }}"
+                                            class="btn btn-sm btn-outline-primary me-1">
+                                            Detail
+                                        </a> --}}
+                                        @if ($change->status !== 'approved')
+                                            <a href="{{ route($prefix . '.shift-change.edit', $change->id) }}"
+                                                class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                <i class="lni lni-pencil"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -89,12 +96,15 @@
     <script>
         $(document).ready(function() {
             $('#laporanTable').DataTable({
-                "order": [[0, "asc"]],
+                "order": [
+                    [0, "asc"]
+                ],
                 "lengthMenu": [5, 10, 25, 50],
                 "pageLength": 5,
-                "columnDefs": [
-                    { "orderable": false, "targets": [8, 10] }
-                ]
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": [8, 10]
+                }]
             });
         });
     </script>

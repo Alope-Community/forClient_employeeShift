@@ -18,16 +18,11 @@ class ShiftHistoryController extends Controller
         $isAdmin = auth()->guard('admin')->check();
 
         $reportsQuery = \App\Models\ShiftReport::query()
-            ->with([
-                'employee',
-                'fromShift',
-                'toShift',
-                'shiftChange'
-            ]);
+            ->with(['shiftChange']);
 
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
         if (!$isAdmin) {
-            $reportsQuery->where('employee_id', $user->id)
+            $reportsQuery->where('from_employee_id', $user->id)
                 ->whereHas('shiftChange', function ($query) {
                     $query->whereNot('status', 'pending');
                 })

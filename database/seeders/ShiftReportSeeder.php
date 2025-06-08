@@ -15,7 +15,7 @@ class ShiftReportSeeder extends Seeder
         $reportsData = [
             [
                 'from_employee_id' => 1,
-                'employee_id' => 1,
+                'employee_id' => 2,
                 'from_shift_id' => 1,
                 'to_shift_id' => 2,
                 'title' => 'Pergantian Shift Pagi ke Siang',
@@ -26,18 +26,18 @@ class ShiftReportSeeder extends Seeder
             ],
             [
                 'from_employee_id' => 2,
-                'employee_id' => 2,
+                'employee_id' => 1,
                 'from_shift_id' => 2,
-                'to_shift_id' => 3,
-                'title' => 'Shift Siang ke Malam',
-                'description' => 'Perlu perhatian di mesin 3, sedikit gangguan teknis saat operasional.',
+                'to_shift_id' => 1,
+                'title' => 'Shift Siang ke Pagi',
+                'description' => 'Serah terima tugas berjalan lancar, tidak ada kendala berarti.',
                 'time' => Carbon::now()->subDays(2)->setTime(23, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
                 'image' => 'shift_reports/report2.jpg',
             ],
         ];
 
-        $shiftLeaders = ShiftLeader::all();
+        // $shiftLeaders = ShiftLeader::all();
 
         foreach ($reportsData as $data) {
             $timestamp = now();
@@ -48,19 +48,19 @@ class ShiftReportSeeder extends Seeder
             ]));
 
             $shiftReport->shiftChange()->create([
-                'status' => 'pending',
-                'approved_by' => null,
-                'approved_at' => null,
+                'status' => 'approved',
+                'approved_by' => 1,
+                'approved_at' => now(),
             ]);
 
-            foreach ($shiftLeaders as $shiftLeader) {
-                $shiftLeader->notify(new ShiftReportNotification(
-                    $shiftReport->id,
-                    'Seeder System',
-                    $shiftReport->time,
-                    $shiftReport->description
-                ));
-            }
+            // foreach ($shiftLeaders as $shiftLeader) {
+            //     $shiftLeader->notify(new ShiftReportNotification(
+            //         $shiftReport->id,
+            //         'Seeder System',
+            //         $shiftReport->time,
+            //         $shiftReport->description
+            //     ));
+            // }
         }
     }
 }

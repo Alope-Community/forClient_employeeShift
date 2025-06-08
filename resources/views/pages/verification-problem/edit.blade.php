@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@section('title', 'Edit Pengajuan Pergantian Shift')
+
+@section('content')
+    <div class="main p-3 ms-5 mt-3">
+        <h1 class="mb-4">{{ __('Edit Pengajuan Pergantian Shift') }}</h1>
+
+        @php
+            $prefix = auth('admin')->check()
+                ? 'admin'
+                : (auth('shift_leader')->check()
+                    ? 'shift-leader'
+                    : (auth('employee')->check()
+                        ? 'employee'
+                        : null));
+        @endphp
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>{{ __('Terjadi kesalahan!') }}</strong>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route($prefix . '.report-problem.update-leader', $shiftChange->id) }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label for="title" class="form-label">{{ __('Judul') }}</label>
+                <input type="text" class="form-control" id="title" name="title"
+                    value="{{ $shiftChange->shiftReport->title }}" readonly required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">{{ __('Alasan') }}</label>
+                <textarea class="form-control" id="description" name="description" rows="4" readonly required>{{ $shiftChange->shiftReport->description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">{{ __('Alamat') }}</label>
+                <textarea class="form-control" id="address" name="address" rows="2" readonly required>{{ $shiftChange->shiftReport->address }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">{{ __('Gambar Saat Ini') }}</label><br>
+                @if ($shiftChange->shiftReport->image)
+                    <img src="{{ asset('storage/' . $shiftChange->shiftReport->image) }}" alt="Image" width="200">
+                @else
+                    <p>{{ __('Tidak ada gambar.') }}</p>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">{{ __('Status Persetujuan') }}</label>
+                <select name="status" id="status" class="form-select" required>
+                    <option value="approved" {{ $shiftChange->status === 'approved' ? 'selected' : '' }}>
+                        {{ __('Disetujui') }}
+                    </option>
+                    <option value="rejected" {{ $shiftChange->status === 'rejected' ? 'selected' : '' }}>
+                        {{ __('Ditolak') }}
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">{{ __('Simpan Perubahan') }}</button>
+            <a href="{{ route($prefix . '.report-problem.index') }}" class="btn btn-secondary">{{ __('Kembali') }}</a>
+        </form>
+    </div>
+@endsection

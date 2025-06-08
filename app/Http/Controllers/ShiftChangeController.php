@@ -70,7 +70,14 @@ class ShiftChangeController extends Controller
     {
         $shiftChange = \App\Models\ShiftChange::with(['shiftReport.employee', 'shiftReport.fromShift', 'shiftReport.toShift'])->findOrFail($id);
 
-        return view('pages.shift-change.edit', compact('shiftChange'));
+        
+        if ($shiftChange->status === 'approved') return abort(403, 'Anda tidak ada akses ke halaman ini.');
+        
+        if ($shiftChange->shiftReport->type === 'change') {
+            return view('pages.shift-change.edit', compact('shiftChange'));
+        } else {
+            return view('pages.verification-problem.edit', compact('shiftChange'));
+        }
     }
 
 
