@@ -39,6 +39,8 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
 
         Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
+        Route::get('/leave-application/{id}/download', [LeaveApplicationController::class, 'download'])
+            ->name('employee.leave-application.download');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');

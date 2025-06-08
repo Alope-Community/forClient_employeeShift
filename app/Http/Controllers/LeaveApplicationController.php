@@ -8,6 +8,7 @@ use App\Models\Shift;
 use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
 use App\Notifications\shiftReportNotification;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
@@ -225,5 +226,19 @@ class LeaveApplicationController extends Controller
         }
 
         return back()->with('success', 'Pengajuan perubahan shift berhasil dihapus.');
+    }
+
+    public function download($id)
+    {
+        $report = ShiftReport::with(['employee', 'fromEmployee', 'fromShift', 'toShift', 'shiftChange'])->findOrFail($id);
+
+        $pdf = Pdf::loadView('pdf.shift-report', compact('report'))
+            ->setOption([
+                'fontDir' => storage_path('/fonts'),
+                'fontCache' => storage_path('/fonts'),
+                'defaultFont' => 'Noto Sans SC'
+            ]);;
+
+        return $pdf->download('riwayat-pergantian-shift-' . $report->employee->name . '.pdf');
     }
 }

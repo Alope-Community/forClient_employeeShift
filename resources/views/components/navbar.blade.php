@@ -35,9 +35,9 @@
           🌐 {{ strtoupper(app()->getLocale()) }}
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
-          <li><a class="dropdown-item" href="{{ route('lang.switch', 'id') }}">🇮🇩 Indonesia</a></li>
-          <li><a class="dropdown-item" href="{{ route('lang.switch', 'en') }}">🇺🇸 English</a></li>
-          <li><a class="dropdown-item" href="{{ route('lang.switch', 'zh') }}">🇨🇳 中文</a></li>
+          <li><a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Indonesia</a></li>
+          <li><a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a></li>
+          <li><a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a></li>
         </ul>
       </div>
     </div>
