@@ -17,6 +17,7 @@ class Employee extends Authenticatable
         'gender',
         'address',
         'phone_number',
+        'division',
         'password',
         'photo',
     ];

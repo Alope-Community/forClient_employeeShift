@@ -18,20 +18,7 @@
                 <p>{{ __('Selamat datang') }}, {{ auth('shift_leader')->user()->name }}</p>
                 <!-- Admin Card -->
 
-                <h3>{{ __('Notifikasi') }}</h3>
-                @forelse(auth()->user()->unreadNotifications as $notification)
-                    <div class="alert alert-info mb-2">
-                        <div>
-                            <strong>{{ $notification->data['title'] }}</strong><br>
-                            {{ $notification->data['message'] }}<br>
-                            <small>{{ $notification->created_at->diffForHumans() }}</small>
-                        </div>
-                        <a href="{{ route('shift-leader.shift-change.edit', $notification->data['report_id']) }}"
-                            class="btn btn-primary mt-2">{{ __('Verifikasi Sekarang') }}</a>
-                    </div>
-                @empty
-                    <p>{{ __('Tidak ada notifikasi') }}.</p>
-                @endforelse
+                @include('sections.dashboard.shift-leader')
             </div>
         </section>
     @endauth

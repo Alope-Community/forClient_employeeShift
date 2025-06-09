@@ -10,6 +10,7 @@ use App\Models\ShiftReport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -26,19 +27,27 @@ class DashboardController extends Controller
 
         $user = Auth::guard('employee')->user();
 
+        $countPerDivision = Employee::select('division', DB::raw('count(*) as total'))
+            ->groupBy('division')
+            ->pluck('total', 'division');
+
         $schedule = Schedule::where('employee_id', $id)
             ->whereDate('date', now())
             ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
             ->first();
 
-        return view('pages.dashboard', compact('user', 'schedule'));
+        return view('pages.dashboard', compact('user', 'schedule', 'countPerDivision'));
     }
 
     public function shiftLeaderDashboard()
     {
         $user = Auth::guard('shift_leader')->user();
 
-        return view('pages.dashboard', compact('user'));
+        $unitPersonnel = Employee::where('division', 'Unit Personnel')->get();
+        $ashFgdPersonnel = Employee::where('division', 'Ash FGD Personnel')->get();
+        $wtpPersonnel = Employee::where('division', 'WTP Personnel')->get();
+
+        return view('pages.dashboard', compact('user', 'unitPersonnel', 'ashFgdPersonnel', 'wtpPersonnel'));
     }
 
     public function adminDashboard()
