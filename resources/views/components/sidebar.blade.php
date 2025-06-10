@@ -1,3 +1,7 @@
+@php
+    $currentLocale = app()->getLocale();
+@endphp
+
 <div class="wrapper">
     <aside id="sidebar" class="expand">
         <div class="d-flex" style="padding-top: 20px;">
@@ -34,23 +38,24 @@
                         <i class="lni lni-user"></i>
                         <span>{{ __('Data Riwayat Pergantian Shift')}}</span>
                     </a>
-                    <li class="sidebar-item dropdown">
-                        <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="lni lni-world me-2"></i>
-                            <span>{{ __('Pilih Bahasa') }}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇺🇸 {{ __('English') }}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇨🇳 {{ __('中文') }}</span>
+                    </a>
+                </li>
             @endauth
 
             @auth('shift_leader')
@@ -78,22 +83,23 @@
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
                 </li>
-                <li class="sidebar-item dropdown">
-                    <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="lni lni-world me-2"></i>
-                        <span>{{ __('Pilih Bahasa') }}</span>
+                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇺🇸 {{ __('English') }}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇨🇳 {{ __('中文') }}</span>
+                    </a>
                 </li>
             @endauth
 
@@ -134,22 +140,23 @@
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
                 </li>
-                <li class="sidebar-item dropdown">
-                    <a class="sidebar-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="lni lni-world me-2"></i>
-                        <span>{{ __('Pilih Bahasa') }}</span>
+                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'id') }}">🇮🇩 Bahasa Indonesia</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">🇺🇸 English</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('language.switch', 'zh') }}">🇨🇳 中文</a>
-                        </li>
-                    </ul>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇺🇸 {{ __('English') }}</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
+                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
+                        <i class="lni lni-world"></i>
+                        <span>🇨🇳 {{ __('中文') }}</span>
+                    </a>
                 </li>
             @endauth
         </ul>
