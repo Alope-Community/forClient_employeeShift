@@ -61,8 +61,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">{{ __('Jenis Kelamin')}}</label>
-                                <input type="text" class="form-control" value="{{ $user->gender }}" readonly>
+                                <label class="form-label">{{ __('Alamat')}}</label>
+                                <input type="text" class="form-control" value="{{ $user->address }}" readonly>
                             </div>
                         @endif
 

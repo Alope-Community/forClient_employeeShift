@@ -13,7 +13,7 @@
     "Notifikasi": "Notification",
     "Verifikasi Sekarang": "Verify Now",
     "Daftar Laporan Permasalahan Shift": "List of Shift Problem Reports",
-    "Tidak ada notifikasi": "Tidak ada notifikasi",
+    "Tidak ada notifikasi": "No notifications",
     "Jadwal Karyawan": "Employee Schedule",
     "Unduh PDF": "Download PDF",
     "Data Pengajuan Permasalahan Shift": "Shift Problem Submission Data",
@@ -132,5 +132,12 @@
     "Pilih Bahasa": "Choose Language",
     "Bahasa Indonesia": "Indonesian",
     "English": "English",
-    "中文": "Chinese"
+    "中文": "Chinese",
+    "+ Ajukan Laporan Permasalahan Shift": "Shift Issue Report",
+    "Foto Profile": "Profile Photo",
+    "Bahasa": "Language",
+    "Data Karyawan Berdasarkan Divisi": "Employee Data by Division",
+    "Unit Personnel": "Unit Personnel",
+    "Ash FGD Personnel": "Ash FGD Personnel",
+    "WTP Personnel": "WTP Personnel"
 }

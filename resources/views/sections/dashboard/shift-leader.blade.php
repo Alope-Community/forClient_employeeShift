@@ -1,4 +1,4 @@
-<div class="">
+<div class="main p-3 ms-5 mt-3">
     <h3>{{ __('Notifikasi') }}</h3>
     @forelse(auth()->user()->unreadNotifications as $notification)
         <div class="alert alert-info mb-2">
@@ -11,91 +11,100 @@
                 class="btn btn-primary mt-2">{{ __('Verifikasi Sekarang') }}</a>
         </div>
     @empty
-        <p>{{ __('Tidak ada notifikasi') }}.</p>
+        <p>{{ __('Tidak ada notifikasi') }}</p>
     @endforelse
 
     <hr class="my-4">
-    <h4 class="mb-4">Data Karyawan Berdasarkan Divisi</h4>
+    <h4 class="mb-4">{{ __('Data Karyawan Berdasarkan Divisi')}}</h4>
 
-    <table id="unit-table" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th colspan="5" class="text-center">Unit Personnel</th>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>Nama Karyawan</th>
-                <th>Jenis Kelamin</th>
-                <th>Nomor Telepon</th>
-                <th>Alamat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($unitPersonnel as $employee)
-                <tr>
-                    <td>{{ $employee->id }}</td>
-                    <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->gender ?? '-' }}</td>
-                    <td>{{ $employee->phone_number ?? '-' }}</td>
-                    <td>{{ $employee->address ?? '-' }}</td>
+    {{-- Unit Personnel --}}
+    <div class="table-responsive">
+        <table id="unit-table" class="table table-bordered table-striped nowrap" style="width:100%">
+            <thead>
+                <tr class="table-dark">
+                    <th colspan="5" class="text-center">{{ __('Unit Personnel') }}</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <table id="ash-fgd-table" class="table table-bordered table-striped mt-5">
-        <thead>
-            <tr>
-                <th colspan="5" class="text-center">Ash FGD Personnel</th>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>Nama Karyawan</th>
-                <th>Jenis Kelamin</th>
-                <th>Nomor Telepon</th>
-                <th>Alamat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($ashFgdPersonnel as $employee)
-                <tr>
-                    <td>{{ $employee->id }}</td>
-                    <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->gender ?? '-' }}</td>
-                    <td>{{ $employee->phone_number ?? '-' }}</td>
-                    <td>{{ $employee->address ?? '-' }}</td>
+                <tr class="table-dark">
+                    <th>{{ __('No.') }}</th>
+                    <th>{{ __('Nama Karyawan') }}</th>
+                    <th>{{ __('Jenis Kelamin') }}</th>
+                    <th>{{ __('Nomor Telepon') }}</th>
+                    <th>{{ __('Alamat') }}</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($unitPersonnel as $index => $employee)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->gender ?? '-' }}</td>
+                        <td>{{ $employee->phone_number ?? '-' }}</td>
+                        <td>{{ $employee->address ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-    <table id="wtp-table" class="table table-bordered table-striped mt-5">
-        <thead>
-            <tr>
-                <th colspan="5" class="text-center">WTP Personnel</th>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <th>Nama Karyawan</th>
-                <th>Jenis Kelamin</th>
-                <th>Nomor Telepon</th>
-                <th>Alamat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($wtpPersonnel as $employee)
-                <tr>
-                    <td>{{ $employee->id }}</td>
-                    <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->gender ?? '-' }}</td>
-                    <td>{{ $employee->phone_number ?? '-' }}</td>
-                    <td>{{ $employee->address ?? '-' }}</td>
+    {{-- Ash FGD Personnel --}}
+    <div class="table-responsive mt-5">
+        <table id="ash-fgd-table" class="table table-bordered table-striped nowrap" style="width:100%">
+            <thead>
+                <tr class="table-dark">
+                    <th colspan="5" class="text-center">{{ __('Ash FGD Personnel') }}</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                <tr class="table-dark">
+                    <th>{{ __('No.') }}</th>
+                    <th>{{ __('Nama Karyawan') }}</th>
+                    <th>{{ __('Jenis Kelamin') }}</th>
+                    <th>{{ __('Nomor Telepon') }}</th>
+                    <th>{{ __('Alamat') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($ashFgdPersonnel as $index => $employee)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->gender ?? '-' }}</td>
+                        <td>{{ $employee->phone_number ?? '-' }}</td>
+                        <td>{{ $employee->address ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
+    {{-- WTP Personnel --}}
+    <div class="table-responsive mt-5">
+        <table id="wtp-table" class="table table-bordered table-striped nowrap" style="width:100%">
+            <thead>
+                <tr class="table-dark">
+                    <th colspan="5" class="text-center">{{ __('WTP Personnel') }}</th>
+                </tr>
+                <tr class="table-dark">
+                    <th>{{ __('No.') }}</th>
+                    <th>{{ __('Nama Karyawan') }}</th>
+                    <th>{{ __('Jenis Kelamin') }}</th>
+                    <th>{{ __('Nomor Telepon') }}</th>
+                    <th>{{ __('Alamat') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($wtpPersonnel as $index => $employee)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $employee->name }}</td>
+                        <td>{{ $employee->gender ?? '-' }}</td>
+                        <td>{{ $employee->phone_number ?? '-' }}</td>
+                        <td>{{ $employee->address ?? '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
 
 @push('scripts')
     <script>

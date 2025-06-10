@@ -15,7 +15,7 @@
         @auth('employee')
             <a href="{{ route('employee.report-problem.create') }}"
                class="btn btn-primary mb-3 d-block d-md-inline-block">
-               {{ __('+ Ajukan Pergantian Shift')}}
+               {{ __('+ Ajukan Laporan Permasalahan Shift') }}
             </a>
         @endauth
 

@@ -94,17 +94,16 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#laporanTable').DataTable({
-                "order": [
-                    [0, "asc"]
-                ],
+                responsive: true,
+                scrollX: true,
+                "order": [[0, "asc"]],
                 "lengthMenu": [5, 10, 25, 50],
                 "pageLength": 5,
-                "columnDefs": [{
-                    "orderable": false,
-                    "targets": [8, 10]
-                }]
+                "columnDefs": [
+                    { "orderable": false, "targets": [8, 10] }
+                ]
             });
         });
     </script>

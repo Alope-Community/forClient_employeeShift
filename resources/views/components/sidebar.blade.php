@@ -1,4 +1,11 @@
 @php
+    $languages = [
+        ['code' => 'id', 'label' => 'Bahasa Indonesia', 'flag' => '🇮🇩'],
+        ['code' => 'en', 'label' => 'English', 'flag' => '🇺🇸'],
+        ['code' => 'zh', 'label' => '中文', 'flag' => '🇨🇳'],
+    ];
+@endphp
+@php
     $currentLocale = app()->getLocale();
 @endphp
 
@@ -38,24 +45,19 @@
                         <i class="lni lni-user"></i>
                         <span>{{ __('Data Riwayat Pergantian Shift')}}</span>
                     </a>
-                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
-                    </a>
                 </li>
-                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇺🇸 {{ __('English') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇨🇳 {{ __('中文') }}</span>
-                    </a>
-                </li>
+<li class="sidebar-item has-submenu">
+    <a href="#" class="sidebar-link submenu-toggle">
+        <i class="lni lni-world"></i>
+        <span>{{ __('Bahasa')}}</span>
+        <i class="lni lni-chevron-down ms-auto"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <li><a href="{{ route('language.switch', 'id') }}" class="sidebar-link">🇮🇩 {{ __('Bahasa Indonesia')}}</a></li>
+        <li><a href="{{ route('language.switch', 'en') }}" class="sidebar-link">🇺🇸 {{ __('English')}}</a></li>
+        <li><a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">🇨🇳 {{ __('中文')}}</a></li>
+    </ul>
+</li>
             @endauth
 
             @auth('shift_leader')
@@ -83,24 +85,18 @@
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇺🇸 {{ __('English') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇨🇳 {{ __('中文') }}</span>
-                    </a>
-                </li>
+<li class="sidebar-item has-submenu">
+    <a href="#" class="sidebar-link submenu-toggle">
+        <i class="lni lni-world"></i>
+        <span>{{ __('Bahasa')}}</span>
+        <i class="lni lni-chevron-down ms-auto"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <li><a href="{{ route('language.switch', 'id') }}" class="sidebar-link">🇮🇩 {{ __('Bahasa Indonesia')}}</a></li>
+        <li><a href="{{ route('language.switch', 'en') }}" class="sidebar-link">🇺🇸 {{ __('English')}}</a></li>
+        <li><a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">🇨🇳 {{ __('中文')}}</a></li>
+    </ul>
+</li>
             @endauth
 
             @auth('admin')
@@ -140,24 +136,18 @@
                         <span>{{ __('Data Verifikasi Pergantian Shift')}}</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ $currentLocale === 'id' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'id') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇮🇩 {{ __('Bahasa Indonesia') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ $currentLocale === 'en' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'en') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇺🇸 {{ __('English') }}</span>
-                    </a>
-                </li>
-                <li class="sidebar-item {{ $currentLocale === 'zh' ? 'active' : '' }}">
-                    <a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">
-                        <i class="lni lni-world"></i>
-                        <span>🇨🇳 {{ __('中文') }}</span>
-                    </a>
-                </li>
+<li class="sidebar-item has-submenu">
+    <a href="#" class="sidebar-link submenu-toggle">
+        <i class="lni lni-world"></i>
+        <span>{{ __('Bahasa')}}</span>
+        <i class="lni lni-chevron-down ms-auto"></i>
+    </a>
+    <ul class="sidebar-submenu">
+        <li><a href="{{ route('language.switch', 'id') }}" class="sidebar-link">🇮🇩 {{ __('Bahasa Indonesia')}}</a></li>
+        <li><a href="{{ route('language.switch', 'en') }}" class="sidebar-link">🇺🇸 {{ __('English')}}</a></li>
+        <li><a href="{{ route('language.switch', 'zh') }}" class="sidebar-link">🇨🇳 {{ __('中文')}}</a></li>
+    </ul>
+</li>
             @endauth
         </ul>
 
@@ -231,5 +221,26 @@
     hamBurger.addEventListener("click", function() {
         document.querySelector("#sidebar").classList.toggle("expand");
     });
+document.addEventListener('DOMContentLoaded', function () {
+    const toggles = document.querySelectorAll('.submenu-toggle');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const parentItem = this.closest('.sidebar-item');
+
+            // Tutup semua dropdown yang lain
+            document.querySelectorAll('.sidebar-item.open').forEach(item => {
+                if (item !== parentItem) {
+                    item.classList.remove('open');
+                }
+            });
+
+            // Toggle yang diklik
+            parentItem.classList.toggle('open');
+        });
+    });
+});
 </script>
 @endpush

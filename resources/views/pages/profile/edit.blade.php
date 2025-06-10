@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="photo" class="form-label">Foto Profil</label>
+                                <label for="photo" class="form-label">{{ __('Foto Profile') }}</label>
                                 <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
                             </div>
 
