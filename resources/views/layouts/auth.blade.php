@@ -18,7 +18,7 @@
 <body>
     <div class="w-100 vh-100 d-flex justify-content-center align-items-center container">
         <div class="border d-flex justify-content-center align-items-center shadow-lg rounded-lg">
-            <img src="{{ asset('assets/hero.jpg') }}" alt="" class="w-50 h-70 object-cover rounded-start-lg">
+            <img src="{{ asset('assets/hero.jpeg') }}" alt="" class="w-50 h-70 object-cover rounded-start-lg">
             <div class="px-5 w-100">
                 @yield('content')
             </div>
