@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $report->title }}</h5>
                 <h6 class="card-subtitle mb-3 text-muted">
-                    {{ __('Diajukan oleh:')}} {{ $report->employee->name }} {{ __('pada')}}
+                    {{ __('Diajukan oleh:')}} {{ $report->fromEmployee->name }} {{ __('pada')}}
                     {{ \Carbon\Carbon::parse($report->time)->translatedFormat('d M Y, H:i') }}
                 </h6>
 

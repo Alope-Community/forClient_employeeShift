@@ -117,7 +117,7 @@ class LeaveApplicationController extends Controller
             'to_shift_id' => $request->to_shift_id,
             'title' => $request->title,
             'description' => $request->description,
-            'time' => now(),
+            'time' => $request->time,
             'address' => $request->address,
             'image' => $request->image
         ]);

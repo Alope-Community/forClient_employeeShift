@@ -80,6 +80,12 @@
             </div>
 
             <div class="mb-3">
+                <label for="time" class="form-label">{{ __('Tanggal') }}</label>
+                <input type="date" name="time" id="time" class="form-control" value="{{ $report->time }}"
+                    required>
+            </div>
+
+            <div class="mb-3">
                 <label for="address" class="form-label">{{ __('Alamat') }}</label>
                 <textarea class="form-control" id="address" name="address" rows="2" required>{{ $report->address }}</textarea>
             </div>

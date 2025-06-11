@@ -23,7 +23,7 @@
                 <select class="form-select" id="from_employee_id" name="from_employee_id" required>
                     <option value=""></option>
                     @foreach ($employees as $employee)
-                    @php
+                        @php
                             $todaySchedule = $employee->schedules->first();
                         @endphp
                         <option value="{{ $employee->id }}" data-schedule-id="{{ $todaySchedule->shift->id ?? '' }}"
@@ -33,15 +33,15 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <!-- Readonly Input Shift -->
             <div class="mb-3">
                 <label for="from_shift_name" class="form-label fw-bold">{{ __('Shift Karyawan Asal') }}</label>
                 <input type="text" id="from_shift_name" class="form-control" readonly>
                 <input type="hidden" name="from_shift_id" id="from_shift_id">
             </div>
-            
-            
+
+
             <div class="mb-3">
                 <label for="to_shift_id" class="form-label fw-bold">{{ __('Shift Tujuan') }}</label>
                 <select name="to_shift_id" id="to_shift_id" class="form-select" required>
@@ -63,6 +63,12 @@
             <div class="mb-3">
                 <label for="description" class="form-label">{{ __('Deskripsi') }}</label>
                 <textarea name="description" id="description" rows="4" class="form-control" required>{{ old('description') }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="time" class="form-label">{{ __('Tanggal') }}</label>
+                <input type="date" name="time" id="time" class="form-control"
+                    value="{{ old('time', now()->format('Y-m-d')) }}" required>
             </div>
 
             <div class="mb-3">

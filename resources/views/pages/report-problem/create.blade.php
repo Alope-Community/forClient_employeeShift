@@ -29,6 +29,12 @@
             </div>
 
             <div class="mb-3">
+                <label for="time" class="form-label">{{ __('Tanggal') }}</label>
+                <input type="date" name="time" id="time" class="form-control"
+                    value="{{ old('time', now()->format('Y-m-d')) }}" required>
+            </div>
+
+            <div class="mb-3">
                 <label for="address" class="form-label">{{ __('Alamat') }}</label>
                 <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}"
                     required>

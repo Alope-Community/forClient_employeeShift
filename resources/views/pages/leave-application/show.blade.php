@@ -68,6 +68,10 @@
                 @auth('admin')
                     <a href="{{ route('admin.leave-application.index') }}"
                         class="btn btn-secondary mt-3">{{ __('Kembali ke Daftar') }}</a>
+                    <a href="{{ route('admin.leave-application.download', $shiftReport->id) }}" class="btn btn-danger mt-3"
+                        target="_blank">
+                        <i class="lni lni-printer"></i> {{ __('Unduh PDF') }}
+                    </a>
                 @endauth
             </div>
         </div>
