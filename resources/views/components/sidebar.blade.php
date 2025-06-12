@@ -40,7 +40,7 @@
                         <span>{{ __('Data Pengajuan Permasalahan Shift') }}</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ request()->routeIs('employee.leave-history') ? 'active' : '' }}">
+                <li class="sidebar-item {{ request()->routeIs('employee.shift-history.index') ? 'active' : '' }}">
                     <a href="{{ route('employee.shift-history.index') }}" class="sidebar-link">
                         <i class="lni lni-user"></i>
                         <span>{{ __('Data Riwayat Pergantian Shift') }}</span>
