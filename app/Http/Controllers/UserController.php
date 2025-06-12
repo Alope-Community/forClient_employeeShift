@@ -70,6 +70,7 @@ class UserController extends Controller
             'role' => 'required|in:admin,shift_leader,employee',
             'username' => 'required_if:role,employee,shift_leader|nullable|string|max:255',
             'gender' => 'required_if:role,employee,shift_leader|nullable|in:Pria,Wanita',
+            'division' => 'required_if:role,employee,shift_leader|nullable',
             'address' => 'required_if:role,employee,shift_leader|nullable|string|max:255',
             'phone_number' => 'required_if:role,employee,shift_leader|nullable|string|max:20',
         ]);
@@ -87,6 +88,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'username' => $request->username,
                     'gender' => $request->gender,
+                    'division' => $request->division,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'password' => bcrypt($request->password),
@@ -97,6 +99,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'username' => $request->username,
                     'gender' => $request->gender,
+                    'division' => $request->division,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'password' => bcrypt($request->password),
@@ -167,6 +170,7 @@ class UserController extends Controller
             'role' => 'required|in:admin,shift_leader,employee',
             'username' => 'required_if:role,employee,shift_leader|nullable|string|max:255',
             'gender' => 'required_if:role,employee,shift_leader|nullable|in:Pria,Wanita',
+            'division' => 'required_if:role,employee,shift_leader|nullable',
             'address' => 'required_if:role,employee,shift_leader|nullable|string|max:255',
             'phone_number' => 'required_if:role,employee,shift_leader|nullable|string|max:20',
             'password' => 'nullable|string|min:8|confirmed', // password tidak wajib diupdate
@@ -199,6 +203,7 @@ class UserController extends Controller
             if (in_array($role, ['shift_leader', 'employee'])) {
                 $user->username = $request->username;
                 $user->gender = $request->gender;
+                $user->division = $request->division;
                 $user->address = $request->address;
                 $user->phone_number = $request->phone_number;
             }

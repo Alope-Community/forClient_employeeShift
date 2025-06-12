@@ -36,6 +36,9 @@
                         <dt class="col-sm-3">{{ __('Jenis Kelamin') }}</dt>
                         <dd class="col-sm-9">{{ $user->gender }}</dd>
 
+                        <dt class="col-sm-3">{{ __('Divisi') }}</dt>
+                        <dd class="col-sm-9">{{ $user->division }}</dd>
+
                         <dt class="col-sm-3">{{ __('Alamat') }}</dt>
                         <dd class="col-sm-9">{{ $user->address }}</dd>
 

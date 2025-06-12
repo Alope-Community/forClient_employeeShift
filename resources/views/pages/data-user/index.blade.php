@@ -27,6 +27,11 @@
                         <th style="width: 5%">{{ __('No') }}</th>
                         <th>{{ __('Nama') }}</th>
                         <th>{{ __('Email') }}</th>
+                        <th>{{ __('Username') }}</th>
+                        <th>{{ __('Jenis Kelamin') }}</th>
+                        <th>{{ __('Alamat') }}</th>
+                        <th>{{ __('Nomor Telepon') }}</th>
+                        <th>{{ __('Divisi') }}</th>
                         <th>{{ __('Role') }}</th>
                         <th style="width: 15%">{{ __('Aksi') }}</th>
                     </tr>
@@ -37,6 +42,11 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $item['model']->name }}</td>
                             <td>{{ $item['model']->email }}</td>
+                            <td>{{ $item['model']->username ?? '-' }}</td>
+                            <td>{{ $item['model']->gender ?? '-' }}</td>
+                            <td>{{ $item['model']->address ?? '-' }}</td>
+                            <td>{{ $item['model']->phone_number ?? '-' }}</td>
+                            <td>{{ $item['model']->division ?? '-' }}</td>
                             <td>
                                 @if ($item['role'] === 'Admin')
                                     <span class="badge bg-info text-dark">{{ __('Admin') }}</span>

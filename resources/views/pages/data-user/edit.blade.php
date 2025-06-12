@@ -74,6 +74,22 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="division" class="form-label">{{ __('Divisi') }}</label>
+                    <select name="division" id="division" class="form-select">
+                        <option value="">-- Pilih Divisi --</option>
+                        <option value="Unit Personnel"
+                            {{ old('division', $user->division) == 'Unit Personnel' ? 'selected' : '' }}>Unit Personnel
+                        </option>
+                        <option value="Ash FGD Personnel"
+                            {{ old('division', $user->division) == 'Ash FGD Personnel' ? 'selected' : '' }}>Ash FGD
+                            Personnel</option>
+                        <option value="WTP Personnel"
+                            {{ old('division', $user->division) == 'WTP Personnel' ? 'selected' : '' }}>Ash FGD Personnel
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="editUserAddress" class="form-label">{{ __('Alamat') }}</label>
                     <input type="text" class="form-control" id="editUserAddress" name="address"
                         value="{{ old('address', $user->address) }}" required>
@@ -89,7 +105,7 @@
             <div class="mb-3">
                 <label for="editUserPassword" class="form-label">{{ __('Password') }}<small
                         class="text-muted">{{ __('kosongkan jika tidak
-                                                                                                diubah') }}</small></label>
+                                                                                                                                                diubah') }}</small></label>
                 <input type="password" class="form-control" id="editUserPassword" name="password"
                     autocomplete="new-password">
             </div>

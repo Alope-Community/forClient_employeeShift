@@ -62,6 +62,16 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="division" class="form-label">{{ __('Divisi') }}</label>
+                    <select name="division" id="division" class="form-select">
+                        <option value="">-- Pilih Divisi --</option>
+                        <option value="Unit Personnel">Unit Personnel</option>
+                        <option value="Ash FGD Personnel">Ash FGD Personnel</option>
+                        <option value="WTP Personnel">WTP Personnel</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="address" class="form-label">{{ __('Alamat') }}</label>
                     <textarea name="address" id="address" class="form-control"></textarea>
                 </div>
