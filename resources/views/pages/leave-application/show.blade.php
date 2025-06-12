@@ -57,7 +57,7 @@
                     @endif
                 </dl>
 
-                @auth('employee')
+                {{-- @auth('employee')
                     <a href="{{ route('employee.leave-application.index') }}"
                         class="btn btn-secondary mt-3">{{ __('Kembali') }}</a>
                     <a href="{{ route('employee.leave-application.download', $shiftReport->id) }}" class="btn btn-danger mt-3"
@@ -72,7 +72,8 @@
                         target="_blank">
                         <i class="lni lni-printer"></i> {{ __('Unduh PDF') }}
                     </a>
-                @endauth
+                @endauth --}}
+                
             </div>
         </div>
     </div>

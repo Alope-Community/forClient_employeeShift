@@ -61,9 +61,9 @@
                     <th>Pengganti</th>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td>{{ $report->shiftChange->approver->name ?? '-' }}</td>
                     <td>{{ $report->employee->name }}</td>
-                    <td></td>
+                    <td>{{ $report->shiftChange->approver->name ?? '-' }}</td>
                     <td>{{ $report->fromEmployee->name }}</td>
                 </tr>
                 <tr>

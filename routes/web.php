@@ -40,16 +40,16 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
 
         Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
-        Route::get('/leave-application/{id}/download', [LeaveApplicationController::class, 'download'])
-            ->name('employee.leave-application.download');
-
+        
         Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
-
+        
         Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
         Route::put('/profile', [ProfileController::class, 'update'])->name('employee.profile.update');
-
+        
         Route::resource('/shift-history', ShiftHistoryController::class)->names('employee.shift-history')->only(['index', 'show']);
+        Route::get('/shift-history/{id}/download', [LeaveApplicationController::class, 'download'])
+            ->name('employee.shift-history.download');
 
         Route::post('/logout', [AuthController::class, 'employeeLogout'])->name('employee.logout');
     });
@@ -57,8 +57,17 @@ Route::middleware([SetLocale::class])->group(function () {
     Route::middleware('auth:shift_leader')->prefix('leader')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'shiftLeaderDashboard'])->name('leader.dashboard');
 
-        Route::resource('/shift', ShiftController::class)->names('shift-leader.shift');
-        Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule')->only(['index', 'show']);
+        Route::get('/user', [UserController::class, 'index'])->name('shift-leader.user.index');
+        Route::get('/user/create', [UserController::class, 'create'])->name('shift-leader.user.create');
+        Route::post('/user', [UserController::class, 'store'])->name('shift-leader.user.store');
+        Route::get('/user/{id}/{role}', [UserController::class, 'show'])->name('shift-leader.user.show');
+        Route::get('/user/{id}/{role}/edit', [UserController::class, 'edit'])->name('shift-leader.user.edit');
+        Route::put('/user/{id}/{role}', [UserController::class, 'update'])->name('shift-leader.user.update');
+        Route::delete('/user/{id}/{role}', [UserController::class, 'destroy'])->name('shift-leader.user.destroy');
+
+        Route::resource('/shift', ShiftController::class)->names('shift-leader.shift')->only(['index', 'show']);
+
+        // Route::resource('/schedule', ScheduleController::class)->names('shift-leader.schedule')->only(['index', 'show']);
 
         Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'edit', 'update']);
 
@@ -76,16 +85,16 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
         // User Management
-        Route::get('/user', [UserController::class, 'index'])->name('data.user.index');
-        Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-        Route::post('/user', [UserController::class, 'store'])->name('user.store');
-        Route::get('/user/{id}/{role}', [UserController::class, 'show'])->name('user.show');
-        Route::get('/user/{id}/{role}/edit', [UserController::class, 'edit'])->name('user.edit');
-        Route::put('/user/{id}/{role}', [UserController::class, 'update'])->name('user.update');
-        Route::delete('/user/{id}/{role}', [UserController::class, 'destroy'])->name('user.destroy');
+        Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+        Route::get('/user/create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::post('/user', [UserController::class, 'store'])->name('admin.user.store');
+        Route::get('/user/{id}/{role}', [UserController::class, 'show'])->name('admin.user.show');
+        Route::get('/user/{id}/{role}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
+        Route::put('/user/{id}/{role}', [UserController::class, 'update'])->name('admin.user.update');
+        Route::delete('/user/{id}/{role}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
         Route::resource('/shift', ShiftController::class)->names('admin.shift');
-        Route::resource('/schedule', ScheduleController::class)->names('admin.schedule')->only(['index', 'show']);
+        // Route::resource('/schedule', ScheduleController::class)->names('admin.schedule')->only(['index', 'show']);
         Route::resource('/leave-application', LeaveApplicationController::class)->names('admin.leave-application')->only(['index', 'show', 'update', 'edit', 'destroy']);
         Route::get('/leave-application/{id}/download', [LeaveApplicationController::class, 'download'])
             ->name('admin.leave-application.download');
@@ -94,6 +103,8 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
+
+        Route::resource('/shift-history', ShiftHistoryController::class)->names('admin.shift-history')->only(['index', 'show', 'download']);
 
         Route::post('/logout', [AuthController::class, 'adminLogout'])->name('admin.logout');
     });

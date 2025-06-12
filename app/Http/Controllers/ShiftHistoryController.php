@@ -22,7 +22,7 @@ class ShiftHistoryController extends Controller
 
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
         if (!$isAdmin) {
-            $reportsQuery->where('from_employee_id', $user->id)
+            $reportsQuery->where('employee_id', $user->id)
                 ->whereHas('shiftChange', function ($query) {
                     $query->whereNot('status', 'pending');
                 })
@@ -54,10 +54,24 @@ class ShiftHistoryController extends Controller
         $user = auth()->user();
 
         // Jika bukan admin, pastikan laporan milik user terkait
-        if (!$isAdmin && $report->from_employee_id !== $user->id) {
+        if (!$isAdmin && $report->employee_id !== $user->id) {
             abort(403, 'Unauthorized');
         }
 
         return view("pages.data-riwayat-shift.show", compact('report'));
+    }
+    
+    public function download($id)
+    {
+        $report = ShiftReport::with(['employee', 'fromEmployee', 'fromShift', 'toShift', 'shiftChange'])->findOrFail($id);
+
+        $pdf = Pdf::loadView('pdf.shift-report', compact('report'))
+            ->setOption([
+                'fontDir' => storage_path('/fonts'),
+                'fontCache' => storage_path('/fonts'),
+                'defaultFont' => 'Noto Sans SC'
+            ]);;
+
+        return $pdf->download('riwayat-pergantian-shift-' . $report->employee->name . '.pdf');
     }
 }

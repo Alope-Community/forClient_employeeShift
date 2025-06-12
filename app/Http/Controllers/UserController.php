@@ -6,21 +6,46 @@ use App\Models\Employee;
 use App\Models\ShiftLeader;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    protected $prefix;
+
+    public function __construct()
+    {
+        if (Auth::guard('admin')->check()) {
+            $this->prefix = 'admin';
+        } elseif (Auth::guard('shift_leader')->check()) {
+            $this->prefix = 'shift-leader';
+        } elseif (Auth::guard('employee')->check()) {
+            $this->prefix = 'employee';
+        } else {
+            abort(403, 'Unauthorized');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admins = User::all();
-        $shiftLeaders = ShiftLeader::all();
-        $employees = Employee::all();
+        if ($this->prefix === 'admin') {
+            $admins = User::all();
+            $shiftLeaders = ShiftLeader::all();
+            $employees = Employee::all();
 
-        $users = $admins->map(fn($u) => ['model' => $u, 'role' => 'Admin'])
-            ->merge($shiftLeaders->map(fn($u) => ['model' => $u, 'role' => 'Shift Leader']))
-            ->merge($employees->map(fn($u) => ['model' => $u, 'role' => 'Employee']));
+            $users = $admins->map(fn($u) => ['model' => $u, 'role' => 'Admin'])
+                ->merge($shiftLeaders->map(fn($u) => ['model' => $u, 'role' => 'Shift Leader']))
+                ->merge($employees->map(fn($u) => ['model' => $u, 'role' => 'Employee']));
+        } elseif ($this->prefix === 'shift-leader') {
+            // Hanya karyawan yang ditampilkan untuk shift leader
+            $employees = Employee::all();
+
+            $users = $employees->map(fn($u) => ['model' => $u, 'role' => 'Employee']);
+        } else {
+            abort(403, 'Unauthorized');
+        }
 
         return view('pages.data-user.index', compact('users'));
     }
@@ -78,7 +103,7 @@ class UserController extends Controller
                 ]);
             }
 
-            return redirect()->route('data.user.index')->with('success', 'User created successfully.');
+            return redirect()->route($this->prefix . '.user.index')->with('success', 'User created successfully.');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -180,7 +205,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('data.user.index')->with('success', 'User updated successfully.');
+            return redirect()->route($this->prefix . '.user.index')->with('success', 'User updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -209,7 +234,7 @@ class UserController extends Controller
 
         try {
             $user->delete();
-            return redirect()->route('data.user.index')->with('success', 'User deleted successfully.');
+            return redirect()->route($this->prefix . '.user.index')->with('success', 'User deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Gagal menghapus user: ' . $e->getMessage()]);
         }
