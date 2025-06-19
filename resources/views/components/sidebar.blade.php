@@ -46,6 +46,12 @@
                         <span>{{ __('Data Riwayat Pergantian Shift') }}</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->routeIs('employee.report-problem-history') ? 'active' : '' }}">
+                    <a href="{{ route('employee.report-problem-history') }}" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>{{ __('Data Riwayat Permasalahan Shift') }}</span>
+                    </a>
+                </li>
                 <li class="sidebar-item has-submenu">
                     <a href="#" class="sidebar-link submenu-toggle">
                         <i class="lni lni-world"></i>
@@ -91,6 +97,13 @@
                         <span>{{ __('Data Jadwal Shift') }}</span>
                     </a>
                 </li> --}}
+
+                <li class="sidebar-item {{ request()->routeIs('shift-leader.report-problem.index') ? 'active' : '' }}">
+                    <a href="{{ route('shift-leader.report-problem.index') }}" class="sidebar-link">
+                        <i class="lni lni-clipboard"></i>
+                        <span>{{ __('Data Laporan Permasalahan Shift') }}</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item {{ request()->routeIs('shift-leader.shift-change.index') ? 'active' : '' }}">
                     <a href="{{ route('shift-leader.shift-change.index') }}" class="sidebar-link">

@@ -36,6 +36,9 @@ class ShiftChangeController extends Controller
     public function index()
     {
         $shiftChanges = \App\Models\ShiftChange::with(['shiftReport', 'approver'])
+            ->whereHas('shiftReport', function ($query) {
+                $query->where('type', 'change');
+            })
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -70,9 +73,9 @@ class ShiftChangeController extends Controller
     {
         $shiftChange = \App\Models\ShiftChange::with(['shiftReport.employee', 'shiftReport.fromShift', 'shiftReport.toShift'])->findOrFail($id);
 
-        
+
         if ($shiftChange->status === 'approved') return abort(403, 'Anda tidak ada akses ke halaman ini.');
-        
+
         if ($shiftChange->shiftReport->type === 'change') {
             return view('pages.shift-change.edit', compact('shiftChange'));
         } else {

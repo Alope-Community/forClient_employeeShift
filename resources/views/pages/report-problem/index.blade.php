@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">{{ __('Daftar Laporan Permasalahan Shift')}}</h1>
+        <h1 class="mb-4">{{ __('Daftar Laporan Permasalahan Shift') }}</h1>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -13,9 +13,8 @@
         @endif
 
         @auth('employee')
-            <a href="{{ route('employee.report-problem.create') }}"
-               class="btn btn-primary mb-3 d-block d-md-inline-block">
-               {{ __('+ Ajukan Laporan Permasalahan Shift') }}
+            <a href="{{ route('employee.report-problem.create') }}" class="btn btn-primary mb-3 d-block d-md-inline-block">
+                {{ __('+ Ajukan Laporan Permasalahan Shift') }}
             </a>
         @endauth
 
@@ -24,12 +23,12 @@
             <table id="reportTable" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>{{ __('No')}}</th>
-                        <th>{{ __('Nama Karyawan')}}</th>
-                        <th>{{ __('Judul')}}</th>
-                        <th>{{ __('Alasan')}}</th>
-                        <th>{{ __('Status')}}</th>
-                        <th>{{ __('Aksi')}}</th>
+                        <th>{{ __('No') }}</th>
+                        <th>{{ __('Nama Karyawan') }}</th>
+                        <th>{{ __('Judul') }}</th>
+                        <th>{{ __('Alasan') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,53 +40,45 @@
                             <td>{{ $report->description }}</td>
                             <td>
                                 @if ($report->shiftChange->status === 'pending')
-                                    <span class="badge bg-warning text-dark">{{ __('Pending')}}</span>
+                                    <span class="badge bg-warning text-dark">{{ __('Pending') }}</span>
                                 @elseif ($report->shiftChange->status === 'approved')
-                                    <span class="badge bg-success text-white">{{ __('Disetuju')}}i</span>
+                                    <span class="badge bg-success text-white">{{ __('Disetuju') }}i</span>
                                 @else
-                                    <span class="badge bg-danger text-white">{{ __('Ditolak')}}</span>
+                                    <span class="badge bg-danger text-white">{{ __('Ditolak') }}</span>
                                 @endif
                             </td>
                             <td class="align-middle">
                                 <div class="d-flex flex-wrap gap-1">
                                     @auth('employee')
                                         <a href="{{ route('employee.report-problem.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail') }}</a>
 
                                         <a href="{{ route('employee.report-problem.edit', $report->id) }}"
                                             class="btn btn-edit btn-sm btn-outline-primary me-1" title="Edit">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <button type="button"
-                                            class="btn btn-sm btn-outline-danger delete-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal"
-                                            data-id="{{ $report->id }}"
-                                            data-name="{{ $report->fromEmployee->name }}"
-                                            data-role="employee"
-                                            title="Hapus">
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $report->id }}"
+                                            data-name="{{ $report->fromEmployee->name }}" data-role="employee" title="Hapus">
                                             <i class="lni lni-trash"></i>
                                         </button>
                                     @endauth
 
-                                    @auth('admin')
-                                        <a href="{{ route('admin.report-problem.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
+                                    @php
+                                        $prefix = auth('admin')->check()
+                                            ? 'admin'
+                                            : (auth('shift_leader')->check()
+                                                ? 'shift-leader'
+                                                : null);
+                                    @endphp
 
-                                        <a href="{{ route('admin.report-problem.edit', $report->id) }}"
+                                    @if ($prefix !== null)
+                                        <a href="{{ route($prefix . '.report-problem.edit', $report->id) }}"
                                             class="btn btn-sm btn-outline-primary me-1" title="Edit">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <button type="button"
-                                            class="btn btn-sm btn-outline-danger delete-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal"
-                                            data-id="{{ $report->id }}"
-                                            data-name="{{ $report->fromEmployee->name }}"
-                                            title="Hapus">
-                                            <i class="lni lni-trash"></i>
-                                        </button>
-                                    @endauth
+                                    @endif
+
                                 </div>
                             </td>
                         </tr>
@@ -101,12 +92,12 @@
             <table id="reportTableDesktop" class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>{{ __('No')}}</th>
-                        <th>{{ __('Nama Karyawan')}}</th>
-                        <th>{{ __('Judul')}}</th>
-                        <th>{{ __('Alasan')}}</th>
-                        <th>{{ __('Status')}}</th>
-                        <th>{{ __('Aksi')}}</th>
+                        <th>{{ __('No') }}</th>
+                        <th>{{ __('Nama Karyawan') }}</th>
+                        <th>{{ __('Judul') }}</th>
+                        <th>{{ __('Alasan') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th>{{ __('Aksi') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,53 +109,44 @@
                             <td>{{ $report->description }}</td>
                             <td>
                                 @if ($report->shiftChange->status === 'pending')
-                                    <span class="badge bg-warning text-dark">{{ __('Pending')}}</span>
+                                    <span class="badge bg-warning text-dark">{{ __('Pending') }}</span>
                                 @elseif ($report->shiftChange->status === 'approved')
-                                    <span class="badge bg-success text-white">{{ __('Disetuju')}}i</span>
+                                    <span class="badge bg-success text-white">{{ __('Disetuju') }}i</span>
                                 @else
-                                    <span class="badge bg-danger text-white">{{ __('Ditolak')}}</span>
+                                    <span class="badge bg-danger text-white">{{ __('Ditolak') }}</span>
                                 @endif
                             </td>
                             <td class="align-middle">
                                 <div class="d-flex flex-wrap gap-1">
                                     @auth('employee')
                                         <a href="{{ route('employee.report-problem.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
+                                            class="btn btn-sm btn-info">{{ __('Detail') }}</a>
 
                                         <a href="{{ route('employee.report-problem.edit', $report->id) }}"
                                             class="btn btn-edit btn-sm btn-outline-primary me-1" title="Edit">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <button type="button"
-                                            class="btn btn-sm btn-outline-danger delete-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal"
-                                            data-id="{{ $report->id }}"
-                                            data-name="{{ $report->fromEmployee->name }}"
-                                            data-role="employee"
-                                            title="Hapus">
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-btn"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $report->id }}"
+                                            data-name="{{ $report->fromEmployee->name }}" data-role="employee" title="Hapus">
                                             <i class="lni lni-trash"></i>
                                         </button>
                                     @endauth
 
-                                    @auth('admin')
-                                        <a href="{{ route('admin.report-problem.show', $report->id) }}"
-                                            class="btn btn-sm btn-info">{{ __('Detail')}}</a>
+                                    @php
+                                        $prefix = auth('admin')->check()
+                                            ? 'admin'
+                                            : (auth('shift_leader')->check()
+                                                ? 'shift-leader'
+                                                : null);
+                                    @endphp
 
-                                        <a href="{{ route('admin.report-problem.edit', $report->id) }}"
+                                    @if ($prefix !== null)
+                                        <a href="{{ route($prefix . '.report-problem.edit', $report->id) }}"
                                             class="btn btn-sm btn-outline-primary me-1" title="Edit">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <button type="button"
-                                            class="btn btn-sm btn-outline-danger delete-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal"
-                                            data-id="{{ $report->id }}"
-                                            data-name="{{ $report->fromEmployee->name }}"
-                                            title="Hapus">
-                                            <i class="lni lni-trash"></i>
-                                        </button>
-                                    @endauth
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -178,21 +160,23 @@
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <form id="deleteForm" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">{{ __('Konfirmasi Hapus')}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                </div>
-                <div class="modal-body">
-                    <p>{{ __('Apakah Anda yakin ingin menghapus pengajuan cuti dari')}} <strong id="employeeName"></strong>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Batal')}}</button>
-                    <button type="submit" class="btn btn-danger">{{ __('Hapus')}}</button>
-                </div>
-            </form>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">{{ __('Konfirmasi Hapus') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ __('Apakah Anda yakin ingin menghapus pengajuan cuti dari') }} <strong
+                                id="employeeName"></strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('Batal') }}</button>
+                        <button type="submit" class="btn btn-danger">{{ __('Hapus') }}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -200,11 +184,11 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#reportTable').DataTable();
             $('#reportTableDesktop').DataTable();
 
-            $('.delete-btn').on('click', function () {
+            $('.delete-btn').on('click', function() {
                 const id = $(this).data('id');
                 const name = $(this).data('name');
                 const role = $(this).data('role') || 'admin'; // default admin if role not set

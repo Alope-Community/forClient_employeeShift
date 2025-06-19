@@ -55,7 +55,7 @@
                 </dl>
 
                 @auth('employee')
-                    <a href="{{ route('employee.report-problem.index') }}"
+                    <a href="{{ url()->previous() }}"
                         class="btn btn-secondary mt-3">{{ __('Kembali') }}</a>
                 @endauth
                 @auth('admin')

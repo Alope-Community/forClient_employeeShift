@@ -42,6 +42,8 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
         
         Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
+        Route::get('/shift-problem-history', [ShiftReportProblemController::class, 'historyIndex'])->name('employee.report-problem-history');
+        Route::get('/shift-problem-history/{id}', [ShiftReportProblemController::class, 'show'])->name('employee.report-problem-history.show');
         
         Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
@@ -71,7 +73,7 @@ Route::middleware([SetLocale::class])->group(function () {
 
         Route::resource('/shift-change', ShiftChangeController::class)->names('shift-leader.shift-change')->only(['index', 'edit', 'update']);
 
-        Route::resource('/shift-problem', ShiftReportProblemController::class)->names('shift-leader.report-problem')->only(['edit']);
+        Route::resource('/shift-problem', ShiftReportProblemController::class)->names('shift-leader.report-problem')->only(['index', 'edit']);
         Route::put('/shift-problem/{id}', [ShiftReportProblemController::class, 'updateOnLeader'])->name('shift-leader.report-problem.update-leader');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('shift-leader.profile.index');

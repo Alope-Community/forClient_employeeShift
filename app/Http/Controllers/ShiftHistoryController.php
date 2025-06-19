@@ -13,7 +13,7 @@ class ShiftHistoryController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
         $user = auth()->user();
         $isAdmin = auth()->guard('admin')->check();
 
@@ -22,9 +22,9 @@ class ShiftHistoryController extends Controller
 
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
         if (!$isAdmin) {
-            $reportsQuery->where('employee_id', $user->id)
+            $reportsQuery->where('from_employee_id', $user->id)
                 ->whereHas('shiftChange', function ($query) {
-                    $query->whereNot('status', 'pending');
+                    $query->whereNot('status', 'pending')->where('type', 'change');
                 })
                 ->with([
                     'shiftChange' => function ($query) {

@@ -23,24 +23,46 @@ class ShiftReportProblemController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $isAdmin = auth()->guard('admin')->check();
 
         $reportsQuery = ShiftReport::query()
-            ->with(['shiftChange' => function ($query) {
-                $query->where('status', 'pending');
-            }])
-            ->where('type', 'problem')
-            ->whereHas('shiftChange', function ($query) {
-                $query->where('status', 'pending');
-            });
+            ->with(['shiftChange'])
+            ->where('type', 'problem');
 
-        if (!$isAdmin) {
-            $reportsQuery->where('from_employee_id', $user->id);
+        if (auth()->guard('employee')->check()) {
+            $reportsQuery->where('from_employee_id', $user->id)
+                ->whereHas('shiftChange', function ($query) {
+                    $query->where('status', 'pending');
+                });
         }
 
         $reports = $reportsQuery->latest()->get();
 
         return view('pages.report-problem.index', compact('reports'));
+    }
+
+    public function historyIndex()
+    {
+        $user = auth()->user();
+
+        $reportsQuery = \App\Models\ShiftReport::query()
+            ->with(['shiftChange']);
+
+        // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
+        if (auth()->guard('employee')->check()) {
+            $reportsQuery->where('from_employee_id', $user->id)
+                ->whereHas('shiftChange', function ($query) {
+                    $query->whereNot('status', 'pending')->where('type', 'problem');
+                })
+                ->with([
+                    'shiftChange' => function ($query) {
+                        $query->whereNot('status', 'pending');
+                    }
+                ]);
+        }
+
+        $reports = $reportsQuery->latest()->get();
+
+        return view("pages.problem-history.index", compact('reports'));
     }
 
     public function create()
@@ -138,6 +160,7 @@ class ShiftReportProblemController extends Controller
 
         $shiftReport = ShiftReport::findOrFail($id);
         $shiftReport->title = $request->title;
+        $shiftReport->time = $request->time;
         $shiftReport->description = $request->description;
         $shiftReport->address = $request->address;
 
