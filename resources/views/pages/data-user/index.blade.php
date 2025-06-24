@@ -20,7 +20,190 @@
             </a>
         @endauth
 
-        <div class="table-responsive-md rounded-4 shadow-sm">
+        {{-- Unit Personnel --}}
+        <div class="table-responsive mt-5">
+            <table id="unit-table" class="table table-bordered table-striped nowrap" style="width:100%">
+                <thead>
+                    <tr class="table-dark">
+                        <th colspan="9" class="text-center">{{ __('Unit Personnel') }}</th>
+                    </tr>
+                    <tr class="table-dark">
+                        <th>{{ __('Nama') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Username') }}</th>
+                        <th>{{ __('Jenis Kelamin') }}</th>
+                        <th>{{ __('Alamat') }}</th>
+                        <th>{{ __('Nomor Telepon') }}</th>
+                        <th>{{ __('Role') }}</th>
+                        <th style="width: 15%">{{ __('Aksi') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $index => $item)
+                        @if ($item['model']->division === 'Unit Personnel')
+                            <tr>
+                                <td>{{ $item['model']->name }}</td>
+                                <td>{{ $item['model']->email ?? '-' }}</td>
+                                <td>{{ $item['model']->username ?? '-' }}</td>
+                                <td>{{ $item['model']->gender ?? '-' }}</td>
+                                <td>{{ $item['model']->address ?? '-' }}</td>
+                                <td>{{ $item['model']->phone_number ?? '-' }}</td>
+                                <td>
+                                    @if ($item['role'] === 'Admin')
+                                        <span class="badge bg-info text-dark">{{ __('Admin') }}</span>
+                                    @elseif ($item['role'] === 'Shift Leader')
+                                        <span class="badge bg-warning text-dark">{{ __('Shift Leader') }}</span>
+                                    @else
+                                        <span class="badge bg-success text-white">{{ __('Employee') }}</span>
+                                    @endif
+                                </td>
+                                <td class="d-flex flex-wrap justify-content-center gap-2">
+
+                                    <a href="{{ route($prefix . '.user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-info">{{ __('Detail') }}</a>
+
+                                    <a href="{{ route($prefix . '.user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="lni lni-pencil"></i>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-outline-danger delete-btn"
+                                        data-id="{{ $item['model']->id }}"
+                                        data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteUserModal" title="Hapus">
+                                        <i class="lni lni-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- WTP Personnel --}}
+        <div class="table-responsive mt-5">
+            <table id="wtp-table" class="table table-bordered table-striped nowrap" style="width:100%">
+                <thead>
+                    <tr class="table-dark">
+                        <th colspan="9" class="text-center">{{ __('WTP Personnel') }}</th>
+                    </tr>
+                    <tr class="table-dark">
+                        <th>{{ __('Nama') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Username') }}</th>
+                        <th>{{ __('Jenis Kelamin') }}</th>
+                        <th>{{ __('Alamat') }}</th>
+                        <th>{{ __('Nomor Telepon') }}</th>
+                        <th>{{ __('Role') }}</th>
+                        <th style="width: 15%">{{ __('Aksi') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $index => $item)
+                        @if ($item['model']->division === 'WTP Personnel')
+                            <tr>
+                                <td>{{ $item['model']->name }}</td>
+                                <td>{{ $item['model']->email ?? '-' }}</td>
+                                <td>{{ $item['model']->username ?? '-' }}</td>
+                                <td>{{ $item['model']->gender ?? '-' }}</td>
+                                <td>{{ $item['model']->address ?? '-' }}</td>
+                                <td>{{ $item['model']->phone_number ?? '-' }}</td>
+                                <td>
+                                    @if ($item['role'] === 'Admin')
+                                        <span class="badge bg-info text-dark">{{ __('Admin') }}</span>
+                                    @elseif ($item['role'] === 'Shift Leader')
+                                        <span class="badge bg-warning text-dark">{{ __('Shift Leader') }}</span>
+                                    @else
+                                        <span class="badge bg-success text-white">{{ __('Employee') }}</span>
+                                    @endif
+                                </td>
+                                <td class="d-flex flex-wrap justify-content-center gap-2">
+
+                                    <a href="{{ route($prefix . '.user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-info">{{ __('Detail') }}</a>
+
+                                    <a href="{{ route($prefix . '.user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="lni lni-pencil"></i>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-outline-danger delete-btn"
+                                        data-id="{{ $item['model']->id }}"
+                                        data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteUserModal" title="Hapus">
+                                        <i class="lni lni-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- Ash FGD Personnel --}}
+        <div class="table-responsive mt-5">
+            <table id="ash-fgd-table" class="table table-bordered table-striped nowrap" style="width:100%">
+                <thead>
+                    <tr class="table-dark">
+                        <th colspan="9" class="text-center">{{ __('Ash FGD Personnel') }}</th>
+                    </tr>
+                    <tr class="table-dark">
+                        <th>{{ __('Nama') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Username') }}</th>
+                        <th>{{ __('Jenis Kelamin') }}</th>
+                        <th>{{ __('Alamat') }}</th>
+                        <th>{{ __('Nomor Telepon') }}</th>
+                        <th>{{ __('Role') }}</th>
+                        <th style="width: 15%">{{ __('Aksi') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $index => $item)
+                        @if ($item['model']->division === 'Ash FGD Personnel')
+                            <tr>
+                                <td>{{ $item['model']->name }}</td>
+                                <td>{{ $item['model']->email ?? '-' }}</td>
+                                <td>{{ $item['model']->username ?? '-' }}</td>
+                                <td>{{ $item['model']->gender ?? '-' }}</td>
+                                <td>{{ $item['model']->address ?? '-' }}</td>
+                                <td>{{ $item['model']->phone_number ?? '-' }}</td>
+                                <td>
+                                    @if ($item['role'] === 'Admin')
+                                        <span class="badge bg-info text-dark">{{ __('Admin') }}</span>
+                                    @elseif ($item['role'] === 'Shift Leader')
+                                        <span class="badge bg-warning text-dark">{{ __('Shift Leader') }}</span>
+                                    @else
+                                        <span class="badge bg-success text-white">{{ __('Employee') }}</span>
+                                    @endif
+                                </td>
+                                <td class="d-flex flex-wrap justify-content-center gap-2">
+
+                                    <a href="{{ route($prefix . '.user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-info">{{ __('Detail') }}</a>
+
+                                    <a href="{{ route($prefix . '.user.edit', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
+                                        class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="lni lni-pencil"></i>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-outline-danger delete-btn"
+                                        data-id="{{ $item['model']->id }}"
+                                        data-role="{{ strtolower(str_replace(' ', '_', $item['role'])) }}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteUserModal" title="Hapus">
+                                        <i class="lni lni-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- <div class="table-responsive-md rounded-4 shadow-sm">
             <table id="userTable" class="table table-sm table-hover table-bordered align-middle mb-0">
                 <thead class="table-dark text-center">
                     <tr>
@@ -57,7 +240,7 @@
                                 @endif
                             </td>
                             <td class="d-flex flex-wrap justify-content-center gap-2">
-                                
+
                                 <a href="{{ route($prefix . '.user.show', ['id' => $item['model']->id, 'role' => strtolower(str_replace(' ', '_', $item['role']))]) }}"
                                     class="btn btn-sm btn-info">{{ __('Detail') }}</a>
 
@@ -76,7 +259,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Modal Hapus -->
@@ -107,9 +290,16 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#userTable').DataTable({
+            $('#unit-table').DataTable({
                 responsive: true,
-                autoWidth: false
+            });
+
+            $('#ash-fgd-table').DataTable({
+                responsive: true,
+            });
+
+            $('#wtp-table').DataTable({
+                responsive: true,
             });
 
             $('#deleteUserModal').on('show.bs.modal', function(event) {
