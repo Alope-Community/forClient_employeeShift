@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('time');
             $table->text('address');
+            $table->text('division');
             $table->text('image');
             $table->timestamps();
         });

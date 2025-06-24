@@ -64,6 +64,10 @@ class DashboardController extends Controller
 
         $countReports = ShiftReport::count();
 
-        return view('pages.dashboard', compact('user', 'countAdmins', 'countEmployees', 'countLeaders', 'countShifts', 'countReports'));
+        $unitPersonnel = Employee::where('division', 'Unit Personnel')->get();
+        $ashFgdPersonnel = Employee::where('division', 'Ash FGD Personnel')->get();
+        $wtpPersonnel = Employee::where('division', 'WTP Personnel')->get();
+
+        return view('pages.dashboard', compact('user', 'countAdmins', 'countEmployees', 'countLeaders', 'countShifts', 'countReports', 'unitPersonnel', 'ashFgdPersonnel', 'wtpPersonnel'));
     }
 }

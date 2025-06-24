@@ -57,14 +57,18 @@
             </div>
 
             <div class="mb-3">
-                <label for="to_shift_id" class="form-label">{{ __('Kepada Shift') }}</label>
-                <select class="form-select" id="to_shift_id" name="to_shift_id" required>
-                    <option value="">-- Pilih Shift --</option>
-                    @foreach ($shifts as $shift)
-                        <option value="{{ $shift->id }}" {{ $report->to_shift_id == $shift->id ? 'selected' : '' }}>
-                            {{ $shift->name }}
-                        </option>
-                    @endforeach
+                <label for="division" class="form-label">{{ __('Divisi') }}</label>
+                <select class="form-select" id="division" name="division" required>
+                    <option value=""></option>
+                    <option value="Unit Personnel" {{ $report->division == 'Unit Personnel' ? 'selected' : '' }}>
+                        Unit Personnel
+                    </option>
+                    <option value="WTP Personnel" {{ $report->division == 'WTP Personnel' ? 'selected' : '' }}>
+                        WTP Personnel
+                    </option>
+                    <option value="Ash FGD Personnel" {{ $report->division == 'Ash FGD Personnel' ? 'selected' : '' }}>
+                        Ash FGD Personnel
+                    </option>
                 </select>
             </div>
 
@@ -88,6 +92,18 @@
             <div class="mb-3">
                 <label for="address" class="form-label">{{ __('Alamat') }}</label>
                 <textarea class="form-control" id="address" name="address" rows="2" required>{{ $report->address }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="to_shift_id" class="form-label">{{ __('Kepada Shift') }}</label>
+                <select class="form-select" id="to_shift_id" name="to_shift_id" required>
+                    <option value="">-- Pilih Shift --</option>
+                    @foreach ($shifts as $shift)
+                        <option value="{{ $shift->id }}" {{ $report->to_shift_id == $shift->id ? 'selected' : '' }}>
+                            {{ $shift->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">

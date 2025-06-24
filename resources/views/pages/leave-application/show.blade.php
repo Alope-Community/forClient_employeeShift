@@ -24,6 +24,9 @@
                     <dt class="col-sm-3">{{ __('Alamat') }}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->address }}</dd>
 
+                    <dt class="col-sm-3">{{ __('Divisi') }}</dt>
+                    <dd class="col-sm-9">{{ $shiftReport->division ?? '-' }}</dd>
+
                     <dt class="col-sm-3">{{ __('Alasan') }}</dt>
                     <dd class="col-sm-9">{{ $shiftReport->description }}</dd>
 

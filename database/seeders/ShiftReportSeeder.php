@@ -22,6 +22,7 @@ class ShiftReportSeeder extends Seeder
                 'description' => 'Serah terima tugas berjalan lancar, tidak ada kendala berarti.',
                 'time' => Carbon::now()->subDays(1)->setTime(15, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
+                'division' => 'WTP Personnel',
                 'image' => 'shift_reports/report1.jpg',
             ],
             [
@@ -33,6 +34,7 @@ class ShiftReportSeeder extends Seeder
                 'description' => 'Serah terima tugas berjalan lancar, tidak ada kendala berarti.',
                 'time' => Carbon::now()->subDays(2)->setTime(23, 0),
                 'address' => 'Pabrik A, Jl. Industri No. 5, Bekasi',
+                'division' => 'Unit Personnel',
                 'image' => 'shift_reports/report2.jpg',
             ],
         ];

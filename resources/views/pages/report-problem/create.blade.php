@@ -18,6 +18,11 @@
             @csrf
 
             <div class="mb-3">
+                <label class="form-label fw-bold">{{ __('Pemohon') }}</label>
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
+            </div>
+
+            <div class="mb-3">
                 <label for="title" class="form-label">{{ __('Judul') }}</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}"
                     required>

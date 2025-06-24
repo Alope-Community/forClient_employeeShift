@@ -22,6 +22,9 @@
                     <dt class="col-sm-3">{{ __('Dari Shift') }}</dt>
                     <dd class="col-sm-9">{{ $report->fromShift->name }}</dd>
 
+                    <dt class="col-sm-3">{{ __('Pengganti Shift') }}</dt>
+                    <dd class="col-sm-9">{{ $report->employee->name }}</dd>
+
                     <dt class="col-sm-3">{{ __('Ke Shift') }}</dt>
                     <dd class="col-sm-9">{{ $report->toShift->name }}</dd>
 

@@ -51,8 +51,8 @@
                     <th colspan="2">Pengganti</th>
                 </tr>
                 <tr>
-                    <td colspan="2">{{ $report->employee->name }}</td>
                     <td colspan="2">{{ $report->fromEmployee->name }}</td>
+                    <td colspan="2">{{ $report->employee->name }}</td>
                 </tr>
                 <tr>
                     <th>Shift Leader/Monitor</th>
@@ -62,9 +62,9 @@
                 </tr>
                 <tr>
                     <td>{{ $report->shiftChange->approver->name ?? '-' }}</td>
-                    <td>{{ $report->employee->name }}</td>
-                    <td>{{ $report->shiftChange->approver->name ?? '-' }}</td>
                     <td>{{ $report->fromEmployee->name }}</td>
+                    <td>{{ $report->shiftChange->approver->name ?? '-' }}</td>
+                    <td>{{ $report->employee->name }}</td>
                 </tr>
                 <tr>
                     <th colspan="2">Tanggal Mengajukan Formulir Tukar Shift</th>

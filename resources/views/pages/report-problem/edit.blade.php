@@ -32,6 +32,11 @@
             </div>
         @endif
 
+        <div class="mb-3">
+            <label class="form-label fw-bold">{{ __('Pemohon') }}</label>
+            <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
+        </div>
+
         <form action="{{ route($updateRoute, $report->shiftChange->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')

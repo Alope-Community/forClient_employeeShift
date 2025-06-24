@@ -14,6 +14,11 @@
             </div>
         @endif
 
+        <div class="mb-3">
+            <label class="form-label fw-bold">{{ __('Pemohon Shift') }}</label>
+            <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
+        </div>
+
         <form action="{{ route('employee.leave-application.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -75,6 +80,22 @@
                 <label for="address" class="form-label">{{ __('Alamat') }}</label>
                 <input type="text" name="address" id="address" class="form-control" value="{{ old('address') }}"
                     required>
+            </div>
+
+            <div class="mb-3">
+                <label for="division" class="form-label fw-bold">{{ __('Divisi') }}</label>
+                <select name="division" id="division" class="form-select" required>
+                    <option value=""></option>
+                    <option value="Unit Personnel">
+                        Unit Personnel
+                    </option>
+                    <option value="WTP Personnel">
+                        WTP Personnel
+                    </option>
+                    <option value="Ash FGD Personnel">
+                        Ash FGD Personnel
+                    </option>
+                </select>
             </div>
 
             <div class="mb-3">

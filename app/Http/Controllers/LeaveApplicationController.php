@@ -107,6 +107,7 @@ class LeaveApplicationController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'address' => 'required|string',
+            'division' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -118,6 +119,7 @@ class LeaveApplicationController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'time' => $request->time,
+            'division' => $request->division,
             'address' => $request->address,
             'image' => $request->image
         ]);
@@ -174,6 +176,7 @@ class LeaveApplicationController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'address' => 'required|string',
+            'division' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -183,6 +186,7 @@ class LeaveApplicationController extends Controller
         $shiftReport->title = $request->title;
         $shiftReport->description = $request->description;
         $shiftReport->address = $request->address;
+        $shiftReport->division = $request->division;
 
         if ($request->hasFile('image')) {
             if ($shiftReport->image) {
