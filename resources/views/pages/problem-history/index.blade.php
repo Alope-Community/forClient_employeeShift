@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main p-3 ms-5 mt-3">
-        <h1 class="mb-4">{{ __('Riwayat Pergantian Shift')}}</h1>
+        <h1 class="mb-4">{{ __('Riwayat Permasalahan Shift')}}</h1>
 
         <div class="table-responsive">
             <table id="reportTable" class="table table-bordered table-striped">
