@@ -76,7 +76,7 @@ class ShiftReportProblemController extends Controller
             ->whereDate('date', now())
             ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
             ->first();
-            
+
         // ambil hanya karyawan dengan jadwal aktif sekarang
         $employees = Employee::where('id', '!=', auth()->user()->id)
             ->whereHas('schedules', function ($query) {
@@ -99,9 +99,11 @@ class ShiftReportProblemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'from_employee_id' => 'required',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'address' => 'required|string',
+            'division' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -111,6 +113,7 @@ class ShiftReportProblemController extends Controller
             'description' => $request->description,
             'time' => now(),
             'type' => 'problem',
+            'division' => auth()->user()->division,
             'address' => $request->address,
             'image' => $request->image
         ]);
@@ -140,7 +143,7 @@ class ShiftReportProblemController extends Controller
             $shiftLeader->notify(new ShiftReportProblemNotification($shiftReport->id, auth()->user()->name, $shiftReport->time, $shiftReport->description));
         }
 
-        return redirect()->route('employee.report-problem.index')->with('success', 'Pengajuan perubahan shift berhasil diajukan. Mohon tunggu konfirmasi dari atasan.');
+        return redirect()->route('employee.report-problem.index')->with('success', 'Pengajuan permasalahan shift berhasil diajukan. Mohon tunggu konfirmasi dari atasan.');
     }
 
     /**

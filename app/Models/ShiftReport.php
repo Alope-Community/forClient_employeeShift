@@ -16,6 +16,7 @@ class ShiftReport extends Model
         'time',
         'type',
         'address',
+        'division',
         'image',
     ];
 

@@ -28,7 +28,11 @@
             @if (!$noSchedule)
                 <div class="mb-3">
                     <label class="form-label fw-bold">{{ __('Dari Shift') }}</label>
-                    <input type="text" class="form-control" readonly value="{{ $schedule->shift->name }}">
+                    <input type="text" name="from_employee_id" class="form-control" readonly value="{{ $schedule->shift->name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">{{ __('Divisi') }}</label>
+                    <input type="text" name="division" class="form-control" readonly value="{{ auth()->user()->division }}">
                 </div>
             @else
                 <div class="alert alert-warning" role="alert">

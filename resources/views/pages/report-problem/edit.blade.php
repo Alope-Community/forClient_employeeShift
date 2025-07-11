@@ -32,14 +32,36 @@
             </div>
         @endif
 
-        <div class="mb-3">
-            <label class="form-label fw-bold">{{ __('Pemohon') }}</label>
-            <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
-        </div>
 
         <form action="{{ route($updateRoute, $report->shiftChange->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">{{ __('Pemohon') }}</label>
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
+            </div>
+
+            @php
+                $noSchedule = $schedule == null;
+            @endphp
+            @if (!$noSchedule)
+                <div class="mb-3">
+                    <label class="form-label fw-bold">{{ __('Dari Shift') }}</label>
+                    <input type="text" name="from_employee_id" class="form-control" readonly
+                        value="{{ $schedule->shift->name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">{{ __('Divisi') }}</label>
+                    <input type="text" name="division" class="form-control" readonly
+                        value="{{ auth()->user()->division }}">
+                </div>
+            @else
+                <div class="alert alert-warning" role="alert">
+                    <strong>Perhatian:</strong> Saat ini Anda tidak memiliki jadwal kerja, jadi Anda tidak dapat mengajukan
+                    permasalahan shift.
+                </div>
+            @endif
 
             <div class="mb-3">
                 <label for="title" class="form-label">{{ __('Judul') }}</label>
