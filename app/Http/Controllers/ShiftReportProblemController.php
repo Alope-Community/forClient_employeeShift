@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Employee;
+use App\Models\Schedule;
 use App\Models\Shift;
 use App\Models\ShiftChange;
 use App\Models\ShiftLeader;
@@ -71,6 +72,11 @@ class ShiftReportProblemController extends Controller
         //     $query->orderBy('date', 'desc')->with('shift');
         // }])->where('id', '!=', auth()->user()->id)->get();
 
+        $schedule = Schedule::with('shift')->where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
+            ->first();
+            
         // ambil hanya karyawan dengan jadwal aktif sekarang
         $employees = Employee::where('id', '!=', auth()->user()->id)
             ->whereHas('schedules', function ($query) {
@@ -83,7 +89,7 @@ class ShiftReportProblemController extends Controller
 
         $shifts = Shift::all();
 
-        return view('pages.report-problem.create', compact('employees', 'shifts'));
+        return view('pages.report-problem.create', compact('employees', 'shifts', 'schedule'));
     }
 
 
