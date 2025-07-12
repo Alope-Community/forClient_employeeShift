@@ -22,7 +22,7 @@ class ShiftHistoryController extends Controller
 
         // Jika bukan admin, filter hanya yang statusnya pending dan milik user terkait
         if (!$isAdmin) {
-            $reportsQuery->where('from_employee_id', $user->id)
+            $reportsQuery->where('employee_id', $user->id)
                 ->whereHas('shiftChange', function ($query) {
                     $query->whereNot('status', 'pending')->where('type', 'change');
                 })

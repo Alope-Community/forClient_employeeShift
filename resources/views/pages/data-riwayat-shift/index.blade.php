@@ -25,7 +25,7 @@
                     @foreach ($reports as $index => $report)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $report->fromEmployee?->name ?? '-' }}</td>
+                            <td>{{ $report->employee?->name ?? '-' }}</td>
                             <td>{{ $report->fromShift?->name ?? '-' }}</td>
                             <td>{{ $report->toShift?->name ?? '-' }}</td>
                             <td>{{ \Carbon\Carbon::parse($report->time)->format('d M Y') }}</td>
