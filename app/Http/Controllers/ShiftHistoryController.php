@@ -54,7 +54,7 @@ class ShiftHistoryController extends Controller
         $user = auth()->user();
 
         // Jika bukan admin, pastikan laporan milik user terkait
-        if (!$isAdmin && $report->from_employee_id !== $user->id) {
+        if (!$isAdmin && $report->employee_id !== $user->id) {
             abort(403, 'Unauthorized');
         }
 
