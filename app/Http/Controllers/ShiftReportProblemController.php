@@ -220,7 +220,12 @@ class ShiftReportProblemController extends Controller
         $report = ShiftReport::findOrFail($id);
         $shifts = Shift::all();
 
-        return view('pages.report-problem.edit', compact('report', 'shifts'));
+        $schedule = Schedule::with('shift')->where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
+            ->first();
+
+        return view('pages.report-problem.edit', compact('report', 'shifts', 'schedule'));
     }
 
 

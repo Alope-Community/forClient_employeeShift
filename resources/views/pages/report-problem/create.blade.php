@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">{{ __('Divisi') }}</label>
-                    <input type="text" name="division" class="form-control" readonly value="{{ auth()->user()->division }}">
+                    <input type="text" name="division" class="form-control" readonly value="{{ $schedule->shift->group }}">
                 </div>
             @else
                 <div class="alert alert-warning" role="alert">
