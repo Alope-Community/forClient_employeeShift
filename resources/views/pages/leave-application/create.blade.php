@@ -24,7 +24,7 @@
 
             <!-- Select Input -->
             <div class="mb-3">
-                <label for="from_employee_id" class="form-label fw-bold">{{ __('Karyawan Asal') }}</label>
+                <label for="from_employee_id" class="form-label fw-bold">{{ __('Pengganti Shift') }}</label>
                 <select class="form-select" id="from_employee_id" name="from_employee_id" required>
                     <option value=""></option>
                     @foreach ($employees as $employee)
