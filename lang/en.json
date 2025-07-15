@@ -146,5 +146,10 @@
     "WTP Personnel": "WTP Personnel",
     "Riwayat Permasalahan Shift": "Shift Issue History",
     "Data Riwayat Permasalahan Shift": "Shift Issue History Data",
-    "Data Laporan Permasalahan Shift": "Shift Issue Report Data"
+    "Data Laporan Permasalahan Shift": "Shift Issue Report Data",
+    "Buat Pengajuan Backup Shift": "Submit Backup Shift Request",
+    "Jadwal Pemohon": "Applicant Schedule",
+    "Sampai Dengan": "Until",
+    "Pengajuan Backup Shift": "Backup Shift Request",
+    "Backup Oleh": "Backed Up By"
 }
