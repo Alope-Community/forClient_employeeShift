@@ -40,6 +40,12 @@
                         <span>{{ __('Data Pengajuan Permasalahan Shift') }}</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ request()->routeIs('employee.shift-replacement.create') ? 'active' : '' }}">
+                    <a href="{{ route('employee.shift-replacement.create') }}" class="sidebar-link">
+                        <i class="lni lni-user"></i>
+                        <span>{{ __('Pengajuan Backup Shift') }}</span>
+                    </a>
+                </li>
                 <li class="sidebar-item {{ request()->routeIs('employee.shift-history.index') ? 'active' : '' }}">
                     <a href="{{ route('employee.shift-history.index') }}" class="sidebar-link">
                         <i class="lni lni-user"></i>

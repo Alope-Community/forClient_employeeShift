@@ -1,4 +1,15 @@
 <div class="main p-3 ms-md-5 mt-3">
+    @if ($schedule != null && $schedule->is_replaced)
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <strong><i class="lni lni-warning fs-5 me-2 text-warning"></i>Perhatian!</strong><br>
+            Penggajian akan disesuaikan karena terdapat pergantian shift.<br>
+            Shift pada tanggal <strong>{{ $schedule->date }}</strong> telah dibackup oleh
+            <strong>{{ $schedule->replacedWith->name }}</strong>.<br>
+            Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12 col-md-8 d-flex flex-column gap-3">
             <!-- Shift Card -->

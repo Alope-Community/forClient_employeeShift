@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
             $table->foreignId('shift_id')->constrained()->cascadeOnDelete();
             $table->dateTime('date');
+            $table->dateTime('end_date')->nullable();
+            $table->boolean('is_replaced')->nullable();
+            $table->foreignId('replaced_with')->nullable()->references('id')->on('employees')->cascadeOnDelete();
             $table->timestamps();
         });
     }

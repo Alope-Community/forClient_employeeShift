@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaveApplicationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReplacementController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ShiftChangeController;
 use App\Http\Controllers\ShiftController;
@@ -40,6 +41,9 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
 
         Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
+        
+        Route::get('/shift-replacement/create', [ReplacementController::class, 'create'])->name('employee.shift-replacement.create');
+        Route::post('/shift-replacement', [ReplacementController::class, 'store'])->name('employee.shift-replacement.store');
         
         Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
         Route::get('/shift-problem-history', [ShiftReportProblemController::class, 'historyIndex'])->name('employee.report-problem-history');
