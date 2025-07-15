@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SetLocale::class);
 
         $middleware->alias([
+            'check.login.time.window' => \App\Http\Middleware\CheckLoginTimeWindow::class,
             'redirect.if.logged.in' => \App\Http\Middleware\RedirectIfLoggedInWithDifferentRole::class,
         ]);
     })

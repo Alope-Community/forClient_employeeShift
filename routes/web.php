@@ -16,7 +16,7 @@ use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Session;
 
 
-Route::middleware([SetLocale::class])->group(function () {
+Route::middleware([SetLocale::class, 'check.login.time.window'])->group(function () {
 
     Route::get('/', function () {
         return view('welcome');
