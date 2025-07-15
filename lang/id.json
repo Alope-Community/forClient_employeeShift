@@ -132,5 +132,17 @@
     "WTP Personnel": "Personil WTP",
     "Riwayat Permasalahan Shift": "Riwayat Permasalahan Shift",
     "Data Riwayat Permasalahan Shift": "Data Riwayat Permasalahan Shift",
-    "Data Laporan Permasalahan Shift": "Data Laporan Permasalahan Shift"
+    "Data Laporan Permasalahan Shift": "Data Laporan Permasalahan Shift",
+    "Buat Pengajuan Backup Shift": "Buat Pengajuan Backup Shift",
+    "Jadwal Pemohon": "Jadwal Pemohon",
+    "Sampai Dengan": "Sampai Dengan",
+    "Backup Oleh": "Backup Oleh",
+    "Pengajuan Backup Shift": "Pengajuan Backup Shift",
+    "Pemohon": "Pemohon",
+    "Perhatian!": "Perhatian!",
+    "Penggajian akan disesuaikan karena terdapat pergantian shift.": "Penggajian akan disesuaikan karena terdapat pergantian shift.",
+    "Shift pada tanggal ": "Shift pada tanggal",
+    "telah dibackup oleh .": "telah dibackup oleh .",
+    "Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.": "Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.",
+    "Jadwal Anda tidak ditemukan. Anda tidak dapat mengajukan penggantian shift.": "Jadwal Anda tidak ditemukan. Anda tidak dapat mengajukan penggantian shift."
 }

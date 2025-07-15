@@ -142,5 +142,17 @@
     "WTP Personnel": "水处理人员",
     "Riwayat Permasalahan Shift": "轮班问题记录",
     "Data Riwayat Permasalahan Shift": "轮班问题记录数据",
-    "Data Laporan Permasalahan Shift": "轮班问题报告数据"
+    "Data Laporan Permasalahan Shift": "轮班问题报告数据",
+    "Buat Pengajuan Backup Shift": "提交替班申请",
+    "Jadwal Pemohon": "申请人排班",
+    "Sampai Dengan": "至",
+    "Backup Oleh": "替班人",
+    "Pengajuan Backup Shift": "替班申请",
+    "Pemohon": "申请人",
+    "Perhatian!": "注意！",
+    "Penggajian akan disesuaikan karena terdapat pergantian shift.": "由于班次变更，薪资将进行调整。",
+    "Shift pada tanggal": "在以下日期的班次：",
+    "telah dibackup oleh .": "已由...代班。",
+    "Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.": "请确保此信息正确。如有错误，请联系管理员。",
+    "Jadwal Anda tidak ditemukan. Anda tidak dapat mengajukan penggantian shift.": "未找到您的排班。您无法申请换班。"
 }

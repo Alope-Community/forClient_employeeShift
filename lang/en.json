@@ -146,5 +146,15 @@
     "WTP Personnel": "WTP Personnel",
     "Riwayat Permasalahan Shift": "Shift Issue History",
     "Data Riwayat Permasalahan Shift": "Shift Issue History Data",
-    "Data Laporan Permasalahan Shift": "Shift Issue Report Data"
+    "Data Laporan Permasalahan Shift": "Shift Issue Report Data",
+    "Buat Pengajuan Backup Shift": "Submit Backup Shift Request",
+    "Jadwal Pemohon": "Applicant Schedule",
+    "Sampai Dengan": "Until",
+    "Pengajuan Backup Shift": "Backup Shift Request",
+    "Backup Oleh": "Backed Up By",
+    "Perhatian!": "Attention!",
+    "Penggajian akan disesuaikan karena terdapat pergantian shift.": "Payroll will be adjusted due to a shift change.",
+    "Shift pada tanggal  telah dibackup oleh .": "The shift on that date has been backed up by .",
+    "Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.": "Make sure this information is correct. Contact admin if there is an error.",
+    "Jadwal Anda tidak ditemukan. Anda tidak dapat mengajukan penggantian shift.": "Your schedule was not found. You cannot request a shift replacement."
 }
