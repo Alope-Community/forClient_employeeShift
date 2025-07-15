@@ -1,13 +1,13 @@
 <div class="main p-3 ms-md-5 mt-3">
     @if ($schedule != null && $schedule->is_replaced)
-        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
-            <strong><i class="lni lni-warning fs-5 me-2 text-warning"></i>Perhatian!</strong><br>
-            Penggajian akan disesuaikan karena terdapat pergantian shift.<br>
-            Shift pada tanggal <strong>{{ $schedule->date }}</strong> telah dibackup oleh
-            <strong>{{ $schedule->replacedWith->name }}</strong>.<br>
-            Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
-        </div>
+    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+        <strong><i class="lni lni-warning fs-5 me-2 text-warning"></i>{{ __('Perhatian!') }}</strong><br>
+        {{ __('Penggajian akan disesuaikan karena terdapat pergantian shift.') }}<br>
+        {{ __('Shift pada tanggal')}}<strong>{{ $schedule->date }}</strong> {{ __('telah dibackup oleh .') }}
+        <strong>{{ $schedule->replacedWith->name }}</strong>.<br>
+        {{ __('Pastikan informasi ini benar. Hubungi admin jika terjadi kesalahan.') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+    </div>
     @endif
 
     <div class="row">
@@ -23,11 +23,11 @@
                         <h5 class="card-title mb-1">{{ __('Shift Saat Ini') }}</h5>
                         <p class="card-text text-muted mb-0">
                             @if ($schedule != null)
-                                {{ $schedule->shift->name }}
-                                ({{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} -
-                                {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }})
+                            {{ $schedule->shift->name }}
+                            ({{ \Carbon\Carbon::parse($schedule->shift->start_time)->format('H:i') }} -
+                            {{ \Carbon\Carbon::parse($schedule->shift->end_time)->format('H:i') }})
                             @else
-                                {{ __('Tidak ada jadwal hari ini.') }}
+                            {{ __('Tidak ada jadwal hari ini.') }}
                             @endif
                         </p>
                     </div>

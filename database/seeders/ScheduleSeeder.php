@@ -10,8 +10,13 @@ class ScheduleSeeder extends Seeder
 {
     public function run(): void
     {
-        // Asumsikan ada employee ID 1 dan 2, serta shift ID 1, 2, dan 3
+        // Employee ID dibagi berdasarkan divisi:
+        // Unit Personnel: ID 1 - 5
+        // WTP Personnel: ID 6 - 10
+        // Ash FGD Personnel: ID 11 - 15
+
         $schedules = [
+            // Unit Personnel
             [
                 'employee_id' => 1,
                 'shift_id' => 1,
@@ -20,14 +25,60 @@ class ScheduleSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'employee_id' => 1,
+                'employee_id' => 2,
                 'shift_id' => 2,
                 'date' => Carbon::now()->subDays(1)->setTime(15, 0),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'employee_id' => 2,
+                'employee_id' => 3,
+                'shift_id' => 3,
+                'date' => Carbon::now()->setTime(23, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            // WTP Personnel
+            [
+                'employee_id' => 6,
+                'shift_id' => 1,
+                'date' => Carbon::now()->subDays(2)->setTime(7, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 7,
+                'shift_id' => 2,
+                'date' => Carbon::now()->subDays(1)->setTime(15, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 8,
+                'shift_id' => 3,
+                'date' => Carbon::now()->setTime(23, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            // Ash FGD Personnel
+            [
+                'employee_id' => 11,
+                'shift_id' => 1,
+                'date' => Carbon::now()->subDays(2)->setTime(7, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 12,
+                'shift_id' => 2,
+                'date' => Carbon::now()->subDays(1)->setTime(15, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 13,
                 'shift_id' => 3,
                 'date' => Carbon::now()->setTime(23, 0),
                 'created_at' => now(),
