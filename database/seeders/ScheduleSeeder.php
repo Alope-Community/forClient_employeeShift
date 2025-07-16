@@ -16,71 +16,24 @@ class ScheduleSeeder extends Seeder
         // Ash FGD Personnel: ID 11 - 15
 
         $schedules = [
-            // Unit Personnel
-            [
+           [
                 'employee_id' => 1,
                 'shift_id' => 1,
-                'date' => Carbon::now()->subDays(2)->setTime(7, 0),
+                'date' => Carbon::now()->startOfWeek()->addDays(1)->setTime(7, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 1,
+                'shift_id' => 2,
+                'date' => Carbon::now()->startOfWeek()->addDays(2)->setTime(15, 0),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'employee_id' => 2,
-                'shift_id' => 2,
-                'date' => Carbon::now()->subDays(1)->setTime(15, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 3,
                 'shift_id' => 3,
-                'date' => Carbon::now()->setTime(23, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            // WTP Personnel
-            [
-                'employee_id' => 6,
-                'shift_id' => 1,
-                'date' => Carbon::now()->subDays(2)->setTime(7, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 7,
-                'shift_id' => 2,
-                'date' => Carbon::now()->subDays(1)->setTime(15, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 8,
-                'shift_id' => 3,
-                'date' => Carbon::now()->setTime(23, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-            // Ash FGD Personnel
-            [
-                'employee_id' => 11,
-                'shift_id' => 1,
-                'date' => Carbon::now()->subDays(2)->setTime(7, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 12,
-                'shift_id' => 2,
-                'date' => Carbon::now()->subDays(1)->setTime(15, 0),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'employee_id' => 13,
-                'shift_id' => 3,
-                'date' => Carbon::now()->setTime(23, 0),
+                'date' => Carbon::now()->startOfWeek()->addDays(3)->setTime(23, 0),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
