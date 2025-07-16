@@ -33,6 +33,13 @@ class ScheduleSeeder extends Seeder
             [
                 'employee_id' => 2,
                 'shift_id' => 3,
+                'date' => Carbon::now()->startOfWeek()->addDays(2)->setTime(15, 0),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'employee_id' => 3,
+                'shift_id' => 3,
                 'date' => Carbon::now()->startOfWeek()->addDays(3)->setTime(23, 0),
                 'created_at' => now(),
                 'updated_at' => now(),
