@@ -48,6 +48,7 @@
     "Tanggal Mulai": "Start Date",
     "Tanggal": "Date",
     "Judul": "Title",
+    "Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.": "Sorry, shift requests can only be made at least 3 hours before the start time.",
     "Alasan": "Reason",
     "Status": "Status",
     "Pending": "Pending",

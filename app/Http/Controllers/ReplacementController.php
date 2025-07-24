@@ -35,7 +35,7 @@ class ReplacementController extends Controller
             $cutoffTime = $scheduleTime->copy()->subHours(3);
 
             if (Carbon::now()->gte($cutoffTime)) {
-                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+                $warningRequest = __('Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.');
             }
         }
 

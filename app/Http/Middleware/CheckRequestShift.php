@@ -35,7 +35,7 @@ class CheckRequestShift
 
                 if ($now->gte($cutoffTime)) {
                     return redirect()->back()->withErrors([
-                        'shift' => 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.',
+                        'shift' => __('Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.'),
                     ]);
                 }
             }
