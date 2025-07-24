@@ -14,6 +14,14 @@
             </div>
         @endif
 
+        @if (session('warningRequest') && !$errors->any())
+            <div class="alert alert-warning">
+                <ul class="mb-0">
+                    {{ session('warningRequest') }}
+                </ul>
+            </div>
+        @endif
+
         @if (is_null($schedule))
             <div class="alert alert-warning">
                 {{ __('Jadwal Anda tidak ditemukan. Anda tidak dapat mengajukan penggantian shift.') }}

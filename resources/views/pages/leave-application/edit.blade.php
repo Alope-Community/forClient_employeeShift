@@ -27,6 +27,14 @@
             </div>
         @endif
 
+        @if (session('warningRequest') && !$errors->any())
+            <div class="alert alert-warning">
+                <ul class="mb-0">
+                    {{ session('warningRequest') }}
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route($prefix . '.leave-application.update', $report->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf

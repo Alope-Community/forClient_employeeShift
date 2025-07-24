@@ -12,6 +12,7 @@ use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
 use App\Notifications\ShiftReportProblemNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -88,6 +89,24 @@ class ShiftReportProblemController extends Controller
             ->get();
 
         $shifts = Shift::all();
+
+        $schedule = Schedule::where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $warningRequest = null;
+
+        if ($schedule) {
+            $scheduleTime = Carbon::parse($schedule->date);
+            $cutoffTime = $scheduleTime->copy()->subHours(3);
+
+            if (Carbon::now()->gte($cutoffTime)) {
+                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+            }
+        }
+
+        session()->flash('warningRequest', $warningRequest);
 
         return view('pages.report-problem.create', compact('employees', 'shifts', 'schedule'));
     }
@@ -224,6 +243,24 @@ class ShiftReportProblemController extends Controller
             ->whereDate('date', now())
             ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
             ->first();
+
+        $schedule = Schedule::where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $warningRequest = null;
+
+        if ($schedule) {
+            $scheduleTime = Carbon::parse($schedule->date);
+            $cutoffTime = $scheduleTime->copy()->subHours(3);
+
+            if (Carbon::now()->gte($cutoffTime)) {
+                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+            }
+        }
+
+        session()->flash('warningRequest', $warningRequest);
 
         return view('pages.report-problem.edit', compact('report', 'shifts', 'schedule'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,19 @@ class ReplacementController extends Controller
             ->whereDate('date', now())
             ->orderBy('created_at', 'desc') // memastikan yang terbaru dari hari ini
             ->first();
+
+        $warningRequest = null;
+
+        if ($schedule) {
+            $scheduleTime = Carbon::parse($schedule->date);
+            $cutoffTime = $scheduleTime->copy()->subHours(3);
+
+            if (Carbon::now()->gte($cutoffTime)) {
+                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+            }
+        }
+
+        session()->flash('warningRequest', $warningRequest);
 
         return view('pages.backup-shift.create', compact('employees', 'schedule'));
     }

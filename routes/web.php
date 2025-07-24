@@ -53,9 +53,20 @@ Route::middleware([SetLocale::class])->group(function () {
             ->names('employee.leave-application');
 
         Route::get('/shift-replacement/create', [ReplacementController::class, 'create'])->name('employee.shift-replacement.create');
-        Route::post('/shift-replacement', [ReplacementController::class, 'store'])->name('employee.shift-replacement.store');
+        Route::post('/shift-replacement', [ReplacementController::class, 'store'])->name('employee.shift-replacement.store')->middleware('check.request.shift');
 
-        Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
+        Route::post('/shift-problem/store', [ShiftReportProblemController::class, 'store'])
+            ->name('employee.report-problem.store')
+            ->middleware('check.request.shift');
+
+        Route::put('/shift-problem/{id}/update', [ShiftReportProblemController::class, 'update'])
+            ->name('employee.report-problem.update')
+            ->middleware('check.request.shift');
+
+        Route::resource('/shift-problem', ShiftReportProblemController::class)
+            ->names('employee.report-problem')
+            ->except(['store', 'update']);
+
         Route::get('/shift-problem-history', [ShiftReportProblemController::class, 'historyIndex'])->name('employee.report-problem-history');
         Route::get('/shift-problem-history/{id}', [ShiftReportProblemController::class, 'show'])->name('employee.report-problem-history.show');
 

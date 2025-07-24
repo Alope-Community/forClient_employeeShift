@@ -237,6 +237,24 @@ class LeaveApplicationController extends Controller
 
         $shifts = Shift::all();
 
+        $schedule = Schedule::where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $warningRequest = null;
+
+        if ($schedule) {
+            $scheduleTime = Carbon::parse($schedule->date);
+            $cutoffTime = $scheduleTime->copy()->subHours(3);
+
+            if (Carbon::now()->gte($cutoffTime)) {
+                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+            }
+        }
+
+        session()->flash('warningRequest', $warningRequest);
+
         return view('pages.leave-application.edit', compact('report', 'shifts', 'employees'));
     }
 
