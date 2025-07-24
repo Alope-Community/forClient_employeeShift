@@ -9,6 +9,7 @@ use App\Models\ShiftLeader;
 use App\Models\ShiftReport;
 use App\Notifications\shiftReportNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,24 @@ class LeaveApplicationController extends Controller
             ->get();
 
         $shifts = Shift::all();
+
+        $schedule = Schedule::where('employee_id', auth()->user()->id)
+            ->whereDate('date', now())
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $warningRequest = null;
+
+        if ($schedule) {
+            $scheduleTime = Carbon::parse($schedule->date);
+            $cutoffTime = $scheduleTime->copy()->subHours(3);
+
+            if (Carbon::now()->gte($cutoffTime)) {
+                $warningRequest = 'Mohon maaf, pengajuan shift hanya dapat dilakukan paling lambat 3 jam sebelum waktu mulai.';
+            }
+        }
+
+        session()->flash('warningRequest', $warningRequest);
 
         return view('pages.leave-application.create', compact('employees', 'shifts'));
     }

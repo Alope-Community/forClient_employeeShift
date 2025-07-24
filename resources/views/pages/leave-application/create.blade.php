@@ -14,6 +14,14 @@
             </div>
         @endif
 
+        @if (session('warningRequest') && !$errors->any())
+            <div class="alert alert-warning">
+                <ul class="mb-0">
+                    {{ session('warningRequest') }}
+                </ul>
+            </div>
+        @endif
+
         <div class="mb-3">
             <label class="form-label fw-bold">{{ __('Pemohon Shift') }}</label>
             <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">

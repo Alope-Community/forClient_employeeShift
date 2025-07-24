@@ -12,6 +12,17 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>{{ __('Terjadi kesalahan!') }}</strong>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @auth('employee')
             <a href="{{ route('employee.leave-application.create') }}"
                class="btn btn-primary mb-3 d-block d-md-inline-block">

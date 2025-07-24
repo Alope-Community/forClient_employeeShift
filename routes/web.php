@@ -16,7 +16,7 @@ use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Session;
 
 
-Route::middleware([SetLocale::class, 'check.login.time.window'])->group(function () {
+Route::middleware([SetLocale::class])->group(function () {
 
     Route::get('/', function () {
         return view('welcome');
@@ -40,19 +40,29 @@ Route::middleware([SetLocale::class, 'check.login.time.window'])->group(function
     Route::middleware('auth:employee')->prefix('employee')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'employeeDashboard'])->name('employee.dashboard');
 
-        Route::resource('/leave-application', LeaveApplicationController::class)->names('employee.leave-application');
-        
+        Route::post('/leave-application/store', [LeaveApplicationController::class, 'store'])
+            ->name('employee.leave-application.store')
+            ->middleware('check.request.shift');
+
+        Route::put('/leave-application/{id}/update', [LeaveApplicationController::class, 'update'])
+            ->name('employee.leave-application.update')
+            ->middleware('check.request.shift');
+
+        Route::resource('/leave-application', LeaveApplicationController::class)
+            ->except(['store', 'update'])
+            ->names('employee.leave-application');
+
         Route::get('/shift-replacement/create', [ReplacementController::class, 'create'])->name('employee.shift-replacement.create');
         Route::post('/shift-replacement', [ReplacementController::class, 'store'])->name('employee.shift-replacement.store');
-        
+
         Route::resource('/shift-problem', ShiftReportProblemController::class)->names('employee.report-problem');
         Route::get('/shift-problem-history', [ShiftReportProblemController::class, 'historyIndex'])->name('employee.report-problem-history');
         Route::get('/shift-problem-history/{id}', [ShiftReportProblemController::class, 'show'])->name('employee.report-problem-history.show');
-        
+
         Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('employee.profile.edit');
         Route::put('/profile', [ProfileController::class, 'update'])->name('employee.profile.update');
-        
+
         Route::resource('/shift-history', ShiftHistoryController::class)->names('employee.shift-history')->only(['index', 'show']);
         Route::get('/shift-history/{id}/download', [LeaveApplicationController::class, 'download'])
             ->name('employee.shift-history.download');

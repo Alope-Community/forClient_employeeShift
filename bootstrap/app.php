@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'check.login.time.window' => \App\Http\Middleware\CheckLoginTimeWindow::class,
+            'check.request.shift' => \App\Http\Middleware\CheckRequestShift::class,
             'redirect.if.logged.in' => \App\Http\Middleware\RedirectIfLoggedInWithDifferentRole::class,
         ]);
     })
